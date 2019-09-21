@@ -3,9 +3,8 @@ using UnityEngine;
 using Intero.Events;
 using Intero.Common;
 
-public class UICanvasController : MonoBehaviour, IListenerErg
+public class UICanvasErgController : MonoBehaviour, IListenerErg
 {
-    public Text textStatus;
     public Text textTime;
     public Text textPace;
     public Text textDistance;

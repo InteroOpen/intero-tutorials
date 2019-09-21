@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Tutorial2Bluetooth.unity
+    path: Assets/Tutorials/Tutorial2Bluetooth/Tutorial2Bluetooth.unity
     guid: df332c13b66a99e46994492cf5e6f05f
   m_configObjects: {}

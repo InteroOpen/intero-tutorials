@@ -32,6 +32,7 @@ extern "C" {
 //        [blePM5 disconnect];
         [blePM5 startScan];
     }
+    /// ErgData
     float getTime(){
         return blePM5.pm5Controller->mErgData.time;
     }
@@ -53,7 +54,7 @@ extern "C" {
     float getCalories(){
         return blePM5.pm5Controller->mErgData.calories;
     }
-    ///
+    /// StrokeData
     float getDriveLength(){
         return blePM5.pm5Controller->mStrokeData.driveLength;
     }
@@ -75,6 +76,17 @@ extern "C" {
     float getStrokeCount(){
         return blePM5.pm5Controller->mStrokeData.strokeCount;
     }
+	// 36
+    float getStrokePower(){
+        return blePM5.pm5Controller->mStrokeData.strokePower;
+    }
+    float getStrokeCalories(){
+        return blePM5.pm5Controller->mStrokeData.strokeCalories;
+    }
+    float getWorkPerStroke(){
+        return blePM5.pm5Controller->mStrokeData.workPerStroke;
+    }
+    
     StrokeData* readStrokeData(){
         return &blePM5.pm5Controller->mStrokeData;
     }
@@ -152,6 +164,7 @@ CBUUID* toLongUUID(char* shortUUID){
     if(central.state != CBCentralManagerStatePoweredOn){
         // [self tLog:@"Diente azul apagado"];
         NSLog(@"bluetoothOff");
+        UnitySendMessageWrapper(@"onBLEOff",@"Happend");
         self.bluetoothOn = NO;
         self.connected = false;
     }else{
@@ -181,12 +194,6 @@ CBUUID* toLongUUID(char* shortUUID){
     [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey: @NO}];
 }
 
-
-// - (void)didReceiveMemoryWarning
-// {
-//     [super didReceiveMemoryWarning];
-// }
-
 -(void) centralManager:(CBCentralManager *)central
  didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData
@@ -194,7 +201,7 @@ CBUUID* toLongUUID(char* shortUUID){
 {
     NSString* name = [advertisementData objectForKey:@"kCBAdvDataLocalName"];
     NSLog(@"didDiscoverPeripheral");
-    NSLog(@"%@",[NSString stringWithFormat:@"Descubri %@, RSSI %@\n",name,RSSI]);
+    NSLog(@"%@",[NSString stringWithFormat:@"Descovered: %@, RSSI %@\n",name,RSSI]);
     // [self tLog:[NSString stringWithFormat:@"Descubri %@, RSSI %@\n",name,RSSI]];
     
     if ([name containsString:@"PM5"]) {
@@ -215,6 +222,7 @@ CBUUID* toLongUUID(char* shortUUID){
         didDisconnectPeripheral: (CBPeripheral *) peripheral
         error:(NSError *)error
 {
+    UnitySendMessageWrapper(@"onBLEDisconnected",@"Happend");
     NSLog(@"PM5 Disconnected");
     self.connected = false;
     // start scanning again
@@ -236,7 +244,7 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
     self.connected = true;
     // stop scanning
     [self.centralManager stopScan];
-    UnitySendMessageWrapper(@"onPM5Connected", @"OK");
+    UnitySendMessageWrapper(@"onBLEConnected", @"OK");
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error

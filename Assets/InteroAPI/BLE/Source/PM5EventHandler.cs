@@ -22,6 +22,10 @@ namespace Intero.BLE
         public static float PeakDriveForce;
         public static float AvgDriveForce;
         public static float StrokeCount;
+        // 36
+        public static float StrokePower;
+        public static float StrokeCalories;
+        public static float WorkPerStroke;
 
 #if UNITY_STANDALONE || UNITY_EDITOR
 
@@ -264,17 +268,23 @@ namespace Intero.BLE
         {
             return StrokeCount;
         }
-        //	public static void requestBLEAccess (){
-        //		
-        //	}
-        // #elif 
-
+        public static float getStrokePower()
+        {
+            return StrokePower;
+        }
+        public static float getStrokeCalories()
+        {
+            return StrokeCalories;
+        }
+        public static float getWorkPerStroke()
+        {
+            return WorkPerStroke;
+        }
+        
 #elif UNITY_IOS
 	public static void SetControllerPM5(BLEReceiver controllerPM5){
 		// _controllerPM5 = controllerPM5;
 	}
-//	[DllImport ("__Internal")]
-//	public static extern void requestBLEAccess ();
 
 	[DllImport ("__Internal")]
 	public static extern void connectToPM5 (int channel);
@@ -334,6 +344,14 @@ namespace Intero.BLE
 	[DllImport ("__Internal")]
 	public static extern float getStrokeCount();
 
+    [DllImport ("__Internal")]
+	public static extern float getStrokePower();
+    
+    [DllImport ("__Internal")]
+	public static extern float getStrokeCalories();
+
+    [DllImport ("__Internal")]
+	public static extern float getWorkPerStroke();
 #endif
 
     }

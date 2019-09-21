@@ -12,6 +12,7 @@
 #include <stdio.h>
 class StrokeData{
 public:
+    // 35
     float time;
     float distance;
     float driveLength;
@@ -21,6 +22,10 @@ public:
     float peakDriveForce;
     float avgDriveForce;
     float strokeCount;
+    // 36
+    float strokePower;
+    float strokeCalories;
+    float workPerStroke;
     char* ToString();
 };
 #endif /* StrokeData_hpp */

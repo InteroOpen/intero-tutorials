@@ -28,6 +28,10 @@ extern "C" {
     float getPeakDriveForce();
     float getAvgDriveForce();
     float getStrokeCount();
+	// 36
+	float getStrokePower();
+	float getStrokeCalories();
+	float getWorkPerStroke();
 }
 
 @interface UnityBLEPM5 : NSObject <CBCentralManagerDelegate,

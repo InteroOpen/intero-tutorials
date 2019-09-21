@@ -3,14 +3,13 @@
 //  BLEScanner
 //
 //  Created by Rodrigo Savage on 3/4/17.
-//  Copyright © 2017 Michael Lehman. All rights reserved.
 //
 
 #include "PM5Controller.h"
 
 PM5Controller::PM5Controller()
-    : mPM5Buffer(NULL){
-//    mPM5Buffer(NULL);
+: mPM5Buffer(NULL){
+    //    mPM5Buffer(NULL);
 }
 
 void PM5Controller::readCharacteristic31(){
@@ -35,7 +34,7 @@ void PM5Controller::readCharacteristic31(){
     mErgData.time = time;
     
     //        readTalkMe();
-//    NSLog(@"Value updated %f, %f, %f, %f, %f, %f ,%f  ",time, distance, flags, totalWOGDistance, totalWOGTime, WOGTimeType, drag);
+    //    NSLog(@"Value updated %f, %f, %f, %f, %f, %f ,%f  ",time, distance, flags, totalWOGDistance, totalWOGTime, WOGTimeType, drag);
 }
 void PM5Controller::readCharacteristic32(){
     float time  ;
@@ -46,7 +45,7 @@ void PM5Controller::readCharacteristic32(){
     float avgPace ;
     float restDistance ;
     float restTime ;
-
+    
     time  = mPM5Buffer.readTime(),
     speed = mPM5Buffer.read2Bytes()*0.001f,
     spm = mPM5Buffer.readByte(),
@@ -60,8 +59,6 @@ void PM5Controller::readCharacteristic32(){
     mErgData.pace = pace;
 }
 void PM5Controller::readCharacteristic35(){
- 
-    // mStrokeData = new StrokeData();
     mStrokeData.time  =mPM5Buffer.readTime();
     mStrokeData.distance =mPM5Buffer.readDistance();
     mStrokeData.driveLength =mPM5Buffer.readByte()*0.01f;
@@ -70,16 +67,18 @@ void PM5Controller::readCharacteristic35(){
     mStrokeData.strokeRecoveryDistance =mPM5Buffer.read2Bytes()*0.01f;
     mStrokeData.peakDriveForce =mPM5Buffer.read2Bytes()*0.1f;
     mStrokeData.avgDriveForce =mPM5Buffer.read2Bytes()*0.1f;
-    mStrokeData.strokeCount =mPM5Buffer.read2Bytes();
 }
 void PM5Controller::readCharacteristic36(){
     float time;
     float strokePower;
-    float strokeCalories;
-    float strokeCount;
+    float workPerStroke;
     time =  mPM5Buffer.readTime();
     strokePower = mPM5Buffer.read2Bytes();
-    strokeCalories = mPM5Buffer.read2Bytes();
-    strokeCount = mPM5Buffer.read2Bytes();
+    mStrokeData.strokeCalories = mPM5Buffer.read2Bytes();
+    mStrokeData.strokeCount = mPM5Buffer.read2Bytes();
+    mPM5Buffer.read3Bytes();
+    mPM5Buffer.read3Bytes();
+    mStrokeData.workPerStroke = mPM5Buffer.read2Bytes()*0.1f;
+    mStrokeData.strokePower = strokePower;
     mErgData.power = strokePower;
 }

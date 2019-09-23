@@ -37,6 +37,7 @@ public class UICanvasBLEController : MonoBehaviour, IListenerBLE
     // Update is called once per frame
     void Start()
     {
+        textStatus.text = "Started BLE Listener";
         InteroEventManager.GetEventManager().AddListener(this);
     }
 }

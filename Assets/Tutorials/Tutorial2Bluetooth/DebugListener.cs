@@ -13,7 +13,6 @@ public class DebugListener : MonoBehaviour, IListenerErg
         UnityEngine.Debug.Log("got strokeData " + strokeDataEvent.strokeData);
     }
 
-
     // Start is called before the first frame update
     void Start()
     {

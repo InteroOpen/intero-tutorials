@@ -890,10 +890,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 778512530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 656ea1e3022149a4b8616909604c9fc9, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e3ebefe7d2ec9842a38887c1b1d5f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textStatus: {fileID: 980708183}
   textTime: {fileID: 1753126198}
   textPace: {fileID: 413956059}
   textDistance: {fileID: 1476324354}

@@ -48,6 +48,7 @@ namespace Intero.BLE
             ergData.spm = PM5EventHandler.getSPM();
             ergData.splitAvgCalories = PM5EventHandler.getCalhr();
             ergData.calories = PM5EventHandler.getCalories();
+            // ErgData ergData = new ErgData(10, 100, 21, 200, 122);
             ErgDataEvent e = new ErgDataEvent(ergData);
             InteroEventManager.GetEventManager().SendEvent(e);
         }

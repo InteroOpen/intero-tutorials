@@ -12,7 +12,7 @@ public class AuthManager : MonoBehaviour
     void Start()
     {
         UnityEngine.Debug.Log("AuthManager.Start!!");
-        TestUserOAuth();
+        // TestUserOAuth();
     }
 
     // Update is called once per frame

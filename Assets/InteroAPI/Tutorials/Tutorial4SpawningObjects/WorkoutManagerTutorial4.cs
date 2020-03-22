@@ -9,10 +9,10 @@ public class WorkoutManagerTutorial4 : MonoBehaviour
     void Start()
     {
         segmentManager = new SegmentManager();
-        segmentManager.Push(new SegmentTime(6, 20, SegmentType.EASY));
-        segmentManager.Push(new SegmentDistance(100, 18, SegmentType.EASY));
-        segmentManager.Push(new SegmentTime(12, 22, SegmentType.MEDIUM));
-        segmentManager.Push(new SegmentTime(3, 24, SegmentType.FAST));
+        segmentManager.Push(new SegmentTime(6, 20, SegmentIntensity.EASY));
+        segmentManager.Push(new SegmentDistance(100, 18, SegmentIntensity.EASY));
+        segmentManager.Push(new SegmentTime(12, 22, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(3, 24, SegmentIntensity.FAST));
     }
 
     public void StartWorkout()

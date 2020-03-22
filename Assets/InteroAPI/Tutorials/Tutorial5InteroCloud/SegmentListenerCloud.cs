@@ -6,10 +6,12 @@ using Intero.Common;
 
 public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
-    private PhysicsManager physicsManager = new PhysicsManager();
     public GameObject player;
+    /*
+    private PhysicsManager physicsManager = new PhysicsManager();
     public HUDController hud;
     public HUDController hudNext;
+    */
     // public ErgData currentErgData;
     public Segment currentSegment = null;
     void IListenerSegment.OnEndSegmentEvent(SegmentEndEvent endSegmentEvent)
@@ -33,7 +35,7 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
         currentSegment = startSegmentEvent.currentSegment;
         
         // hud.DisplayCurrentSegment(startSegmentEvent.currentSegment, 0);
-        hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
+        // hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
     } 
 
     void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent)
@@ -53,6 +55,7 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
         // currentErgData = ergDataEvent.ergData;
         if (player.activeInHierarchy)
         {
+            /*
             Rigidbody rigidBody = player.GetComponent<Rigidbody>();
             float v = rigidBody.velocity.x;
             float x = rigidBody.position.x;
@@ -62,13 +65,12 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
             // update hud
             if(currentSegment!=null)
                 hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
+            */
         }
         // UnityEngine.Debug.Log("got ergData " + ergDataEvent.ergData);
     }
     void Start()
     {
-
-         // player.GetComponent<Rigidbody>();
         InteroEventManager.GetEventManager().AddListener((IListenerErg)this);
         InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
         InteroEventManager.GetEventManager().AddListener((IListenerSegment)this);

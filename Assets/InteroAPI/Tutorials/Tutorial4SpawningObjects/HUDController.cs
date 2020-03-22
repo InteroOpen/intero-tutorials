@@ -13,8 +13,7 @@ public class HUDController : MonoBehaviour
     public GameObject segRecuperacion;
     public GameObject segFuerte;
     public GameObject segMedio;
-
-    // Update is called once per frame
+    
     public void DisplayCurrentSegment(Segment segment, ErgData progressValue)
     {
         textObjective.text = segment.getTextObjective();

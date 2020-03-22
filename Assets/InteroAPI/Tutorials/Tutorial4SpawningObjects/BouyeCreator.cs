@@ -63,7 +63,7 @@ public class BouyeCreator : MonoBehaviour
 
         }
 
-        textoDistacia.text = distancia + "m";
+       // textoDistacia.text = distancia + "m";
 
     }
     public void SetPlayer(Rigidbody player)

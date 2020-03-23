@@ -542,6 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   className: {fileID: 3527514991895754891}
   classStart: {fileID: 3527514992134958066}
+  Day: {fileID: 3527514992897514962}
 --- !u!1 &3527514993301219699
 GameObject:
   m_ObjectHideFlags: 0

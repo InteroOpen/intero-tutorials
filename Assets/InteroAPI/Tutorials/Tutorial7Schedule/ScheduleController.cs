@@ -23,7 +23,6 @@ public class ScheduleController : MonoBehaviour
 
     public ClassUiItem[] workoutItems = null;
     Dictionary<string, string> nombres = new Dictionary<string, string>();
-    Dictionary<int, string> fechas = new Dictionary<int, string>();
     DateTime[] fechasInicio; 
 
     InteroCloud interoCloud = new InteroCloud();
@@ -63,7 +62,6 @@ public class ScheduleController : MonoBehaviour
 
         foreach (WorkoutClassJSON workout in workoutClasses){
             numberOfItems++;
-            fechas.Add(numberOfItems, workout.dateStart);
             UnityEngine.Debug.Log(workout.dateStart + " de  "+workout.workoutId);
         }
 
@@ -85,7 +83,7 @@ public class ScheduleController : MonoBehaviour
             //set name
             classuiItem.className.text = nombres[workoutClasses[i].workoutId.ToString()];
             //set image
-            classuiItem.classStart.text = workoutClasses[i].dateStart;
+            classuiItem.classStart.text = workoutClasses[i].dateStart.Day.ToString();
         }
 
     }

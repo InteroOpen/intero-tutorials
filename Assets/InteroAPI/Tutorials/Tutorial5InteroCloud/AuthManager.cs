@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ using UnityEngine;
 using Intero.Common;
 using static InteroAPI.OAuth.InteroCloud;
 using Intero.Workouts;
+using System;
 
 public class AuthManager : MonoBehaviour
 {
@@ -15,18 +16,65 @@ public class AuthManager : MonoBehaviour
     public WorkoutManager workoutManager;
     public int historyId;
     public int classId;
+    public PasswordManager passwordManager;
+
     // Start is called before the first frame update
     void Start()
     {
         UnityEngine.Debug.Log("AuthManager.Start!!");
-        Login();
+        /*
+        try
+        {
+            passwordManager.SaveCredentials("user", "password");
+        } catch (Exception e)
+        {
+            print("e " + e.Message);
+        }
+        */
+        // Login();
     }
-    async Task Login()
+
+
+
+    //public async Task Login(string username, string password)
+    //{
+    //    print("login start " + username);
+
+    //    //await interoCloud.OAuth(username, password);
+    //    print("login success " + username);
+    //    passwordManager.SaveCredentials(username,password);
+    //    print("SaveCredentials success " + username);
+
+    //    //
+    //    // List<WorkoutJSON> workouts = await interoCloud.GetWorkouts("rodrigosavage-at-gmail.com");
+    //    // WorkoutJSON work = workouts[0];
+    //    // workoutManager.LoadWorkout(work);
+    //}
+    public async Task<string> Login()
     {
-        await interoCloud.OAuth("rodrigosavage-at-gmail.com", "rtopdfrtio");
-        List<WorkoutJSON> workouts = await interoCloud.GetWorkouts("rodrigosavage-at-gmail.com");
-        WorkoutJSON work = workouts[0];
-        workoutManager.LoadWorkout(work);
+        passwordManager.ReadCredentials();
+        string username = passwordManager.username;
+        string password = passwordManager.password;
+        print("Login leyo correcto "+ username + " dd " + password);
+        string s  = await interoCloud.OAuth(username, password);
+        print("error " + s);
+
+        return s;
+        //
+        // List<WorkoutJSON> workouts = await interoCloud.GetWorkouts("rodrigosavage-at-gmail.com");
+        // WorkoutJSON work = workouts[0];
+        // workoutManager.LoadWorkout(work);
+    }
+
+    public async Task<string> Signup(string user, string email, string pass)
+    {
+        string s = await interoCloud.Signup(user, email, pass);
+        passwordManager.SaveCredentials(user, pass);
+        return s;
+    }
+    public bool AreCredentialsSaved()
+    {
+        return passwordManager.AreCredentialsSaved();
     }
     public void SetClassId(int classId)
     {
@@ -41,9 +89,11 @@ public class AuthManager : MonoBehaviour
         print("Setting history id " + historyId);
     }
 
-    public void  PostMessage( int segmentNum, ErgData e)
+    public async Task PostMessage(int segmentNum, ErgData e)
     {
-        interoCloud.PostMessage(historyId, segmentNum, e);
+        print("PostMessage" + historyId+ segmentNum+ e);
+
+        await interoCloud.PostMessage(historyId, segmentNum, e);
     }
 
 }

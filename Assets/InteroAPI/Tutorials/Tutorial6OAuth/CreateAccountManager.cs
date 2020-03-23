@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class CreateAccountManager : MonoBehaviour
 {
-    InteroCloud interoCloud = new InteroCloud();
+    AuthManager interoCloud = new AuthManager();
     public InputField emailInput;
     public InputField userInput;
     public InputField passwordInput;
 
     public ModalInfoController modalInfo;
+    public CanvasController canvasController;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +39,18 @@ public class CreateAccountManager : MonoBehaviour
         UnityEngine.Debug.Log(user);
         UnityEngine.Debug.Log(pass);
         string error = await interoCloud.Signup(user, email, pass);
+
+        // string error = await interoCloud.Signup(user, email, pass);
         UnityEngine.Debug.Log("ress " + error);
         if(error != null)
         {
             modalInfo.Show(error);
+        }
+        else
+        {
+            print("Showign ShowrowingScheduleView");
+            canvasController.ShowrowingScheduleView();
+            // await interoCloud.Login(user, pass);
         }
     }
 }

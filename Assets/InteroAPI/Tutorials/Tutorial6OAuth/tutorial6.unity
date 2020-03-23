@@ -1736,7 +1736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &778512531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2763,6 +2763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1197615231}
   - component: {fileID: 1197615230}
+  - component: {fileID: 1197615232}
   m_Layer: 0
   m_Name: AuthManager
   m_TagString: Untagged
@@ -2785,6 +2786,7 @@ MonoBehaviour:
   workoutManager: {fileID: 1757430011}
   historyId: 0
   classId: 0
+  passwordManager: {fileID: 1197615232}
 --- !u!4 &1197615231
 Transform:
   m_ObjectHideFlags: 0
@@ -2799,6 +2801,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1197615232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197615229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff1a16bcecf5c1d47a6efc68761efae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  username: 
+  password: 
 --- !u!1 &1204553608
 GameObject:
   m_ObjectHideFlags: 0
@@ -10554,6 +10570,7 @@ MonoBehaviour:
   userInput: {fileID: 1264202509}
   passwordInput: {fileID: 8638992417648900224}
   modalInfo: {fileID: 1772901556}
+  canvasController: {fileID: 8638992418853483346}
 --- !u!1 &2078737114
 GameObject:
   m_ObjectHideFlags: 0
@@ -12650,7 +12667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8638992417878585487}
   m_Layer: 5
-  m_Name: Initial Menu
+  m_Name: Login Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13808,7 +13825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8638992418347745553
 GameObject:
   m_ObjectHideFlags: 0
@@ -14324,7 +14341,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8638992418524911121}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8638992418853483346}
+        m_MethodName: ShowcreateAccountView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &8638992418524911121
@@ -14535,7 +14563,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Login
+  m_Text: Crea tu cuenta
 --- !u!1 &8638992418537105283
 GameObject:
   m_ObjectHideFlags: 0
@@ -15280,13 +15308,34 @@ GameObject:
   - component: {fileID: 8638992418853483348}
   - component: {fileID: 8638992418853483351}
   - component: {fileID: 8638992418853483350}
+  - component: {fileID: 8638992418853483346}
   m_Layer: 5
   m_Name: CanvasUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!114 &8638992418853483346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638992418853483345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb98936b13605b49b1cc547d242ee7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginView: {fileID: 8638992417878585486}
+  createAccountView: {fileID: 8638992418312676699}
+  completeProfileView: {fileID: 8638992418502618757}
+  rowingScheduleView: {fileID: 8638992417969136267}
+  profileView: {fileID: 8638992418442633307}
+  syncErgView: {fileID: 8638992418823425166}
+  modalInfo: {fileID: 1772901556}
+  authManager: {fileID: 1197615230}
 --- !u!223 &8638992418853483348
 Canvas:
   m_ObjectHideFlags: 0

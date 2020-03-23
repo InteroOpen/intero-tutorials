@@ -5,34 +5,45 @@ using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using InteroAPI.OAuth;
 using UnityEngine;
+using Intero.Common;
+using static InteroAPI.OAuth.InteroCloud;
+using Intero.Workouts;
 
 public class AuthManager : MonoBehaviour
 {
+    public InteroCloud interoCloud = new InteroCloud();
+    public WorkoutManager workoutManager;
+    public int historyId;
+    public int classId;
     // Start is called before the first frame update
     void Start()
     {
         UnityEngine.Debug.Log("AuthManager.Start!!");
-        // TestUserOAuth();
+        Login();
     }
-
-    // Update is called once per frame
-    void Update()
+    async Task Login()
     {
-        
-    }
-    public async Task TestUserOAuth()
-    {
-
-        InteroCloud interoCloud = new InteroCloud();
-        //string userName = "rodrigosavage-at-gmail.com";
-        // string userPass = "rtopdfrtio";
         await interoCloud.OAuth("rodrigosavage-at-gmail.com", "rtopdfrtio");
-        var values = new Dictionary<string, string>
-            {
-               { "thing1", "hello" },
-               { "thing2", "world" }
-            };
-        var responseString = await interoCloud.SendMessage(values);
-        UnityEngine.Debug.Log(responseString);
+        List<WorkoutJSON> workouts = await interoCloud.GetWorkouts("rodrigosavage-at-gmail.com");
+        WorkoutJSON work = workouts[0];
+        workoutManager.LoadWorkout(work);
     }
+    public void SetClassId(int classId)
+    {
+        this.classId = classId;
+        print("Setting SetClassId id " + classId);
+
+    }
+    public async Task PostStartWorkout()
+    {
+        StartWorkoutJSON workoutHistory = await interoCloud.PostStartWorkout(classId);
+        historyId = workoutHistory.id;
+        print("Setting history id " + historyId);
+    }
+
+    public void  PostMessage( int segmentNum, ErgData e)
+    {
+        interoCloud.PostMessage(historyId, segmentNum, e);
+    }
+
 }

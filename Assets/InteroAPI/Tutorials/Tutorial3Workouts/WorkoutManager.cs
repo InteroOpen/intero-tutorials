@@ -1,19 +1,59 @@
 ﻿using UnityEngine;
 using Intero.Workouts;
 using Intero.Events;
+using System.Threading.Tasks;
+using InteroAPI.OAuth;
+using System.Collections.Generic;
 
 public class WorkoutManager : MonoBehaviour
 {
     SegmentManager segmentManager;
-
     void Start()
     {
         segmentManager = new SegmentManager();
+        /*
         segmentManager.Push(new SegmentTime(6, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentTime(12, 22, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(3, 24, SegmentIntensity.FAST));
+        */
+        // TestLoadClass();
     }
+    /*
+    async Task TestLoadClass()
+    {
+        InteroCloud interoCloud = new InteroCloud();
 
+        await interoCloud.OAuth("rodrigosavage-at-gmail.com", "rtopdfrtio");
+
+        List<WorkoutJSON> workouts = await interoCloud.GetWorkouts("rodrigosavage-at-gmail.com");
+        WorkoutJSON work = workouts[0];
+        print("n " + work.name);
+        foreach (SegmentJSON segmentJSON in work.segments)
+        {
+            
+            Segment s = Segment.Factory(segmentJSON);
+            print("segmentJSON " + segmentJSON);
+            //print("segmentJSON " + (segmentJSON.type == SegmentType.distance));
+            print("seg " + s);
+            segmentManager.Push(s);
+        }
+    }*/
+    
+    public void LoadWorkout(WorkoutJSON work)
+    {
+        print("Loading " + work);
+        foreach (SegmentJSON segmentJSON in work.segments)
+        {
+
+            Segment s = Segment.Factory(segmentJSON);
+            // print("segmentJSON " + segmentJSON);
+            // print("segmentJSON " + (segmentJSON.type == SegmentType.distance));
+            // print("seg " + s);
+            segmentManager.Push(s);
+        }
+
+    }
+   
     public void StartWorkout()
     {
         segmentManager.OnStartWorkout();

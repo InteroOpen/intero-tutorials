@@ -7,6 +7,7 @@ using Intero.Common;
 public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
     public GameObject player;
+    public AuthManager auth;
     /*
     private PhysicsManager physicsManager = new PhysicsManager();
     public HUDController hud;
@@ -40,7 +41,8 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
 
     void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent)
     {
-
+        auth.SetClassId(6969);
+        auth.PostStartWorkout();
     }
     void IListenerWorkout.OnEndWorkoutEvent(WorkoutEndEvent endWorkoutEvent)
     {
@@ -52,9 +54,10 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
     }
     void IListenerErg.OnErgDataEvent(ErgDataEvent ergDataEvent)
     {
-        // currentErgData = ergDataEvent.ergData;
+        ErgData currentErgData = ergDataEvent.ergData;
         if (player.activeInHierarchy)
         {
+            // auth.PostMessage(currentSegment.index, currentErgData);
             /*
             Rigidbody rigidBody = player.GetComponent<Rigidbody>();
             float v = rigidBody.velocity.x;

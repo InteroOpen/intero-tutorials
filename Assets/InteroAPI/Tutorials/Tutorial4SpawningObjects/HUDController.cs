@@ -22,8 +22,8 @@ public class HUDController : MonoBehaviour
         segRecuperacion.SetActive(SegmentIntensity.EASY == segment.typeIntensity);
         segFuerte.SetActive(SegmentIntensity.FAST == segment.typeIntensity);
         segMedio.SetActive(SegmentIntensity.MEDIUM == segment.typeIntensity);
-        string[] strDifficulty = { "recuperación", "medio", "intenso" };
-        textDifficulty.text = strDifficulty[(int)segment.type];// SegmentTime.timeToString((int)segment.getRemaining(0));
+        string[] strDifficulty = { "recuperación", "medio", "Fuerte!"};
+        textDifficulty.text = strDifficulty[(int)segment.typeIntensity];// SegmentTime.timeToString((int)segment.getRemaining(0));
     }
 
 }

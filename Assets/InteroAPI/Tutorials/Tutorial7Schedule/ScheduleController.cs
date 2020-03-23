@@ -82,8 +82,10 @@ public class ScheduleController : MonoBehaviour
             ClassUiItem classuiItem = SpawnedItem.GetComponent<ClassUiItem>();
             //set name
             classuiItem.className.text = nombres[workoutClasses[i].workoutId.ToString()];
-            //set image
-            classuiItem.classStart.text = workoutClasses[i].dateStart.Day.ToString();
+            //set hour
+            classuiItem.classStart.text = workoutClasses[i].dateStart.TimeOfDay.ToString();
+            //set day
+            classuiItem.Day.text = workoutClasses[i].dateStart.DayOfWeek.ToString();
         }
 
     }

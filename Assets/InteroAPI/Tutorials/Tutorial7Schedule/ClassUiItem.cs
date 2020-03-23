@@ -11,4 +11,6 @@ public class ClassUiItem : MonoBehaviour{
     //Class time
     public Text classStart;
 
+    public Text Day;
+
 }

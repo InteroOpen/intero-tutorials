@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using Intero.Workouts;
 using System.Collections.Generic;
+using System;
 
 public class ScheduleController : MonoBehaviour
 {
@@ -21,7 +22,9 @@ public class ScheduleController : MonoBehaviour
     private int numberOfWorkouts = 0;
 
     public ClassUiItem[] workoutItems = null;
-    public string[] workoutName = null;
+    Dictionary<string, string> nombres = new Dictionary<string, string>();
+    Dictionary<int, string> fechas = new Dictionary<int, string>();
+    DateTime[] fechasInicio; 
 
     InteroCloud interoCloud = new InteroCloud();
     // Start is called before the first frame update
@@ -29,6 +32,20 @@ public class ScheduleController : MonoBehaviour
     {
         GetWorkouts();
     }
+
+   /* public string ConvertIdtoName(int id)
+    {
+        string nombre = "";
+        switch (id)
+        {
+            case 792010:
+                nombre = "Rod work";
+                return nombre;
+                break;
+            
+        }
+        return nombre;
+    }*/
 
     public async Task GetWorkouts()
     {
@@ -38,6 +55,7 @@ public class ScheduleController : MonoBehaviour
 
         foreach (WorkoutJSON workout in workouts){
             numberOfWorkouts++;
+            nombres.Add(workout.id, workout.name);
             UnityEngine.Debug.Log(workout);
         }
 
@@ -45,29 +63,19 @@ public class ScheduleController : MonoBehaviour
 
         foreach (WorkoutClassJSON workout in workoutClasses){
             numberOfItems++;
+            fechas.Add(numberOfItems, workout.dateStart);
             UnityEngine.Debug.Log(workout.dateStart + " de  "+workout.workoutId);
         }
 
         content.sizeDelta = new Vector2(0, numberOfItems * 60);
 
-      /*  for(int i=0; i< numberOfItems; i++)
-        {
-            for(int j=0; j < numberOfWorkouts; j++)
-            {
-                if(workouts[j].id == workoutClasses[i].workoutId.ToString()){
-                    workoutName[i] = workouts[j].name;
-                }
-            }
-            
-        }*/
-
-
         for (int i = 0; i < numberOfItems; i++)
         {
+            //fechas[i] = workoutClasses[i].dateStart;
             // 60 width of item
             float spawnY = i * 60;
             //newSpawn Position
-            Vector3 pos = new Vector3(SpawnPoint.position.x , -spawnY, SpawnPoint.position.z);
+            Vector3 pos = new Vector3(SpawnPoint.position.x -100, -spawnY, SpawnPoint.position.z);
             //instantiate item
             GameObject SpawnedItem = Instantiate(item, pos, SpawnPoint.rotation);
             //setParent
@@ -75,7 +83,7 @@ public class ScheduleController : MonoBehaviour
             //get ItemDetails Component
             ClassUiItem classuiItem = SpawnedItem.GetComponent<ClassUiItem>();
             //set name
-            classuiItem.className.text = workoutClasses[i].author;
+            classuiItem.className.text = nombres[workoutClasses[i].workoutId.ToString()];
             //set image
             classuiItem.classStart.text = workoutClasses[i].dateStart;
         }

@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial2Bluetooth/Tutorial2Bluetooth.unity
     guid: df332c13b66a99e46994492cf5e6f05f
+  - enabled: 0
+    path: Assets/InteroAPI/Tutorials/Tutorial8Networking/Tutorial8Server.unity
+    guid: 01a4ab49207e0e94f9ac8603fea66f07
+  - enabled: 1
+    path: Assets/InteroAPI/Tutorials/Tutorial8Networking/Tutorial8Client.unity
+    guid: 7934b34f569c0df4f8ed65dba95a1341
   m_configObjects: {}

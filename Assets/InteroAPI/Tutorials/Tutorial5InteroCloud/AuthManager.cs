@@ -96,4 +96,24 @@ public class AuthManager : MonoBehaviour
         await interoCloud.PostMessage(historyId, segmentNum, e);
     }
 
+    public async Task<Dictionary<int, WorkoutJSON>> GetWorkoutDic()
+    {
+        Dictionary<int, WorkoutJSON> workoutDic = new Dictionary<int, WorkoutJSON>();
+        print("fetching workocouts");
+        List<WorkoutJSON> workouts = await interoCloud.GetWorkouts("rodrigosavage-at-gmail.com");
+
+        foreach (WorkoutJSON workout in workouts)
+        {
+            workoutDic.Add(int.Parse(workout.id), workout);
+            UnityEngine.Debug.Log(workout);
+        }
+        return workoutDic;
+    }
+    public async Task<List<WorkoutClassJSON>> GetWorkoutClasses()
+    {
+        List<WorkoutClassJSON> workoutClasses = await interoCloud.GetWorkoutClasses("rodrigosavage-at-gmail.com");
+        // ShowWorkouts(workoutClasses, workoutDic);
+        return workoutClasses;
+    }
+
 }

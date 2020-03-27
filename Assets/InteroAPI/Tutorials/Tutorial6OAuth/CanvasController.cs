@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Intero.Workouts;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class CanvasController : MonoBehaviour
 
     public ModalInfoController modalInfo;
     public AuthManager authManager;
+    public ScheduleController schedule;
     // public PasswordManager passwordManager;
     private void Start()
     {
@@ -36,7 +38,14 @@ public class CanvasController : MonoBehaviour
             if (error==null)
             {
                 ShowrowingScheduleView();
-            }else
+
+                List<WorkoutClassJSON> workoutClasses = await authManager.GetWorkoutClasses();
+                Dictionary<int, WorkoutJSON> workouts = await authManager.GetWorkoutDic();
+                print("got " + workoutClasses);
+                print("got " + workouts);
+                schedule.ShowWorkouts(workoutClasses, workouts);
+            }
+            else
             {
                 modalInfo.Show(error);
             }

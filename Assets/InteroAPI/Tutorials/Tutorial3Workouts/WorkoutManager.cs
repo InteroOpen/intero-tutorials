@@ -4,20 +4,28 @@ using Intero.Events;
 using System.Threading.Tasks;
 using InteroAPI.OAuth;
 using System.Collections.Generic;
+using Intero.Common;
 
 public class WorkoutManager : MonoBehaviour
 {
     SegmentManager segmentManager;
+    Segment[] segments;
     void Start()
     {
         segmentManager = new SegmentManager();
-        /*
+        
         segmentManager.Push(new SegmentTime(6, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentTime(12, 22, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(3, 24, SegmentIntensity.FAST));
-        */
+        segmentManager.Push(new SegmentTime(30, 18, SegmentIntensity.EASY));
+
         // TestLoadClass();
+      //  segments = segmentManager.ToArray();
     }
+    //public float GetRemainingSegment (int segmentId, ErgData e)
+    //{
+    //    segments[segmentId].
+    //}
     /*
     async Task TestLoadClass()
     {
@@ -46,9 +54,6 @@ public class WorkoutManager : MonoBehaviour
         {
 
             Segment s = Segment.Factory(segmentJSON);
-            // print("segmentJSON " + segmentJSON);
-            // print("segmentJSON " + (segmentJSON.type == SegmentType.distance));
-            // print("seg " + s);
             segmentManager.Push(s);
         }
 

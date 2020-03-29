@@ -8,7 +8,7 @@ using InteroAPI.Statistics;
 public class SegmentListenerOSC : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
     public GameObject player;
-    public Client netManager;
+    public ClientUI netManager;
     public LeaderboardController leaderboard;
 
     /*
@@ -50,11 +50,11 @@ public class SegmentListenerOSC : MonoBehaviour, IListenerErg, IListenerWorkout,
         ErgData ergData = ergDataEvent.ergData;
         if (player.activeInHierarchy && currentSegment !=null)
         {
-            //print("xx client " + netManager.client);
+            print("Local " + ergData);
             
             //print("xx currentSegment " + currentSegment);
-            netManager.client.SendMessage(ergData, currentSegment);
-            leaderboard.UpdateRank(netManager.name, currentSegment.getProgressedDistance(ergData), ergData);
+            netManager.SendMessage(ergData, currentSegment);
+            leaderboard.UpdateRank(netManager.GetName(), currentSegment.getProgressedDistance(ergData), ergData, currentSegment);
             /*
             if (currentSegment != null)
             {

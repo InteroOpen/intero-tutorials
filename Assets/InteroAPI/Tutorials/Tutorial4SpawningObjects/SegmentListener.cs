@@ -32,7 +32,8 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
         print("OnStartSegmentEvent " + startSegmentEvent.progressType + " " + startSegmentEvent.currentSegment);
         currentSegment = startSegmentEvent.currentSegment;
         // hud.DisplayCurrentSegment(startSegmentEvent.currentSegment, 0);
-        hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
+        if(startSegmentEvent.nextSegment != null)
+            hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
     } 
 
     void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent)
@@ -59,10 +60,15 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
             rigidBody.velocity = new Vector3(body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);
             rigidBody.position = new Vector3(body.distance, rigidBody.position.y, rigidBody.position.z);
             // update hud
-            if(currentSegment!=null)
+            if (currentSegment != null)
+            {
                 hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
+               // float d = currentSegment.getProgressedDistance(ergDataEvent.ergData);
+               // print("loc xx erg " + ergDataEvent.ergData + "|"+d);
+
+            }
         }
-        // UnityEngine.Debug.Log("got ergData " + ergDataEvent.ergData);
+
     }
     void Start()
     {

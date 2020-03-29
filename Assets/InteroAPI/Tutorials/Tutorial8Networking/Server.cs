@@ -31,16 +31,15 @@ public class Server : MonoBehaviour, IListenerOSC
     }
     void IListenerOSC.OnOSCClientConnectedEvent(OSCClientConnectedEvent connectedEvent)
     {
-        print(name + " OnOSCClientConnectedEvent " + connectedEvent);
+        print(name + " OnOSCClientConnectedEvent ");
         textOut.text += connectedEvent.socketSender.username + " connected ...\n";
-        // server.BroadcastToClients()
     }
 
     void IListenerOSC.OnOSCErgDataEvent(OSCErgDataEvent ergEvent)
     {
         textOutUser[ergEvent.senderId].text =  name+" "+ ergEvent.socketSender.username + " "+ ergEvent.ergData;
         server.BroadcastToClients(ergEvent.socketSender.username, ergEvent.ergData, ergEvent.segment, ergEvent.senderId);
-        print(name + " " + ergEvent.ergData + " ss " + ergEvent.segment.index + " s " + ergEvent.segment.startDistance);
+        // print(name + " " + ergEvent.ergData + " ss " + ergEvent.segment.index + " s " + ergEvent.segment.startDistance);
     }
 
     void IListenerOSC.OnOSCMessageEvent(OSCMessageEvent messageEvent)

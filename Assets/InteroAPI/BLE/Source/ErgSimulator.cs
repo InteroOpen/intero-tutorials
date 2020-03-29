@@ -3,8 +3,6 @@ using Intero.Common;
 using Intero.Events;
 using System.Collections;
 
-namespace Intero.BLE
-{
     public class ErgSimulator : MonoBehaviour
     {
         ErgData erg = new ErgData();
@@ -22,14 +20,21 @@ namespace Intero.BLE
                 erg.time = time;
                 erg.pace = pace;
                 erg.distance = distance;
-                SendErgData();
+                // SendErgData();
             }
         }
-
+        void Start()
+        {
+         
+            InvokeRepeating("SendErgData", 0.0f, 0.3f);
+        }
+        public void SetPace(string pace)
+    {
+        this.pace = float.Parse( pace);
+    }
         void SendErgData()
         {
             ErgDataEvent e = new ErgDataEvent(erg);
             InteroEventManager.GetEventManager().SendEvent(e);
         }
     }
-}

@@ -34,7 +34,7 @@ public class LeaderboardController : MonoBehaviour
         ErgData e = rank.ergData;
         Segment s = rank.segment;
         // rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.heartrate;
-        rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + e.distance + "|" + s.getProgressedDistance(e);
+        rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + e.distance;//  + "|" + s.getProgressedDistance(e);
     }
     public void UpdateRankList(LinkedList<RankNode> listRanks) {
         int i = 0;
@@ -45,9 +45,13 @@ public class LeaderboardController : MonoBehaviour
         
     }
 
-    public void UpdateRank(string name, float v, ErgData ergData, Segment s)
+    public void UpdateRank(string name, float v, ErgData ergData, Segment segment)
     {
-        leaderboard.UpdateRank(name,v,ergData, s);
-        UpdateRankList(leaderboard.GetRankings());
+        ErgData e = new ErgData();
+        Segment s = new SegmentTime(segment);
+        e.Copy(ergData);
+        leaderboard.UpdateRank(name,v,e, s);
+        LinkedList<RankNode> ranks = leaderboard.GetRankings();
+        UpdateRankList(ranks);
     }
 }

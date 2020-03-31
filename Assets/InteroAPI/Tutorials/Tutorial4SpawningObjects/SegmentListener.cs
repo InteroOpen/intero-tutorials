@@ -19,12 +19,7 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
 
     void IListenerSegment.OnProgressSegmentEvent(SegmentProgressEvent progressSegmentEvent)
     {
-        // ergDataEvent
-        
-        // hud.DisplayCurrentSegment(progressSegmentEvent.currentSegment, progressSegmentEvent.progressPercent);
 
-        // print("OnProgressSegmentEvent " + progressSegmentEvent.progressPercent + " " + progressSegmentEvent.progressType + " " + progressSegmentEvent.currentSegment);
-        // print("next : " + progressSegmentEvent.nextSegment);
     }
 
     void IListenerSegment.OnStartSegmentEvent(SegmentStartEvent startSegmentEvent)
@@ -38,7 +33,6 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
 
     void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent)
     {
-
     }
     void IListenerWorkout.OnEndWorkoutEvent(WorkoutEndEvent endWorkoutEvent)
     {
@@ -46,7 +40,6 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
 
     void IListenerErg.OnStrokeDataEvent(StrokeDataEvent strokeDataEvent)
     {
-        // UnityEngine.Debug.Log("got strokeData " + strokeDataEvent.strokeData);
     }
     void IListenerErg.OnErgDataEvent(ErgDataEvent ergDataEvent)
     {

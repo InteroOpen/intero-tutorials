@@ -9,6 +9,7 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
 {
     public WorkoutManager workoutManager;
     public LeaderboardController leaderboard;
+    public RivalController rivalController;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +23,14 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
 
     void IListenerOSC.OnOSCErgDataEvent(OSCErgDataEvent ergEvent)
     {
-
+        print(" OSC got ergta");
         string username = ergEvent.socketSender.username;
         ErgData e = ergEvent.ergData;
         Segment s = ergEvent.segment;
         float d = s.getProgressedDistance(e);
         print(username + " xx OSC " + ergEvent.ergData + "|"+d );
         leaderboard.UpdateRank(username, d, e, s);
+        // rivalController.UpdateRival(ergEvent);
 
     }
 
@@ -39,16 +41,12 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
     void IListenerOSC.OnOSCStrokeDataEvent(OSCStrokeDataEvent strokeEvent)
     {
     }
-    void OnDestroy()
-    {
-        //client.OnDestroy();
-        // Debug.Log("OnDestroy1");
-    }
 
     void IListenerOSC.OnOSCStartWorkoutDataEvent(OSCStartWorkoutEvent startWorkoutEvent)
     {
         print("Client  Start Workout!!!");
+        // Spawn rival boats
         workoutManager.StartWorkout();
-        // client.SendMessage(new ErgData(1,2,3,4,5));
+        // rivalController.StartWorkout(3);
     }
 }

@@ -38,6 +38,7 @@ public class Server : MonoBehaviour, IListenerOSC
     void IListenerOSC.OnOSCErgDataEvent(OSCErgDataEvent ergEvent)
     {
         textOutUser[ergEvent.senderId].text =  name+" "+ ergEvent.socketSender.username + " "+ ergEvent.ergData;
+       // print(name + " Ergata " + ergEvent.senderId);
         server.BroadcastToClients(ergEvent.socketSender.username, ergEvent.ergData, ergEvent.segment, ergEvent.senderId);
         // print(name + " " + ergEvent.ergData + " ss " + ergEvent.segment.index + " s " + ergEvent.segment.startDistance);
     }

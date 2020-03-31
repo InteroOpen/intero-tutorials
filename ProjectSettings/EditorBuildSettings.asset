@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/InteroAPI/Tutorials/Tutorial2Bluetooth/Tutorial2Bluetooth.unity
     guid: df332c13b66a99e46994492cf5e6f05f
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: c632ebc52a7af0c4abeb59714d03ea6b
+  - enabled: 1
+    path: Assets/Scenes/LobbyEscene.unity
+    guid: d53b83b6ec9e65e46be7d99613c362e0
   m_configObjects: {}

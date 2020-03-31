@@ -32,26 +32,12 @@ public class ScheduleController : MonoBehaviour
         GetWorkouts();
     }
 
-   /* public string ConvertIdtoName(int id)
-    {
-        string nombre = "";
-        switch (id)
-        {
-            case 792010:
-                nombre = "Rod work";
-                return nombre;
-                break;
-            
-        }
-        return nombre;
-    }*/
-
     public async Task GetWorkouts()
     {
         await interoCloud.OAuth("rodrigosavage-at-gmail.com", "rtopdfrtio");
         
         List<WorkoutJSON> workouts = await interoCloud.GetWorkouts("rodrigosavage-at-gmail.com");
-
+        SingletonWorkouts.instancia.workouts = workouts;
         foreach (WorkoutJSON workout in workouts){
             numberOfWorkouts++;
             nombres.Add(workout.id, workout.name);
@@ -59,7 +45,7 @@ public class ScheduleController : MonoBehaviour
         }
 
         List<WorkoutClassJSON> workoutClasses = await interoCloud.GetWorkoutClasses("rodrigosavage-at-gmail.com");
-
+        SingletonWorkouts.instancia.workoutClasses = workoutClasses;
         foreach (WorkoutClassJSON workout in workoutClasses){
             numberOfItems++;
             UnityEngine.Debug.Log(workout.dateStart + " de  "+workout.workoutId);
@@ -86,6 +72,8 @@ public class ScheduleController : MonoBehaviour
             classuiItem.classStart.text = workoutClasses[i].dateStart.TimeOfDay.ToString();
             //set day
             classuiItem.Day.text = workoutClasses[i].dateStart.DayOfWeek.ToString();
+            //set id
+            classuiItem.idItem = workoutClasses[i].workoutId.ToString();
         }
 
     }

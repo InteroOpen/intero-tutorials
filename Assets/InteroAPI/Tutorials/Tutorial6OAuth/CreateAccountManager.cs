@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CreateAccountManager : MonoBehaviour
 {
-    AuthManager interoCloud = new AuthManager();
+    public AuthManager interoCloud;
     public InputField emailInput;
     public InputField userInput;
     public InputField passwordInput;
@@ -18,6 +18,8 @@ public class CreateAccountManager : MonoBehaviour
     {
 
         // interoCloud.
+        print("passwordManager " + interoCloud.passwordManager);
+
     }
 
     // Update is called once per frame
@@ -28,6 +30,8 @@ public class CreateAccountManager : MonoBehaviour
 
     public void OnCreateAccount()
     {
+        print("passwordManager " + interoCloud.passwordManager);
+
         CreateAccount();
     }
     public async Task CreateAccount()
@@ -38,6 +42,7 @@ public class CreateAccountManager : MonoBehaviour
         UnityEngine.Debug.Log(email);
         UnityEngine.Debug.Log(user);
         UnityEngine.Debug.Log(pass);
+        print("passwordManager " + interoCloud.passwordManager);
         string error = await interoCloud.Signup(user, email, pass);
 
         // string error = await interoCloud.Signup(user, email, pass);

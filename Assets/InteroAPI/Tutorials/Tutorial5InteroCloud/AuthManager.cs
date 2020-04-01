@@ -21,7 +21,7 @@ public class AuthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UnityEngine.Debug.Log("AuthManager.Start!!");
+        UnityEngine.Debug.Log("AuthManager.Start!!" + passwordManager);
         /*
         try
         {
@@ -52,6 +52,7 @@ public class AuthManager : MonoBehaviour
     //}
     public async Task<string> Login()
     {
+        print("Trying to Login");
         passwordManager.ReadCredentials();
         string username = passwordManager.username;
         string password = passwordManager.password;
@@ -68,12 +69,16 @@ public class AuthManager : MonoBehaviour
 
     public async Task<string> Signup(string user, string email, string pass)
     {
+        print("password man " + passwordManager);
+        print("joojo");
         string s = await interoCloud.Signup(user, email, pass);
+        print("res"+s);
         passwordManager.SaveCredentials(user, pass);
         return s;
     }
     public bool AreCredentialsSaved()
     {
+        print("pp " + passwordManager);
         return passwordManager.AreCredentialsSaved();
     }
     public void SetClassId(int classId)

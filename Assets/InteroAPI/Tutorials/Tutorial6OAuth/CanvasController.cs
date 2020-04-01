@@ -50,6 +50,7 @@ public class CanvasController : MonoBehaviour
                 modalInfo.Show(error);
             }
         }
+        print("passwordManager " + authManager.passwordManager);
     }
 
     public void HideAll()
@@ -70,7 +71,11 @@ public class CanvasController : MonoBehaviour
     public void ShowcreateAccountView()
     {
         HideAll();
+        print("passwordManager " + authManager.passwordManager);
+
         createAccountView.SetActive(true);
+        print("passwordManager " + authManager.passwordManager);
+
     }
     public void ShowcompleteProfileView()
     {

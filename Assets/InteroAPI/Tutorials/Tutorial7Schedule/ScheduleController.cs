@@ -46,8 +46,10 @@ public class ScheduleController : MonoBehaviour
     }*/
     public void ShowWorkouts(List<WorkoutClassJSON> workoutClasses, Dictionary<int, WorkoutJSON> workouts)
     {
+        print(workoutClasses.Count);
         for (int i = 0; i < workoutClasses.Count; i++)
         {
+            print (workouts[workoutClasses[i].workoutId].name);
             //fechas[i] = workoutClasses[i].dateStart;
             // 60 width of item
             float spawnY = i * 60;

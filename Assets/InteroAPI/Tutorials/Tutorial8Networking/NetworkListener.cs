@@ -49,4 +49,9 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
         workoutManager.StartWorkout();
         // rivalController.StartWorkout(3);
     }
+
+    void IListenerOSC.OnOSCClientDisconnectedEvent(OSCClientDisconnectedEvent connectedEvent)
+    {
+        throw new System.NotImplementedException();
+    }
 }

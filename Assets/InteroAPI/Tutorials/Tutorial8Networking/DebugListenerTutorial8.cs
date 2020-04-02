@@ -9,6 +9,11 @@ public class DebugListenerTutorial8 : MonoBehaviour, IListenerOSC
        // print("OnOSCClientConnectedEvent " + connectedEvent);
     }
 
+    void IListenerOSC.OnOSCClientDisconnectedEvent(OSCClientDisconnectedEvent connectedEvent)
+    {
+        throw new System.NotImplementedException();
+    }
+
     void IListenerOSC.OnOSCErgDataEvent(OSCErgDataEvent ergEvent)
     {
         //print("OnOSCErgDataEvent " + ergEvent.ergData);

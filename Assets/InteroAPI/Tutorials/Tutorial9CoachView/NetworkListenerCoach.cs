@@ -20,9 +20,9 @@ public class NetworkListenerCoach : MonoBehaviour, IListenerOSC
     {
         string username = connectedEvent.socketSender.username;
         string s = username + " connectado\n";
+        if (username.Equals("coach")==false) ;
         connectedText.text += s;
         print(s);
-
     }
 
     void IListenerOSC.OnOSCErgDataEvent(OSCErgDataEvent ergEvent)
@@ -38,6 +38,7 @@ public class NetworkListenerCoach : MonoBehaviour, IListenerOSC
 
     void IListenerOSC.OnOSCMessageEvent(OSCMessageEvent messageEvent)
     {
+        print("jj "+ messageEvent.msgReceive.Address);
         throw new System.NotImplementedException();
     }
 
@@ -51,4 +52,8 @@ public class NetworkListenerCoach : MonoBehaviour, IListenerOSC
         throw new System.NotImplementedException();
     }
 
+    void IListenerOSC.OnOSCClientDisconnectedEvent(OSCClientDisconnectedEvent connectedEvent)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -67,4 +67,9 @@ public class Server : MonoBehaviour, IListenerOSC
     {
         print(name + "  Start Workout!!! " );
     }
+
+    void IListenerOSC.OnOSCClientDisconnectedEvent(OSCClientDisconnectedEvent connectedEvent)
+    {
+        throw new System.NotImplementedException();
+    }
 }

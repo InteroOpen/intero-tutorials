@@ -14,25 +14,35 @@ public class SegmentFiller : MonoBehaviour
     [SerializeField]
     private RectTransform content = null;
 
-    public WorkoutJSON workout;
-    private void Awake()
+    public CanvasController canvas;
+    // public 
+   // public List<WorkoutJSON> workouts;
+    //public List<WorkoutClassJSON> workoutClasses;
+    //public List<SegmentJSON> segments;
+    public void ShowSelectedWorkout(WorkoutJSON workout)//List<WorkoutJSON> workouts, string workoutId)
     {
-        for(int i=0; i<SingletonWorkouts.instancia.workouts.Count; i++)
+        canvas.ShowworkoutSumaryView();
+        /*
+        WorkoutJSON workout = null;
+        for (int i=0; i< workouts.Count; i++)
         {
-            if(SingletonWorkouts.instancia.id == SingletonWorkouts.instancia.workouts[i].id)
+            if(workoutId == workouts[i].id)
             {
                 workout = SingletonWorkouts.instancia.workouts[i];
             }
         }
-
+        */
         content.sizeDelta = new Vector2(0, workout.segments.Count * 100);
-
+        string[] strDifficulty = { "recuperación", "medio", "Fuerte!" };
+        // Workout 
         for (int i=0; i<workout.segments.Count; i++)
         {
+            Segment s = Segment.Factory(workout.segments[i]);
+            // Segment segment = new SegmentTime()
             // 60 width of item
             float spawnY = i * 95;
             //newSpawn Position
-            Vector3 pos = new Vector3(SpawnPoint.position.x - 100, -spawnY, SpawnPoint.position.z);
+            Vector3 pos = new Vector3(0.0f, -spawnY, SpawnPoint.position.z);
             //instantiate item
             GameObject SpawnedItem = Instantiate(item, pos, SpawnPoint.rotation);
             //setParent
@@ -40,11 +50,11 @@ public class SegmentFiller : MonoBehaviour
             //get ItemDetails Component
             ClassSegmentUi segmentItem = SpawnedItem.GetComponent<ClassSegmentUi>();
             //set type
-            segmentItem.segmentType.text = workout.segments[i].type.ToString();
+            segmentItem.segmentType.text = strDifficulty[(int)s.typeIntensity];// .type.ToString();
             //set target
-            segmentItem.segmentObjective.text = workout.segments[i].target.ToString();
+            segmentItem.segmentObjective.text = s.getTextObjective(); // workout.segments[i].target.spm.ToString();
             //set duration
-            segmentItem.segmentDuration.text = workout.segments[i].duration.ToString();
+            segmentItem.segmentDuration.text = s.getTextRemaining(0);// workout.segments[i].duration.ToString();
             //set background color
             //no se que valores arroja intensity porque es del tipo SegmentIntensity
             // pero para cambiar el color del fondo seria

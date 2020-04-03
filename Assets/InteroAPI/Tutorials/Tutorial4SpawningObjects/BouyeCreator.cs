@@ -84,7 +84,7 @@ public class BouyeCreator : MonoBehaviour
         if (x > distancia + metros / 2)
         {
             distancia += metros;
-            textoDistacia.text = distancia + "m";
+            // textoDistacia.text = distancia + "m";
             for (int lane = 1; lane < nLanes; lane += 2)
             {
                 distRight[lane / 2].transform.position = new Vector3(distancia, 0.5f, 3.5f * lane + z);

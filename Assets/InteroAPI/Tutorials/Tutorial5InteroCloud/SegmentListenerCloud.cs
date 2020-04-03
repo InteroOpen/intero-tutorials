@@ -34,7 +34,7 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
     {
         print("OnStartSegmentEvent " + startSegmentEvent.progressType + " " + startSegmentEvent.currentSegment);
         currentSegment = startSegmentEvent.currentSegment;
-        
+        print("OnStartSegmentEvent " + currentSegment.index);
         // hud.DisplayCurrentSegment(startSegmentEvent.currentSegment, 0);
         // hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
     } 
@@ -57,7 +57,13 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
         ErgData currentErgData = ergDataEvent.ergData;
         if (player.activeInHierarchy)
         {
-            // auth.PostMessage(currentSegment.index, currentErgData);
+            if (currentSegment != null)
+            {
+                int i = currentSegment.index;
+                print("OnStartSegmentEventJJJ " +i);
+                auth.PostMessage(i, currentErgData);
+
+            }
             /*
             Rigidbody rigidBody = player.GetComponent<Rigidbody>();
             float v = rigidBody.velocity.x;

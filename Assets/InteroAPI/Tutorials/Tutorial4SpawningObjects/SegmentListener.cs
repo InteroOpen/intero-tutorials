@@ -14,30 +14,26 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
     public Segment currentSegment = null;
     void IListenerSegment.OnEndSegmentEvent(SegmentEndEvent endSegmentEvent)
     {
-        print("OnEndSegmentEvent " + endSegmentEvent.progressType + " " + endSegmentEvent.currentSegment);
+        // print("OnEndSegmentEvent " + endSegmentEvent.progressType + " " + endSegmentEvent.currentSegment);
+        physicsManager.ResetLocation();
     }
 
     void IListenerSegment.OnProgressSegmentEvent(SegmentProgressEvent progressSegmentEvent)
-    {
-        // ergDataEvent
-        
-        // hud.DisplayCurrentSegment(progressSegmentEvent.currentSegment, progressSegmentEvent.progressPercent);
-
-        // print("OnProgressSegmentEvent " + progressSegmentEvent.progressPercent + " " + progressSegmentEvent.progressType + " " + progressSegmentEvent.currentSegment);
-        // print("next : " + progressSegmentEvent.nextSegment);
-    }
+    { }
 
     void IListenerSegment.OnStartSegmentEvent(SegmentStartEvent startSegmentEvent)
     {
-        print("OnStartSegmentEvent " + startSegmentEvent.progressType + " " + startSegmentEvent.currentSegment);
+        // print("OnStartSegmentEvent " + startSegmentEvent.progressType + " " + startSegmentEvent.currentSegment);
         currentSegment = startSegmentEvent.currentSegment;
         // hud.DisplayCurrentSegment(startSegmentEvent.currentSegment, 0);
-        hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
+        if(startSegmentEvent.nextSegment != null)
+            hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
+        // reset location
+        physicsManager.ResetLocation();
     } 
 
     void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent)
     {
-
     }
     void IListenerWorkout.OnEndWorkoutEvent(WorkoutEndEvent endWorkoutEvent)
     {
@@ -45,7 +41,6 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
 
     void IListenerErg.OnStrokeDataEvent(StrokeDataEvent strokeDataEvent)
     {
-        // UnityEngine.Debug.Log("got strokeData " + strokeDataEvent.strokeData);
     }
     void IListenerErg.OnErgDataEvent(ErgDataEvent ergDataEvent)
     {
@@ -55,14 +50,31 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
             Rigidbody rigidBody = player.GetComponent<Rigidbody>();
             float v = rigidBody.velocity.x;
             float x = rigidBody.position.x;
-            InteroBody1D body = physicsManager.UpdateLocation(x, v, ergDataEvent.ergData);
+
+            InteroBody1D body = null;  
+
+            // update hud
+            if (currentSegment != null)
+            {
+                ErgData e = new ErgData();
+                e.Copy(ergDataEvent.ergData);
+                e.distance = currentSegment.getProgressedDistance(ergDataEvent.ergData);
+                // float d = currentSegment.getProgressedDistance(ergDataEvent.ergData);
+                // print("loc xx erg " + ergDataEvent.ergData + "|"+d);
+                body = physicsManager.UpdateLocation(x, v, e);
+                hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
+                // physicsManager.se
+
+            }
+            else
+            {
+                body = physicsManager.UpdateLocation(x, v, ergDataEvent.ergData);
+            }
+
             rigidBody.velocity = new Vector3(body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);
             rigidBody.position = new Vector3(body.distance, rigidBody.position.y, rigidBody.position.z);
-            // update hud
-            if(currentSegment!=null)
-                hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
         }
-        // UnityEngine.Debug.Log("got ergData " + ergDataEvent.ergData);
+
     }
     void Start()
     {

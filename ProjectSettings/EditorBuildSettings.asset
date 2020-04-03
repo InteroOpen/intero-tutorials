@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/InteroAPI/Tutorials/Tutorial2Bluetooth/Tutorial2Bluetooth.unity
     guid: df332c13b66a99e46994492cf5e6f05f
   - enabled: 0
-    path: Assets/InteroAPI/Tutorials/Tutorial8Networking/Tutorial8Server.unity
-    guid: 01a4ab49207e0e94f9ac8603fea66f07
-  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: c632ebc52a7af0c4abeb59714d03ea6b
+  - enabled: 0
+    path: Assets/Scenes/LobbyEscene.unity
+    guid: d53b83b6ec9e65e46be7d99613c362e0
+  - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial8Networking/Tutorial8Client.unity
     guid: 7934b34f569c0df4f8ed65dba95a1341
+  - enabled: 1
+    path: Assets/InteroAPI/Tutorials/Tutorial9CoachView/Tutorial9CoachView.unity
+    guid: e1a43ce9f184cdb418e295b8dd7cccf5
   m_configObjects: {}

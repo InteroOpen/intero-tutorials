@@ -2,35 +2,37 @@
 using System.Threading.Tasks;
 using UnityEngine.UI;
 
-public class CreateAccountManager : MonoBehaviour
+public class LoginAccount : MonoBehaviour
 {
     public AuthManager interoCloud;
-    public InputField emailInput;
     public InputField userInput;
     public InputField passwordInput;
 
     public ModalInfoController modalInfo;
     public CanvasController canvasController;
 
-    public void OnCreateAccount()
+    // Start is called before the first frame update
+    void Start()
     {
-        CreateAccount();
+        print("passwordManager " + interoCloud.passwordManager);
+    }
+    public void OnLoginAccount()
+    {
+        Login();
     }
 
-    public async Task CreateAccount()
+    public async Task Login()
     {
         string user = userInput.text;
         string pass = passwordInput.text;
-        string email = emailInput.text;
-        UnityEngine.Debug.Log(email);
         UnityEngine.Debug.Log(user);
         UnityEngine.Debug.Log(pass);
         print("passwordManager " + interoCloud.passwordManager);
-        string error = await interoCloud.Signup(user, email, pass);
+        string error = await interoCloud.Login(user, pass);
 
         // string error = await interoCloud.Signup(user, email, pass);
         UnityEngine.Debug.Log("ress " + error);
-        if(error != null)
+        if (error != null)
         {
             modalInfo.Show(error);
         }

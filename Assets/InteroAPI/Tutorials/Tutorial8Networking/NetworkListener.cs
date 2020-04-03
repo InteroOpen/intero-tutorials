@@ -25,12 +25,13 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
     {
         print(" OSC got ergta");
         string username = ergEvent.socketSender.username;
+
         ErgData e = ergEvent.ergData;
         Segment s = ergEvent.segment;
         float d = s.getProgressedDistance(e);
         print(username + " xx OSC " + ergEvent.ergData + "|"+d );
         leaderboard.UpdateRank(username, d, e, s);
-        // rivalController.UpdateRival(ergEvent);
+        rivalController.UpdateRival(ergEvent);
 
     }
 
@@ -47,7 +48,7 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
         print("Client  Start Workout!!!");
         // Spawn rival boats
         workoutManager.StartWorkout();
-        // rivalController.StartWorkout(3);
+        rivalController.StartWorkout(5);
     }
 
     void IListenerOSC.OnOSCClientDisconnectedEvent(OSCClientDisconnectedEvent connectedEvent)

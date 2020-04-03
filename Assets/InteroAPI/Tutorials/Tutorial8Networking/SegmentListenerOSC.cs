@@ -45,8 +45,8 @@ public class SegmentListenerOSC : MonoBehaviour, IListenerErg, IListenerWorkout,
         if (player.activeInHierarchy && currentSegment !=null)
         {
             print("Local " + ergData);
-            netManager.SendMessage(ergData, currentSegment);
             leaderboard.UpdateRank(netManager.GetName(), currentSegment.getProgressedDistance(ergData), ergData, currentSegment);
+            netManager.SendMessage(ergData, currentSegment);
 
         }
         // UnityEngine.Debug.Log("got ergData " + ergDataEvent.ergData);

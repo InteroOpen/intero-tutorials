@@ -22,16 +22,6 @@ public class AuthManager : MonoBehaviour
     void Start()
     {
         UnityEngine.Debug.Log("AuthManager.Start!!" + passwordManager);
-        /*
-        try
-        {
-            passwordManager.SaveCredentials("user", "password");
-        } catch (Exception e)
-        {
-            print("e " + e.Message);
-        }
-        */
-        // Login();
     }
 
 
@@ -61,12 +51,20 @@ public class AuthManager : MonoBehaviour
         print("error " + s);
 
         return s;
-        //
-        // List<WorkoutJSON> workouts = await interoCloud.GetWorkouts("rodrigosavage-at-gmail.com");
-        // WorkoutJSON work = workouts[0];
-        // workoutManager.LoadWorkout(work);
     }
+    public async Task<string> Login(string username, string password)
+    {
+        print("Trying to Login");
+        // passwordManager.ReadCredentials();
+        //string username = passwordManager.username;
+        //string password = passwordManager.password;
+        print("Login leyo correcto " + username + " dd " + password);
+        passwordManager.SaveCredentials(username, password);
+        string s = await interoCloud.OAuth(username, password);
+        print("error " + s);
 
+        return s;
+    }
     public async Task<string> Signup(string user, string email, string pass)
     {
         print("password man " + passwordManager);

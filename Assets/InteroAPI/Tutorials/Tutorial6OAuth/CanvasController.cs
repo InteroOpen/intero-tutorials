@@ -7,9 +7,11 @@ using UnityEngine;
 public class CanvasController : MonoBehaviour
 {
     public GameObject loginView;
+    public GameObject loginAccountView;
     public GameObject createAccountView;
     public GameObject completeProfileView;
     public GameObject rowingScheduleView;
+    public GameObject workoutSumaryView;
     public GameObject profileView;
     public GameObject syncErgView;
 
@@ -29,6 +31,16 @@ public class CanvasController : MonoBehaviour
         }*/
         CheckLogin();
     }
+
+    async Task LoadWorkouts()
+    {
+        List<WorkoutClassJSON> workoutClasses = await authManager.GetWorkoutClasses();
+        Dictionary<int, WorkoutJSON> workouts = await authManager.GetWorkoutDic();
+        print("got " + workoutClasses);
+        print("got " + workouts);
+        schedule.ShowWorkouts(workoutClasses, workouts);
+    }
+
     async Task CheckLogin() {
         ShowloginView();
         if (authManager.AreCredentialsSaved())
@@ -38,12 +50,6 @@ public class CanvasController : MonoBehaviour
             if (error==null)
             {
                 ShowrowingScheduleView();
-
-                List<WorkoutClassJSON> workoutClasses = await authManager.GetWorkoutClasses();
-                Dictionary<int, WorkoutJSON> workouts = await authManager.GetWorkoutDic();
-                print("got " + workoutClasses);
-                print("got " + workouts);
-                schedule.ShowWorkouts(workoutClasses, workouts);
             }
             else
             {
@@ -56,9 +62,12 @@ public class CanvasController : MonoBehaviour
     public void HideAll()
     {
         loginView.SetActive(false);
+        loginAccountView.SetActive(false);
+
         createAccountView.SetActive(false);
         completeProfileView.SetActive(false);
         rowingScheduleView.SetActive(false);
+        workoutSumaryView.SetActive(false);
         profileView.SetActive(false);
         syncErgView.SetActive(false);
     }
@@ -67,6 +76,11 @@ public class CanvasController : MonoBehaviour
     {
         HideAll();
         loginView.SetActive(true);
+    }
+    public void ShowloginAccountView()
+    {
+        HideAll();
+        loginAccountView.SetActive(true);
     }
     public void ShowcreateAccountView()
     {
@@ -84,8 +98,14 @@ public class CanvasController : MonoBehaviour
     }
     public void ShowrowingScheduleView()
     {
+        LoadWorkouts();
         HideAll();
         rowingScheduleView.SetActive(true);
+    }
+    public void ShowworkoutSumaryView()
+    {
+        HideAll();
+        workoutSumaryView.SetActive(true);
     }
     public void ShowprofileView()
     {

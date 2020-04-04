@@ -47,7 +47,6 @@ public class SegmentListenerOSC : MonoBehaviour, IListenerErg, IListenerWorkout,
             print("Local " + ergData);
             leaderboard.UpdateRank(netManager.GetName(), currentSegment.getProgressedDistance(ergData), ergData, currentSegment);
             netManager.SendMessage(ergData, currentSegment);
-
         }
         // UnityEngine.Debug.Log("got ergData " + ergDataEvent.ergData);
     }

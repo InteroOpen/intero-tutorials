@@ -3,6 +3,7 @@ using UnityEngine;
 using Intero.Physics;
 using Intero.Workouts;
 using Intero.Common;
+using Intero.Statistics;
 
 public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
@@ -10,12 +11,15 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
     public GameObject player;
     public HUDController hud;
     public HUDController hudNext;
+    public SegmentSummary segmentSummary;
+    StatisticManager statisticManager = new StatisticManager();
     // public ErgData currentErgData;
     public Segment currentSegment = null;
     void IListenerSegment.OnEndSegmentEvent(SegmentEndEvent endSegmentEvent)
     {
         // print("OnEndSegmentEvent " + endSegmentEvent.progressType + " " + endSegmentEvent.currentSegment);
         physicsManager.ResetLocation();
+        segmentSummary.ShowSegmentSummary(endSegmentEvent, statisticManager);
     }
 
     void IListenerSegment.OnProgressSegmentEvent(SegmentProgressEvent progressSegmentEvent)
@@ -83,5 +87,9 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
         InteroEventManager.GetEventManager().AddListener((IListenerErg)this);
         InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
         InteroEventManager.GetEventManager().AddListener((IListenerSegment)this);
+        // add statistic manager to the listener
+        InteroEventManager.GetEventManager().AddListener((IListenerErg)statisticManager);
+        InteroEventManager.GetEventManager().AddListener((IListenerWorkout)statisticManager);
+        InteroEventManager.GetEventManager().AddListener((IListenerSegment)statisticManager);
     }
 }

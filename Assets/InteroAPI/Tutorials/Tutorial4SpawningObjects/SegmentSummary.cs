@@ -2,8 +2,6 @@
 using Intero.Events;
 using Intero.Statistics;
 using Intero.Workouts;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,10 +25,11 @@ public class SegmentSummary : MonoBehaviour
 
         // ErgData[] ergs = (ErgData[]).ToArray();
         string ret = "";
-        Stack s = statisticManager.ergSegmentStack;
-        for (int i = 0; i < s.Count; ++i)
+        ErgData[] s = statisticManager.ergSegmentStack.ToArray();
+
+        for (int i = 0; i < s.Length; ++i)
         {
-            e = (ErgData)s.Pop();
+            e = s[i];
             ret += "[" + e.pace + ", " + e.spm + ", " + e.avgPower + "] ";
         }
         print("jojo " + ret);

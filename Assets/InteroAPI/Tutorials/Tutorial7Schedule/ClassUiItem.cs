@@ -19,7 +19,7 @@ public class ClassUiItem : MonoBehaviour{
 
     public WorkoutJSON workout;
     
-       public SegmentFiller segmentFiller;
+    public SegmentFiller segmentFiller;
     public void ChangeScene()
     {
         segmentFiller.ShowSelectedWorkout(workout);

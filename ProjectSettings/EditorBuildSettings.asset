@@ -17,7 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial8Networking/Tutorial8Client.unity
     guid: 7934b34f569c0df4f8ed65dba95a1341
-  - enabled: 1
+  - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial9CoachView/Tutorial9CoachView.unity
     guid: e1a43ce9f184cdb418e295b8dd7cccf5
+  - enabled: 1
+    path: Assets/InteroAPI/Tutorials/Tutorial10Everything/tutorial10.unity
+    guid: b9644e7fb1101c046b74d5cae350252d
   m_configObjects: {}

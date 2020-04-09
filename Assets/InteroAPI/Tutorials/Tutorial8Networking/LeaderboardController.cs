@@ -33,8 +33,8 @@ public class LeaderboardController : MonoBehaviour
         rankNameTexts[i].text = (i + 1) + " " + rank.username;
         ErgData e = rank.ergData;
         Segment s = rank.segment;
-        // rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.heartrate;
-        rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + (s.getProgressedDistance(e)*-1);//  + "|" + s.getProgressedDistance(e);
+        rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.spm+ " " + rank.ergData.heartrate;
+       //  rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + (s.getProgressedDistance(e)*-1);//  + "|" + s.getProgressedDistance(e);
     }
     public void UpdateRankList(LinkedList<RankNode> listRanks) {
         int i = 0;

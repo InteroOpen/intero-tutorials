@@ -22,7 +22,7 @@ public class RivalController : MonoBehaviour
         physicsManagers = new PhysicsManager[numRivals];
         for (int i = 0; i < numRivals; i++)
         {
-            rivals[i] = Instantiate(rivalTemplate, new Vector3(0,0, (i + 1) * 2.0F), rivalTemplate.transform.rotation);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
+            rivals[i] = Instantiate(rivalTemplate, new Vector3(0,0, (i + 1) * .6F), rivalTemplate.transform.rotation);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
             rivals[i].transform.parent = transform.parent;
             rivals[i].SetActive(true);
             physicsManagers[i] = new PhysicsManager();
@@ -31,21 +31,22 @@ public class RivalController : MonoBehaviour
 
     public void UpdateRival(OSCErgDataEvent ergEvent)
     {
-        print("index " + ergEvent.senderId);
+        print("UpdateRival index " + ergEvent.senderId);
         GameObject rival = rivals[ergEvent.senderId];
         PhysicsManager physicsManager = physicsManagers[ergEvent.senderId];
         Rigidbody rigidBody = rival.GetComponent<Rigidbody>();
         float v = rigidBody.velocity.x;
         float x = rigidBody.position.x;
-        float z = ergEvent.senderId * 2.0f;
+        // float z = ergEvent.senderId * 2.0f;
         
         ErgData e = new ErgData();
         e.Copy(ergEvent.ergData);
         e.distance = ergEvent.segment.getProgressedDistance(ergEvent.ergData);
-        if (e.distance < 0.1) physicsManager.ResetLocation();
+        print("UpdateRival p Distance " + e.distance);
+        if (e.distance < 0.1 && e.distance> -0.1) physicsManager.ResetLocation();
 
         InteroBody1D body = physicsManager.UpdateLocation(x, v, e);
         rigidBody.velocity = new Vector3(body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);
-        rigidBody.position = new Vector3(body.distance, rigidBody.position.y, z);
+        rigidBody.position = new Vector3(body.distance, rigidBody.position.y, rigidBody.position.z);
     }
 }

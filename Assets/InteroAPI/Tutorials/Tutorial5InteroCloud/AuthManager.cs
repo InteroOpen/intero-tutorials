@@ -94,7 +94,7 @@ public class AuthManager : MonoBehaviour
 
     public async Task PostMessage(int segmentNum, ErgData e)
     {
-        print("PostMessage" + historyId+ segmentNum+ e);
+        // print("PostMessage" + historyId+ segmentNum+ e);
 
         await interoCloud.PostMessage(historyId, segmentNum, e);
     }

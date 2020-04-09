@@ -15,13 +15,15 @@ public class SegmentFiller : MonoBehaviour
     private RectTransform content = null;
 
     public CanvasController canvas;
-    // public 
-   // public List<WorkoutJSON> workouts;
-    //public List<WorkoutClassJSON> workoutClasses;
-    //public List<SegmentJSON> segments;
+
+    public WorkoutManager workoutManager;
+
+    public ClientUI client;
     public void ShowSelectedWorkout(WorkoutJSON workout)//List<WorkoutJSON> workouts, string workoutId)
     {
         canvas.ShowworkoutSumaryView();
+        client.StartClient(canvas.GetUsername());
+        workoutManager.LoadWorkout(workout);
         /*
         WorkoutJSON workout = null;
         for (int i=0; i< workouts.Count; i++)

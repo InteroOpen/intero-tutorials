@@ -3,7 +3,6 @@ using UnityEngine;
 using Intero.Physics;
 using Intero.Workouts;
 using Intero.Common;
-using Intero.Statistics;
 
 public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
@@ -11,41 +10,37 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
     public GameObject player;
     public HUDController hud;
     public HUDController hudNext;
-    public SegmentSummary segmentSummary;
-    StatisticManager statisticManager = new StatisticManager();
     // public ErgData currentErgData;
     public Segment currentSegment = null;
+    UnityThreadEvents unityThreadEvents = new UnityThreadEvents(InteroEventManager.GetEventManager());
     void IListenerSegment.OnEndSegmentEvent(SegmentEndEvent endSegmentEvent)
     {
-        // print("OnEndSegmentEvent " + endSegmentEvent.progressType + " " + endSegmentEvent.currentSegment);
+        if(endSegmentEvent.nextSegment==null)
+        {
+            // end workout
+            // InteroEventManager.GetEventManager().SendEvent(new WorkoutEndEvent());
+            unityThreadEvents.EnqueueEvent(new WorkoutEndEvent());
+        }
         physicsManager.ResetLocation();
-        segmentSummary.ShowSegmentSummary(endSegmentEvent, statisticManager);
     }
 
-    void IListenerSegment.OnProgressSegmentEvent(SegmentProgressEvent progressSegmentEvent)
-    { }
-
+    void IListenerSegment.OnProgressSegmentEvent(SegmentProgressEvent progressSegmentEvent) { }
     void IListenerSegment.OnStartSegmentEvent(SegmentStartEvent startSegmentEvent)
     {
-        // print("OnStartSegmentEvent " + startSegmentEvent.progressType + " " + startSegmentEvent.currentSegment);
         currentSegment = startSegmentEvent.currentSegment;
-        // hud.DisplayCurrentSegment(startSegmentEvent.currentSegment, 0);
         if(startSegmentEvent.nextSegment != null)
             hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
-        // reset location
+
         physicsManager.ResetLocation();
     } 
 
-    void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent)
-    {
-    }
+    void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent) { }
     void IListenerWorkout.OnEndWorkoutEvent(WorkoutEndEvent endWorkoutEvent)
     {
+        currentSegment = null;
     }
 
-    void IListenerErg.OnStrokeDataEvent(StrokeDataEvent strokeDataEvent)
-    {
-    }
+    void IListenerErg.OnStrokeDataEvent(StrokeDataEvent strokeDataEvent) { }
     void IListenerErg.OnErgDataEvent(ErgDataEvent ergDataEvent)
     {
         // currentErgData = ergDataEvent.ergData;
@@ -65,6 +60,8 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
                 e.distance = currentSegment.getProgressedDistance(ergDataEvent.ergData);
                 // float d = currentSegment.getProgressedDistance(ergDataEvent.ergData);
                 // print("loc xx erg " + ergDataEvent.ergData + "|"+d);
+                print(ergDataEvent.ergData);
+
                 body = physicsManager.UpdateLocation(x, v, e);
                 hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
                 // physicsManager.se
@@ -78,18 +75,18 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
             rigidBody.velocity = new Vector3(body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);
             rigidBody.position = new Vector3(body.distance, rigidBody.position.y, rigidBody.position.z);
         }
-
     }
     void Start()
     {
 
-         // player.GetComponent<Rigidbody>();
+        print("SegmentListener Start");
+
         InteroEventManager.GetEventManager().AddListener((IListenerErg)this);
         InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
         InteroEventManager.GetEventManager().AddListener((IListenerSegment)this);
-        // add statistic manager to the listener
-        InteroEventManager.GetEventManager().AddListener((IListenerErg)statisticManager);
-        InteroEventManager.GetEventManager().AddListener((IListenerWorkout)statisticManager);
-        InteroEventManager.GetEventManager().AddListener((IListenerSegment)statisticManager);
+    }
+    void Update()
+    {
+        unityThreadEvents.Update();
     }
 }

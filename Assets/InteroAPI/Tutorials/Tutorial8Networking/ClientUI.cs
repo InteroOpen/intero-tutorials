@@ -14,6 +14,15 @@ public class ClientUI : MonoBehaviour
     public ErgSimulator ergSimulator;
     InteroClientTCP client = null;
     // Start is called before the first frame update
+    public void StartClient(string username)
+    {
+        if (client != null)
+            client.OnDestroy();
+        client = new InteroClientTCP();
+        client.username = username;
+        ergSimulator.SetPace("120");
+        client.Connect(8080);
+    }
     public void StartClient()
     {
         client = new InteroClientTCP();
@@ -23,7 +32,9 @@ public class ClientUI : MonoBehaviour
     }
     public string GetName()
     {
-        return nameText.text;
+        if (client == null)
+            return "missigno";
+        return client.username;//nameText.text;
     }
     // Update is called once per frame
     void Update()
@@ -33,7 +44,8 @@ public class ClientUI : MonoBehaviour
     }
     void OnDestroy()
     {
-        client.OnDestroy();
+        if (client != null)
+            client.OnDestroy();
         Debug.Log("OnDestroy1");
     }
 

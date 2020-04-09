@@ -27,7 +27,7 @@ using System.Collections;
         void Start()
         {
          
-            InvokeRepeating("SendErgData", 0.0f, 0.3f);
+            InvokeRepeating("SendErgData", 0.0f, 0.4f);
         }
         public void SetPace(string pace)
     {

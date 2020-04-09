@@ -12,6 +12,7 @@ public class CanvasController : MonoBehaviour
     public GameObject completeProfileView;
     public GameObject rowingScheduleView;
     public GameObject workoutSumaryView;
+    public GameObject workoutResultsView;
     public GameObject profileView;
     public GameObject syncErgView;
 
@@ -22,13 +23,6 @@ public class CanvasController : MonoBehaviour
     private void Start()
     {
         HideAll();
-        /*
-        if (passwordManager.AreCredentialsSaved())
-        {
-            passwordManager.ReadCredentials();
-            authManager.Login(passwordManager.username,passwordManager.password);
-            ShowrowingScheduleView();
-        }*/
         CheckLogin();
     }
 
@@ -68,6 +62,8 @@ public class CanvasController : MonoBehaviour
         completeProfileView.SetActive(false);
         rowingScheduleView.SetActive(false);
         workoutSumaryView.SetActive(false);
+        workoutResultsView.SetActive(false);
+
         profileView.SetActive(false);
         syncErgView.SetActive(false);
     }
@@ -81,6 +77,10 @@ public class CanvasController : MonoBehaviour
     {
         HideAll();
         loginAccountView.SetActive(true);
+    }
+    public string GetUsername()
+    {
+        return authManager.passwordManager.username;
     }
     public void ShowcreateAccountView()
     {
@@ -107,6 +107,12 @@ public class CanvasController : MonoBehaviour
         HideAll();
         workoutSumaryView.SetActive(true);
     }
+    public void ShowWorkoutResultsView()
+    {
+        HideAll();
+        workoutResultsView.SetActive(true);
+    }
+    
     public void ShowprofileView()
     {
         HideAll();

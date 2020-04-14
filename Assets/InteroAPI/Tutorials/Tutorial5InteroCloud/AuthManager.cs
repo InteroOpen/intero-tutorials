@@ -9,10 +9,11 @@ using Intero.Common;
 using static InteroAPI.OAuth.InteroCloud;
 using Intero.Workouts;
 using System;
+using Amazon;
 
 public class AuthManager : MonoBehaviour
 {
-    public InteroCloud interoCloud = new InteroCloud();
+    public InteroCloud interoCloud = null;
     public WorkoutManager workoutManager;
     public int historyId;
     public int classId;
@@ -21,7 +22,9 @@ public class AuthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UnityEngine.Debug.Log("AuthManager.Start!!" + passwordManager);
+        Debug.Log("AuthManager.Start!!" + passwordManager);
+//        UnityInitializer.AttachToGameObject(this.gameObject);
+        interoCloud = new InteroCloud();
     }
 
 
@@ -108,7 +111,7 @@ public class AuthManager : MonoBehaviour
         foreach (WorkoutJSON workout in workouts)
         {
             workoutDic.Add(int.Parse(workout.id), workout);
-            UnityEngine.Debug.Log(workout);
+            // UnityEngine.Debug.Log(workout);
         }
         return workoutDic;
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
@@ -25,14 +26,18 @@ public class CanvasController : MonoBehaviour
         HideAll();
         CheckLogin();
     }
-
+    public Text testOut;
     async Task LoadWorkouts()
     {
+        testOut.text = "loading workouts...";
         List<WorkoutClassJSON> workoutClasses = await authManager.GetWorkoutClasses();
         Dictionary<int, WorkoutJSON> workouts = await authManager.GetWorkoutDic();
-        print("got " + workoutClasses);
+        testOut.text = "loading Finished..";
+        testOut.text = "N workout " + workoutClasses.Count;
+        print("got LoadWorkouts " + workoutClasses.Count);
         print("got " + workouts);
-        schedule.ShowWorkouts(workoutClasses, workouts);
+
+        // schedule.ShowWorkouts(workoutClasses, workouts);
     }
 
     async Task CheckLogin() {
@@ -40,7 +45,7 @@ public class CanvasController : MonoBehaviour
         if (authManager.AreCredentialsSaved())
         {
             string error = await authManager.Login();
-            print("error!! " + error);
+            print("error! ! Fumar" + error);
             if (error==null)
             {
                 ShowrowingScheduleView();

@@ -22,6 +22,7 @@ public class ClassUiItem : MonoBehaviour{
     public SegmentFiller segmentFiller;
     public void ChangeScene()
     {
+
         segmentFiller.ShowSelectedWorkout(workout);
         // SingletonWorkouts.instancia.id = idItem;
         // SceneManager.LoadScene("LobbyEscene");

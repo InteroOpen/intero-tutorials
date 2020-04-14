@@ -59,6 +59,12 @@ public class WorkoutManager : MonoBehaviour
     {
         segmentManager.Clear();
         print("Loading " + work);
+        if(work == null)
+        {
+            print("Error Workout is null");
+           // return;
+        }
+
         foreach (SegmentJSON segmentJSON in work.segments)
         {
 

@@ -21,16 +21,25 @@ public class LeaderboardController : MonoBehaviour
         rankStatsTexts = new Text[numberEntries];
         for (int i = 0; i < numberEntries; i++)
         {
-            GameObject g = Instantiate(rankPrefab, new Vector3(0, -i * 30.0F, 0), Quaternion.identity);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
+            GameObject g = Instantiate(rankPrefab, new Vector3(0, -i * 90.0F + 60F, 0), Quaternion.identity);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
             g.SetActive(true);                                                                                         //setParent
             g.transform.SetParent(transform, false);
             rankNameTexts[i] = g.transform.Find("RankName").GetComponent<Text>();
             rankStatsTexts[i] = g.transform.Find("RankStats").GetComponent<Text>();
         }
     }
+    string GetShortName(string name)
+    {
+        int n = name.Length;
+        if (n < 9)
+        {
+            return name;
+        }
+        return name.Substring(0, 4) + "" + name.Substring(n - 4, 4);
+    }
     void SetRank(int i, RankNode rank)
     {
-        rankNameTexts[i].text = (i + 1) + " " + rank.username;
+        rankNameTexts[i].text = (i + 1) + " " + GetShortName(rank.username);
         ErgData e = rank.ergData;
         Segment s = rank.segment;
         rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.spm+ " " + rank.ergData.heartrate;

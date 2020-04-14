@@ -16,10 +16,11 @@ public class ScheduleController : MonoBehaviour
 
     public void ShowWorkouts(List<WorkoutClassJSON> workoutClasses, Dictionary<int, WorkoutJSON> workouts)
     {
-        print(workoutClasses.Count);
         for (int i = 0; i < workoutClasses.Count; i++)
         {
             WorkoutJSON workout = workouts[workoutClasses[i].workoutId];
+
+            // workout.MemberwiseClone();
             print (workout.name);
             //fechas[i] = workoutClasses[i].dateStart;
             // 60 width of item
@@ -41,6 +42,8 @@ public class ScheduleController : MonoBehaviour
             //set day
             classuiItem.Day.text = workoutClasses[i].dateStart.DayOfWeek.ToString();
         }
+        print("ScheduleController.ShowWorkouts Count" + workoutClasses.Count);
+
     }
     private async Task GetWorkouts()
     {

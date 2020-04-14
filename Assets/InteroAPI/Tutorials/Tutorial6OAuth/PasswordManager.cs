@@ -9,7 +9,7 @@ public class PasswordManager : MonoBehaviour
     public string password;
     public void Start()
     {
-        path = Application.dataPath + "/pass.txt";
+        path = Application.persistentDataPath + "/pass.txt";
     }
 
     public bool AreCredentialsSaved()
@@ -28,12 +28,12 @@ public class PasswordManager : MonoBehaviour
 
     public void SaveCredentials(string username, string password)
     {
-        print("SaveCredentials success " + username);
+        print("1 SaveCredentials started " + username);
 
         File.WriteAllText(path, username + "\n" + password + "\n");
         this.username = username;
         this.password = password;
-        print("SaveCredentials success " + username);
+        print("2 SaveCredentials success " + username);
 
     }
 }

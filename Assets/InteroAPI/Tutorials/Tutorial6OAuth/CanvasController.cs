@@ -30,6 +30,7 @@ public class CanvasController : MonoBehaviour
     async Task LoadWorkouts()
     {
         testOut.text = "loading workouts...";
+        testOut.text = "loading " + authManager.interoCloud.GetOAuthToken();
         List<WorkoutClassJSON> workoutClasses = await authManager.GetWorkoutClasses();
         Dictionary<int, WorkoutJSON> workouts = await authManager.GetWorkoutDic();
         testOut.text = "loading Finished..";
@@ -37,7 +38,7 @@ public class CanvasController : MonoBehaviour
         print("got LoadWorkouts " + workoutClasses.Count);
         print("got " + workouts);
 
-        // schedule.ShowWorkouts(workoutClasses, workouts);
+         schedule.ShowWorkouts(workoutClasses, workouts);
     }
 
     async Task CheckLogin() {

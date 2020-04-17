@@ -73,5 +73,104 @@ namespace Intero.BLE
             StrokeDataEvent e = new StrokeDataEvent(strokeData);
             InteroEventManager.GetEventManager().SendEvent(e);
         }
-    }
+
+		public ErgData onErgDataReady(float i_f,
+								float time,
+								float distance,
+								float flags,
+								float totalWOGDistance,
+								float totalWOGTime,
+								float WOGTimeType,
+								float drag,
+								// 32
+								float speed,
+								float SPM,
+								float heartrate,
+								float pace,
+								float avgPace,
+								float restDistance,
+								float restTime,
+								int intervalCount,
+								float avgPower,
+								float calories,
+								float splitAvgPace,
+								float splitAvgPower,
+								float splitAvgCalories,
+								float splitTime,
+								float splitDistance)
+		{
+			// print("onErgDataReady "+i_f);
+			int i = (int)i_f;
+			ergData.i = i;
+			ergData.time = time;
+			ergData.distance = distance;
+			ergData.flags = flags;
+			ergData.totalWOGDistance = totalWOGDistance;
+			ergData.totalWOGTime = totalWOGTime;
+			ergData.WOGTimeType = WOGTimeType;
+			ergData.drag = drag;
+			// 32
+			ergData.speed = speed;
+			ergData.spm = SPM;
+			ergData.heartrate = heartrate;
+			ergData.pace = pace;
+			ergData.avgPace = avgPace;
+			ergData.restDistance = restDistance;
+			ergData.restTime = restTime;
+			ergData.intervalCount = intervalCount;
+			ergData.avgPower = avgPower;
+			ergData.calories = calories;
+			ergData.splitAvgPace = splitAvgPace;
+			ergData.splitAvgPower = splitAvgPower;
+			ergData.splitAvgCalories = splitAvgCalories;
+			ergData.splitTime = splitTime;
+			ergData.splitDistance = splitDistance;
+			// ergData.power = power;
+			return ergData;
+			// textStatus.text =  ("ErgData Connected "+time);
+
+			// if (playerBLE!=null){
+			// 		playerBLE.OnErgData (ergData);
+			// }
+			// interoServer.SendErgData(ergData);
+		}
+
+		public StrokeData onStrokeDataReady(
+				float i_f,
+				float time,
+				float distance,
+				float driveLength,
+				float driveTime,
+				float strokeRecoveryTime,
+				float strokeRecoveryDistance,
+				float peakDriveForce,
+				float avgDriveForce,
+				float workPerStroke,
+				float strokeCount,
+				float strokePower,
+				float strokeCalories,
+				float projectedWorkTime,
+				float projectedWorkDistance
+				)
+		{
+			int i = (int)i_f;
+			strokeData.i = i;
+			strokeData.time = time;
+			strokeData.distance = distance;
+			strokeData.driveLength = driveLength;
+			strokeData.driveTime = driveTime;
+			strokeData.strokeRecoveryTime = strokeRecoveryTime;
+			strokeData.strokeRecoveryDistance = strokeRecoveryDistance;
+			strokeData.peakDriveForce = peakDriveForce;
+			strokeData.avgDriveForce = avgDriveForce;
+			strokeData.workPerStroke = workPerStroke;
+			strokeData.strokeCount = strokeCount;
+			strokeData.strokePower = strokePower;
+			strokeData.strokeCalories = strokeCalories;
+			// strokeData.projectedWorkTime = projectedWorkTime;
+			// strokeData.projectedWorkDistance = projectedWorkDistance;
+
+			return strokeData;
+		}
+	}
 }

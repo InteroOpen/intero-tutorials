@@ -60,7 +60,7 @@ namespace Intero.BLE
 
 		public void onShareComplete(int result)
 		{
-			PM5EventHandler._controllerPM5.onPM5Connected(" "+result);
+			_controllerPM5.onBLEConnected(" "+result);
 		}
 		public void onErgDataReady(
 			float time,

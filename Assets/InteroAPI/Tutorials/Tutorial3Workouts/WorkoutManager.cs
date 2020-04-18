@@ -16,6 +16,7 @@ public class WorkoutManager : MonoBehaviour
         segmentManager.Push(new SegmentDistance(1000, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentDistance(500, 22, SegmentIntensity.FAST));
         segmentManager.Push(new SegmentTime(200, 24, SegmentIntensity.MEDIUM));
+        
         /*
         segmentManager.Push(new SegmentTime(3, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentTime(3, 22, SegmentIntensity.MEDIUM));

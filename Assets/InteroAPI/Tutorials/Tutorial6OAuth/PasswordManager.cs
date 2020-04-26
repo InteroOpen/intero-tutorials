@@ -2,13 +2,14 @@
 using System.IO;
 using UnityEngine;
 
-public class PasswordManager : MonoBehaviour
+public class PasswordManager
 {
     string path;
     public string username;
     public string password;
-    public void Start()
+    public PasswordManager()
     {
+        Debug.Log("pass managet star!!");
         path = Application.persistentDataPath + "/pass.txt";
     }
 
@@ -18,6 +19,7 @@ public class PasswordManager : MonoBehaviour
     }
     public void ReadCredentials()
     {
+        Debug.Log("1 Reading creds " + username);
         IEnumerable<string> ls = File.ReadLines(path);
         IEnumerator<string> e = ls.GetEnumerator();
         e.MoveNext();
@@ -28,12 +30,12 @@ public class PasswordManager : MonoBehaviour
 
     public void SaveCredentials(string username, string password)
     {
-        print("1 SaveCredentials started " + username);
+        Debug.Log("1 SaveCredentials started " + username);
 
         File.WriteAllText(path, username + "\n" + password + "\n");
         this.username = username;
         this.password = password;
-        print("2 SaveCredentials success " + username);
+        Debug.Log("2 SaveCredentials success " + username);
 
     }
 }

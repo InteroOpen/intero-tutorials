@@ -18,11 +18,12 @@ public class SegmentFiller : MonoBehaviour
 
     public WorkoutManager workoutManager;
 
-    public ClientUI client;
+    public ClientUI client = null;
     public void ShowSelectedWorkout(WorkoutJSON workout)//List<WorkoutJSON> workouts, string workoutId)
     {
         canvas.ShowworkoutSumaryView();
-        client.StartClient(canvas.GetUsername());
+        if(client!=null)
+            client.StartClient(canvas.GetUsername());
         if (workout == null)
         {
             print("SegmentFiller.ShowSelectedWorkout Nu!!!");

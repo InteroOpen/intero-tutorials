@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using static TestInteroCloud;
+// using static TestInteroCloud;
 
 public class CanvasController : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class CanvasController : MonoBehaviour
     public GameObject syncErgView;
 
     public ModalInfoController modalInfo;
-    public AuthManager authManager;
+    public LambdaWorkoutHistory authManager;
     public ScheduleController schedule;
     // public PasswordManager passwordManager;
     private void Start()
@@ -30,19 +32,31 @@ public class CanvasController : MonoBehaviour
     async Task LoadWorkouts()
     {
         testOut.text = "loading workouts...";
-        testOut.text = "loading " + authManager.interoCloud.GetOAuthToken();
-        List<WorkoutClassJSON> workoutClasses = await authManager.GetWorkoutClasses();
-        Dictionary<int, WorkoutJSON> workouts = await authManager.GetWorkoutDic();
-        testOut.text = "loading Finished..";
-        testOut.text = "N workout " + workoutClasses.Count;
-        print("got LoadWorkouts " + workoutClasses.Count);
-        print("got " + workouts);
-
-         schedule.ShowWorkouts(workoutClasses, workouts);
+        testOut.text = "loading " + authManager.accessToken; // interoCloud..GetOAuthToken();
+        
+        ContributorClassT c = await authManager.GetWorkoutClasses();
+        Debug.Log("Melanie! " + c.response.IsSuccessStatusCode);
+        if(c.response.IsSuccessStatusCode == false){
+            modalInfo.Show(c.response.ToString());
+        } else 
+        
+        {
+            List<WorkoutClassJSON> workoutClasses = c.classes;
+            // List<WorkoutClassJSON> workoutClasses = await authManager.GetWorkoutClasses();
+            Debug.Log("Got classes " + workoutClasses);
+            // List<WorkoutClassJSON> workoutClasses = await authManager.GetWorkoutClasses();
+            Dictionary<int, WorkoutJSON> workouts = await authManager.GetWorkoutDic();
+            testOut.text = "loading Finished..";
+            testOut.text = "N workout " + workoutClasses.Count;
+            print("got LoadWorkouts " + workoutClasses.Count);
+            print("got " + workouts);
+            schedule.ShowWorkouts(workoutClasses, workouts);
+        }
     }
 
     async Task CheckLogin() {
         ShowloginView();
+        print("Are creds save? "+ authManager.AreCredentialsSaved());
         if (authManager.AreCredentialsSaved())
         {
             string error = await authManager.Login();

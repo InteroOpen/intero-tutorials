@@ -16,10 +16,48 @@ namespace Intero.BLE
 
         public void StartBLE(int channel)
         {
-            PM5EventHandler.connectToPM5(channel);
-        }
+#if UNITY_STANDALONE || UNITY_EDITOR
 
-        void onBLEOn(string s)
+#elif UNITY_ANDROID
+			PluginBLEPM5.InitBLEPM5(0);
+#else
+            PM5EventHandler.connectToPM5(channel);
+#endif
+		}
+		ErgDataEvent ergDataEvent = null;
+		StrokeDataEvent strokeDataEvent = null;
+		bool erdataReady, strokeDataReady;
+		public void ScanDevices()
+		{
+#if UNITY_STANDALONE || UNITY_EDITOR
+#elif UNITY_ANDROID
+			PluginBLEPM5.StartScanning((ErgData a) => {
+				ergDataEvent = new ErgDataEvent(a);
+				erdataReady = true;
+				print("INTERO_BLE ergdata " + a);
+			}, (StrokeData a) => {
+				strokeDataEvent = new StrokeDataEvent(a);
+				strokeDataReady = true;
+				print("INTERO_BLE stroke " + a);
+			});
+#endif
+		}
+		private void Update()
+		{
+			if (erdataReady)
+			{
+				InteroEventManager.GetEventManager().SendEvent(ergDataEvent);
+				erdataReady = false;
+			}
+			if (strokeDataReady)
+			{
+				InteroEventManager.GetEventManager().SendEvent(strokeDataEvent);
+				strokeDataReady = false;
+			}
+
+		}
+
+		void onBLEOn(string s)
         {
             InteroEventManager.GetEventManager().SendEvent(new BLEOnEvent());
         }

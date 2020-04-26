@@ -28,18 +28,19 @@ namespace Intero.BLE
         public static float WorkPerStroke;
 
 #if UNITY_STANDALONE || UNITY_EDITOR
-
+        /*
         public static void SetControllerPM5(BLEReceiver controllerPM5)
         {
             // _controllerPM5 = controllerPM5;
-        }
+        }*/
 
         public static void connectToPM5(int channel)
         {
             // PluginInstance.Call("connectToPM5", new object[] {mShareImageCallback, channel});
         }
-
 #elif UNITY_ANDROID
+    /*
+
 	const string pluginName = "com.cwgtech.unity.MyPlugin";
 	public static BLEReceiver _controllerPM5 = null;
 	static ShareImageCallback mShareImageCallback = new ShareImageCallback();
@@ -184,7 +185,7 @@ namespace Intero.BLE
 			return _pluginInstance;
 		}
 	}
-
+    */
 #endif
 #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_ANDROID
 

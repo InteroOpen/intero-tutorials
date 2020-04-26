@@ -20,7 +20,7 @@ using System.Collections;
                 erg.time = time;
                 erg.pace = pace;
                 erg.distance = distance;
-            erg.spm = 22;
+            erg.spm = 34;
                 // SendErgData();
             }
         }

@@ -7,7 +7,7 @@ using Intero.Common;
 public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
     public GameObject player;
-    public AuthManager auth;
+    public LambdaWorkoutHistory auth;
     /*
     private PhysicsManager physicsManager = new PhysicsManager();
     public HUDController hud;

@@ -12,9 +12,16 @@
   <assembly fullname="mscorlib" preserve="all">
   	<!-- <namespace fullname="System.Security.Cryptography" preserve="all"/> -->
   </assembly>
+	<assembly fullname="Newtonsoft.Json" preserve="all">
+		<namespace fullname="System.Net.Http.Formatting" preserve="all"/>
+		<!-- <namespace fullname="System.Security.Cryptography" preserve="all"/> -->
+	</assembly>
 
   <assembly fullname="System" preserve="all">
-  	<!-- <namespace fullname="System.Security.Cryptography" preserve="all"/> -->
+	  <namespace fullname="System.Security.Cryptography" preserve="all"/>
+	  <namespace fullname="System.Net.Http.Formatting" preserve="all"/>
+	  <namespace fullname="System.Reflection.Emit.DynamicMethod" preserve="all"/>
+	  
   </assembly>
 
   <assembly fullname="AWSSDK.Core" preserve="all">

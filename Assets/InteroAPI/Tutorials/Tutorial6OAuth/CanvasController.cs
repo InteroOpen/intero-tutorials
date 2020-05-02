@@ -1,10 +1,11 @@
-﻿using Intero.Workouts;
-using System.Collections;
+﻿// using Intero.Workouts;
+// using System.Collections;
+using InteroAPI.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using static TestInteroCloud;
 // using static TestInteroCloud;
 
 public class CanvasController : MonoBehaviour
@@ -22,18 +23,45 @@ public class CanvasController : MonoBehaviour
     public ModalInfoController modalInfo;
     public LambdaWorkoutHistory authManager;
     public ScheduleController schedule;
+
+    bool showInfo = false;
+    string infoMsg;
     // public PasswordManager passwordManager;
-    private void Start()
+    public void Start()
     {
         HideAll();
         CheckLogin();
     }
+
+    public void Update()
+    {
+        if (showInfo)
+        {
+            showInfo = false;
+            modalInfo.Show(infoMsg);
+        }
+    }
+
+    public void ShowInfo(string msg)
+    {
+        showInfo = true;
+        infoMsg = msg;
+    }
+
     public Text testOut;
     async Task LoadWorkouts()
     {
         testOut.text = "loading workouts...";
         testOut.text = "loading " + authManager.accessToken; // interoCloud..GetOAuthToken();
-        
+
+        WorkoutClassJSON[] workoutClasses = await authManager.GetWorkoutClasses();
+        Dictionary<int, WorkoutJSON> workouts = await authManager.GetWorkoutDic();
+        testOut.text = "loading Finished..";
+        testOut.text = "N workout " + workoutClasses.Length;
+        print("got LoadWorkouts " + workoutClasses.Length);
+        print("got " + workouts);
+        schedule.ShowWorkouts(workoutClasses, workouts);
+        /*
         ContributorClassT c = await authManager.GetWorkoutClasses();
         Debug.Log("Melanie! " + c.response.IsSuccessStatusCode);
         if(c.response.IsSuccessStatusCode == false){
@@ -51,11 +79,19 @@ public class CanvasController : MonoBehaviour
             print("got LoadWorkouts " + workoutClasses.Count);
             print("got " + workouts);
             schedule.ShowWorkouts(workoutClasses, workouts);
-        }
+        }*/
+
     }
 
     async Task CheckLogin() {
-        ShowloginView();
+        try
+        {
+            ShowloginView();
+        }catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
+        print("jojo");
         print("Are creds save? "+ authManager.AreCredentialsSaved());
         if (authManager.AreCredentialsSaved())
         {
@@ -75,6 +111,9 @@ public class CanvasController : MonoBehaviour
 
     public void HideAll()
     {
+
+        //print("CanvasCOntroller.HideAll");
+        
         loginView.SetActive(false);
         loginAccountView.SetActive(false);
 
@@ -86,6 +125,8 @@ public class CanvasController : MonoBehaviour
 
         profileView.SetActive(false);
         syncErgView.SetActive(false);
+
+       // print("CanvasCOntroller.HideAll success");
     }
 
     public void ShowloginView()

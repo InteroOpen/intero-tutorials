@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Intero.Workouts;
-
+using InteroAPI.OAuth;
 
 public class ClassUiItem : MonoBehaviour{
 

@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-using Intero.Workouts;
+using InteroAPI.OAuth;
 
 public class SingletonWorkouts : MonoBehaviour
 {
     public static SingletonWorkouts instancia;
-    public List<WorkoutJSON> workouts;
-    public List<WorkoutClassJSON> workoutClasses;
-    public List<SegmentJSON> segments;
+    public WorkoutJSON[] workouts;
+    public WorkoutClassJSON[] workoutClasses;
+    public SegmentJSON[] segments;
     public string id;
 
     private void Awake()

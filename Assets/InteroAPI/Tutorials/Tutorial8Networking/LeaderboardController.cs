@@ -14,6 +14,7 @@ public class LeaderboardController : MonoBehaviour
     LeaderBoardManager leaderboard;
     public GameObject rankPrefab;
     public int numberEntries;
+    public RankNode rankLocal = null;
     void Start()
     {
         leaderboard = new LeaderBoardManager();
@@ -31,29 +32,39 @@ public class LeaderboardController : MonoBehaviour
     string GetShortName(string name)
     {
         int n = name.Length;
-        if (n < 9)
+        if (n < 5)
         {
             return name;
         }
-        return name.Substring(0, 4) + "" + name.Substring(n - 4, 4);
+        return name.Substring(0, 2) + "" + name.Substring(n - 2, 2);
     }
     void SetRank(int i, RankNode rank)
     {
+        // rank.progressDistance 
         rankNameTexts[i].text = (i + 1) + " " + GetShortName(rank.username);
         ErgData e = rank.ergData;
         Segment s = rank.segment;
-        rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.spm+ " " + rank.ergData.heartrate;
+        rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.spm + " " + (int)(rank.progressDistance - rankLocal.progressDistance) + " m"; //  + rank.ergData.heartrate;
        //  rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + (s.getProgressedDistance(e)*-1);//  + "|" + s.getProgressedDistance(e);
     }
     public void UpdateRankList(LinkedList<RankNode> listRanks) {
         int i = 0;
+        // only update the ones of my same index
+        int currentSegment = rankLocal.segment.index;
         for (LinkedListNode<RankNode> it = listRanks.First; it != null; it = it.Next)
         {
-            SetRank(i++, it.Value);
+            RankNode r = it.Value;
+            //if(r.segment.index==currentSegment)
+                SetRank(i++, r);
         }
         
     }
 
+    public void UpdateRankLocal(string name, float v, ErgData ergData, Segment segment)
+    {
+        rankLocal = new RankNode(name, v, ergData, segment);
+        UpdateRank(name, v, ergData, segment);
+    }
     public void UpdateRank(string name, float v, ErgData ergData, Segment segment)
     {
         ErgData e = new ErgData();

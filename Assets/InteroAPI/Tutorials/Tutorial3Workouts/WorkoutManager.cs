@@ -9,14 +9,16 @@ using Intero.Common;
 public class WorkoutManager : MonoBehaviour
 {
     SegmentManager segmentManager;
-    Segment[] segments;
+    // Segment[] segments;
+    public bool inWorkout;
     void Start()
     {
         segmentManager = new SegmentManager();
         segmentManager.Push(new SegmentDistance(1000, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentDistance(500, 22, SegmentIntensity.FAST));
         segmentManager.Push(new SegmentTime(200, 24, SegmentIntensity.MEDIUM));
-        
+
+        inWorkout = false;
         /*
         segmentManager.Push(new SegmentTime(3, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentTime(3, 22, SegmentIntensity.MEDIUM));
@@ -80,17 +82,19 @@ public class WorkoutManager : MonoBehaviour
         segmentManager.OnStartWorkout();
         print("SegmentManager.StartWorkout");
         InteroEventManager.GetEventManager().SendEvent(new WorkoutStartEvent());
+        inWorkout = true;
     }
 
     public void EndWorkout()
     {
         print("SegmentManager.EndWorkout");
         InteroEventManager.GetEventManager().SendEvent(new WorkoutEndEvent());
+        inWorkout = false;
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) && inWorkout)
         {
             EndWorkout();
         }

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using InteroAPI.OAuth;
 
 public class LoginAccount : MonoBehaviour
 {
-    public AuthManager interoCloud;
+    public OAuthManager interoCloud;
     public InputField userInput;
     public InputField passwordInput;
 

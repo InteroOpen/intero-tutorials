@@ -1,8 +1,8 @@
 ﻿using Intero.Events;
 using UnityEngine;
-using Intero.Physics;
 using Intero.Workouts;
 using Intero.Common;
+using InteroAPI.OAuth;
 
 public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {

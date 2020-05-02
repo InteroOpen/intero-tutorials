@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Intero.Workouts;
+using InteroAPI.OAuth;
 
 public class SegmentFiller : MonoBehaviour
 {
@@ -41,10 +40,10 @@ public class SegmentFiller : MonoBehaviour
             }
         }
         */
-        content.sizeDelta = new Vector2(0, workout.segments.Count * 100);
+        content.sizeDelta = new Vector2(0, workout.segments.Length * 100);
         string[] strDifficulty = { "recuperación", "medio", "Fuerte!" };
         // Workout 
-        for (int i=0; i<workout.segments.Count; i++)
+        for (int i=0; i<workout.segments.Length; i++)
         {
             Segment s = Segment.Factory(workout.segments[i]);
             // Segment segment = new SegmentTime()

@@ -14,9 +14,9 @@ public class ScheduleController : MonoBehaviour
     [SerializeField]
     private GameObject item = null;
 
-    public void ShowWorkouts(List<WorkoutClassJSON> workoutClasses, Dictionary<int, WorkoutJSON> workouts)
+    public void ShowWorkouts(WorkoutClassJSON[] workoutClasses, Dictionary<int, WorkoutJSON> workouts)
     {
-        for (int i = 0; i < workoutClasses.Count; i++)
+        for (int i = 0; i < workoutClasses.Length; i++)
         {
             WorkoutJSON workout = workouts[workoutClasses[i].workoutId];
 
@@ -42,7 +42,7 @@ public class ScheduleController : MonoBehaviour
             //set day
             classuiItem.Day.text = workoutClasses[i].dateStart.DayOfWeek.ToString();
         }
-        print("ScheduleController.ShowWorkouts Count" + workoutClasses.Count);
+        print("ScheduleController.ShowWorkouts Count" + workoutClasses.Length);
 
     }
     private async Task GetWorkouts()

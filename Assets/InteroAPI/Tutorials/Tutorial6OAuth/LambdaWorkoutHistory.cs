@@ -1,4 +1,6 @@
-﻿using Intero.Common;
+﻿
+/*
+using Intero.Common;
 using Intero.Workouts;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,7 +61,7 @@ public class LambdaWorkoutHistory : AuthManager
         // Debug.Log("Got workouts " + classes.Count);
         return workoutClasses;
         //        return c.classes;
-    }*/
+    }
     
     public async Task<ContributorClassT> GetWorkoutClasses()
     {
@@ -69,3 +71,4 @@ public class LambdaWorkoutHistory : AuthManager
         //        return c.classes;
     }
 }
+    */

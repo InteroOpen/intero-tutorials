@@ -56,4 +56,9 @@ public class NetworkListenerCoach : MonoBehaviour, IListenerOSC
     {
         throw new System.NotImplementedException();
     }
+
+    public void OnOSCNoServerResponseEvent(Intero.Events.OSCNoServerResponseEvent e)
+    {
+        print("OSCNoServerResponseEvent " + e.errorMsg);
+    }
 }

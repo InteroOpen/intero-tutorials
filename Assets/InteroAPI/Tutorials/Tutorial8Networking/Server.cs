@@ -72,4 +72,9 @@ public class Server : MonoBehaviour, IListenerOSC
     {
         throw new System.NotImplementedException();
     }
+
+    void IListenerOSC.OnOSCNoServerResponseEvent(Intero.Events.OSCNoServerResponseEvent e)
+    {
+        print("OSCNoServerResponseEvent " + e.errorMsg);
+    }
 }

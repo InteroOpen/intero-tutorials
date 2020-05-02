@@ -12,6 +12,7 @@ using System.Net;
 using System;
 using Newtonsoft.Json;
 
+/*
 public class TestInteroCloud : InteroCloud
 {
     public class ContributorClassT
@@ -144,6 +145,7 @@ public class TestInteroCloud : InteroCloud
         return passwordManager.AreCredentialsSaved();
     }
 }
+*/
 
 /*
 public int historyId;

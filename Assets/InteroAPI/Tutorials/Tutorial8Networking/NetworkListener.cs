@@ -11,6 +11,7 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
     public LeaderboardController leaderboard;
     public RivalController rivalController;
     // Start is called before the first frame update
+    public CanvasController cc;
     void Start()
     {
         InteroEventManager.GetEventManager().AddListener((IListenerOSC)this);
@@ -54,5 +55,12 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
     void IListenerOSC.OnOSCClientDisconnectedEvent(OSCClientDisconnectedEvent connectedEvent)
     {
         throw new System.NotImplementedException();
+    }
+
+    void IListenerOSC.OnOSCNoServerResponseEvent(Intero.Events.OSCNoServerResponseEvent e)
+    {
+
+        cc.ShowInfo("Error contactando el servidor de Intero.\nNo podra ver el progreso de otros:\n"+e.errorMsg);
+        print("Client  OnOSCNoServerResponseEvent !!! "+e.errorMsg);
     }
 }

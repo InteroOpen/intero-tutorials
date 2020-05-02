@@ -21,14 +21,30 @@ public class ClientUI : MonoBehaviour
         client = new InteroClientTCP();
         client.username = username;
         ergSimulator.SetPace("120");
-        client.Connect(8080);
+        try
+        {
+            client.Connect(8080);
+        } catch(Exception e)
+        {
+            print(" fv " + e.Message);
+        }
     }
     public void StartClient()
     {
         client = new InteroClientTCP();
         client.username = nameText.text;
         ergSimulator.SetPace(speedText.text);
-        client.Connect(8080);
+        try
+        {
+            print(" Starting client " );
+            client.Connect(8080);
+            print(" End client ");
+
+        }
+        catch (Exception e)
+        {
+            print(" fv " + e.Message);
+        }
     }
     public string GetName()
     {

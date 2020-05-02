@@ -26,6 +26,12 @@ public class DebugListenerTutorial8 : MonoBehaviour, IListenerOSC
 
     }
 
+    void IListenerOSC.OnOSCNoServerResponseEvent(Intero.Events.OSCNoServerResponseEvent e)
+    {
+        print("OnOSCNoServerResponseEvent " +e.errorMsg);
+//        throw new System.NotImplementedException();
+    }
+
     void IListenerOSC.OnOSCStartWorkoutDataEvent(OSCStartWorkoutEvent startWorkoutEvent)
     {
         //throw new System.NotImplementedException();

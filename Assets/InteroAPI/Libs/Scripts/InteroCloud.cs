@@ -11,7 +11,8 @@ public class InteroCloud
         protected static readonly HttpClient client = new HttpClient();
         protected const string backendAPIAddress = "https://pni2tv862g.execute-api.us-east-2.amazonaws.com/dev/";
 
-    public void SetOAuthHeader(string key)
+    public void 
+    (string key)
     {
         client.DefaultRequestHeaders.Add("authorization", key);
         client.DefaultRequestHeaders.Add("X-Amz-Date", DateTime.UtcNow.ToLongDateString());

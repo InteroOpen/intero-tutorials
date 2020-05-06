@@ -11,7 +11,7 @@ namespace InteroAPI.OAuth
         public string accessToken = null;
         void Awake()
         {
-            Debug.Log("AuthManager.Start!!" + passwordManager);
+            Debug.Log("AuthManager.Start!!" );
             interoCloud = new InteroCloudUnity();
             passwordManager = new PasswordManager();
 #if UNITY_STANDALONE || UNITY_EDITOR

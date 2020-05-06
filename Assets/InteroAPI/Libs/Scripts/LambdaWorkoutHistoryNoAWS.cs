@@ -3,10 +3,10 @@ using Intero.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-
+// https://64i5elpzke.execute-api.us-east-2.amazonaws.com/dev/vrow?action=classes
 namespace InteroAPI.OAuth
 {
-    public class LambdaWorkoutHistory : OAuthManager
+    public class LambdaWorkoutHistoryNoAWS : OAuthManager
     {
         public int historyId;
         public int classId;
@@ -14,20 +14,43 @@ namespace InteroAPI.OAuth
         {
             this.classId = classId;
         }
+        void Awake()
+        {
+            Debug.Log("AuthManager.Start!!" + passwordManager);
+            interoCloud = new InteroCloudUnity();
+            interoCloud.backendAPIAddress = "https://64i5elpzke.execute-api.us-east-2.amazonaws.com/dev";
+            passwordManager = new PasswordManager();
+        }
         public async Task<StartWorkoutJSON> PostStartWorkout()
         {
             Debug.Log("PostStartWorkout");
-
+            return null;
+            /*
             StartWorkoutJSON workoutHistory = await interoCloud.PostStartWorkout(classId);
             historyId = workoutHistory.id;
             return workoutHistory;
+            */
         }
-
+        public void Login(string user)
+        {
+            passwordManager.username = user;
+        }
+        public new async Task<string> Login()
+        {
+            return null;
+        }
+        public new async Task<string> Login(string username, string password, bool saveCreds = true)
+        {
+            return null;
+        }
+        public new async Task<string> Signup(string user, string email, string pass)
+        {
+            return null;
+        }
         public async Task PostMessage(int segmentNum, ErgData e)
         {
-            // print("PostMessage" + historyId+ segmentNum+ e);
             Debug.Log("PostMessage");
-            await interoCloud.PostMessage(historyId, segmentNum, e);
+            // await interoCloud.PostMessage(historyId, segmentNum, e);
         }
 
         public async Task<Dictionary<int, WorkoutJSON>> GetWorkoutDic()

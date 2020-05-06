@@ -21,7 +21,7 @@ public class CanvasController : MonoBehaviour
     public GameObject syncErgView;
 
     public ModalInfoController modalInfo;
-    public LambdaWorkoutHistory authManager;
+    public LambdaWorkoutHistoryNoAWS authManager;
     public ScheduleController schedule;
 
     bool showInfo = false;
@@ -87,6 +87,7 @@ public class CanvasController : MonoBehaviour
         try
         {
             ShowloginView();
+            return;
         }catch (Exception e)
         {
             Debug.LogError(e);

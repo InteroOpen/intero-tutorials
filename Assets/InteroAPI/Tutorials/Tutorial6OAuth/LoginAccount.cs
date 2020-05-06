@@ -5,7 +5,7 @@ using InteroAPI.OAuth;
 
 public class LoginAccount : MonoBehaviour
 {
-    public OAuthManager interoCloud;
+    public LambdaWorkoutHistory interoCloud;
     public InputField userInput;
     public InputField passwordInput;
 

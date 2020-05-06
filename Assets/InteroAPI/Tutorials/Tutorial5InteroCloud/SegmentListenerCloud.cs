@@ -7,7 +7,7 @@ using InteroAPI.OAuth;
 public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
     public GameObject player;
-    public LambdaWorkoutHistory auth;
+    public LambdaWorkoutHistoryNoAWS auth;
     /*
     private PhysicsManager physicsManager = new PhysicsManager();
     public HUDController hud;

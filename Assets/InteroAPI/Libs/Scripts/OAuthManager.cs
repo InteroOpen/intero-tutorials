@@ -14,7 +14,7 @@ namespace InteroAPI.OAuth
             Debug.Log("AuthManager.Start!!" );
             interoCloud = new InteroCloudUnity();
             passwordManager = new PasswordManager();
-#if UNITY_STANDALONE || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_EDITOR || UNITY_IOS
 #elif UNITY_ANDROID
         PluginCognito.InitCognito();
 #endif
@@ -32,7 +32,7 @@ namespace InteroAPI.OAuth
         public async Task<string> Login(string username, string password, bool saveCreds = true)
         {
             string s;
-#if UNITY_STANDALONE || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_EDITOR || UNITY_IOS
             AWSOAuth awsOAuth = AWSOAuth.GetAWSOAuth();
             Debug.Log("AWSOAuth " + awsOAuth);
             try

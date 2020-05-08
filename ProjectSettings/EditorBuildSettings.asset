@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LobbyEscene.unity
     guid: d53b83b6ec9e65e46be7d99613c362e0
-  - enabled: 1
+  - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial8Networking/Tutorial8Client.unity
     guid: 7934b34f569c0df4f8ed65dba95a1341
   - enabled: 0
@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial10Everything/tutorialPhone.unity
     guid: 9b6ed8badd37efe438626d5cf0e29ef9
-  - enabled: 0
+  - enabled: 1
     path: Assets/InteroAPI/Tutorials/Tutorial10Everything/tutorialPhoneNoAWS.unity
     guid: 0df0931c2046bf448b3a6b71af45c244
   m_configObjects:

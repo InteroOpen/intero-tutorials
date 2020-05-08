@@ -43,7 +43,7 @@ public class RivalController : MonoBehaviour
         e.Copy(ergEvent.ergData);
         e.distance = ergEvent.segment.getProgressedDistance(ergEvent.ergData);
         print("UpdateRival p Distance " + e.distance);
-        // if (e.distance < 0.1 && e.distance> -0.1) physicsManager.ResetLocation();
+        if (e.distance < 0.1 && e.distance> -0.1) physicsManager.ResetLocation();
 
         InteroBody1D body = physicsManager.UpdateLocation(x, v, e);
         rigidBody.velocity = new Vector3(body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);

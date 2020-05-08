@@ -49,7 +49,7 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
         print("Client  Start Workout!!!");
         // Spawn rival boats
         workoutManager.StartWorkout();
-        rivalController.StartWorkout(5);
+        rivalController.StartWorkout(6);
     }
 
     void IListenerOSC.OnOSCClientDisconnectedEvent(OSCClientDisconnectedEvent connectedEvent)

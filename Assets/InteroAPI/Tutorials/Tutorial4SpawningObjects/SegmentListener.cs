@@ -24,7 +24,7 @@ public class PhysicsManager
         {
             // teleport to new location
             previousLocation = targetLocation;
-            return new InteroBody1D(e.distance, realSpeed);
+            return new InteroBody1D(e.distance, 0);
         }
         else
         {
@@ -53,8 +53,8 @@ public class PhysicsManager
         }
     }
 }
-
 */
+
 
 public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
@@ -75,7 +75,7 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
             // InteroEventManager.GetEventManager().SendEvent(new WorkoutEndEvent());
             unityThreadEvents.EnqueueEvent(new WorkoutEndEvent());
         }
-        // physicsManager.ResetLocation();
+       //  physicsManager.ResetLocation();
     }
 
     void IListenerSegment.OnProgressSegmentEvent(SegmentProgressEvent progressSegmentEvent) { }
@@ -88,7 +88,9 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
         // physicsManager.ResetLocation();
     } 
 
-    void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent) { }
+    void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent) {
+        // physicsManager.ResetLocation();
+    }
     void IListenerWorkout.OnEndWorkoutEvent(WorkoutEndEvent endWorkoutEvent)
     {
         currentSegment = null;
@@ -101,8 +103,8 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
         if (player.activeInHierarchy)
         {
             Rigidbody rigidBody = player.GetComponent<Rigidbody>();
-            float v = -rigidBody.velocity.x;
-            float x = -rigidBody.position.x;
+            float v = rigidBody.velocity.x;
+            float x = rigidBody.position.x;
 
             InteroBody1D body = null;
             /*
@@ -126,14 +128,22 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
 
                 }
                 else*/
-                {
+            if (currentSegment != null)
+            {
+                ErgData e = new ErgData();
+                e.Copy(ergDataEvent.ergData);
+                e.distance = currentSegment.getProgressedDistance(ergDataEvent.ergData);
+                body = physicsManager.UpdateLocation(x, v, e);
+                hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
+            }
+            else
+            {
                     body = physicsManager.UpdateLocation(x, v, ergDataEvent.ergData);
                 }
-            if (currentSegment != null)
-                hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
 
-            rigidBody.velocity = new Vector3(-body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);
-            rigidBody.position = new Vector3(-body.distance, rigidBody.position.y, rigidBody.position.z);
+
+            rigidBody.velocity = new Vector3(body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);
+            rigidBody.position = new Vector3(body.distance, rigidBody.position.y, rigidBody.position.z);
         }
     }
     void Start()

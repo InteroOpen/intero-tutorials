@@ -18,6 +18,26 @@ public class SegmentFiller : MonoBehaviour
     public WorkoutManager workoutManager;
 
     public ClientUI client = null;
+
+    private GameObject[] SpawedItems = new GameObject[100];
+
+    void CleanMenu(int newLenght)
+    {
+        for (int i = 0; i < SpawedItems.Length && SpawedItems[i]!=null; i++)
+        {
+            SpawedItems[i].SetActive(false);
+        }
+        for (int i = 0; i < newLenght; i++)
+        {
+            if (SpawedItems[i] == null)
+            {
+                float spawnY = i * 95;
+                Vector3 pos = new Vector3(0.0f, -spawnY, SpawnPoint.position.z);
+                SpawedItems[i] = Instantiate(item, pos, SpawnPoint.rotation);
+            }
+            SpawedItems[i].SetActive(true);
+        }
+    }
     public void ShowSelectedWorkout(WorkoutJSON workout)//List<WorkoutJSON> workouts, string workoutId)
     {
         canvas.ShowworkoutSumaryView();
@@ -40,6 +60,8 @@ public class SegmentFiller : MonoBehaviour
             }
         }
         */
+        CleanMenu(workout.segments.Length);
+        print("segments " + workout.segments.Length);
         content.sizeDelta = new Vector2(0, workout.segments.Length * 100);
         string[] strDifficulty = { "recuperación", "medio", "Fuerte!" };
         // Workout 
@@ -48,12 +70,16 @@ public class SegmentFiller : MonoBehaviour
             Segment s = Segment.Factory(workout.segments[i]);
             // Segment segment = new SegmentTime()
             // 60 width of item
+            /*
             float spawnY = i * 95;
             //newSpawn Position
             Vector3 pos = new Vector3(0.0f, -spawnY, SpawnPoint.position.z);
             //instantiate item
             GameObject SpawnedItem = Instantiate(item, pos, SpawnPoint.rotation);
+            // SpawnedItem.se
             //setParent
+            */
+            GameObject SpawnedItem = SpawedItems[i];
             SpawnedItem.transform.SetParent(SpawnPoint, false);
             //get ItemDetails Component
             ClassSegmentUi segmentItem = SpawnedItem.GetComponent<ClassSegmentUi>();

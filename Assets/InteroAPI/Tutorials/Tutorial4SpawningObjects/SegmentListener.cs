@@ -4,9 +4,10 @@ using Intero.Physics;
 using Intero.Workouts;
 using Intero.Common;
 
-/*
+
 public class PhysicsManager
 {
+
     InteroBody1D previousLocation;
     public float kP = 1.0f, kD = 1.0f;
     // this functions returns the new location
@@ -40,12 +41,12 @@ public class PhysicsManager
             float deltaDistance = targetLocation.distance - realDistance;
             float speed = deltaDistance / dT;
             // Debug.Log($"delta\t{e.distance}\t{deltaDistance}\t{dT}");
-            if (System.Math.Abs(deltaDistance) > 15)
+            /*if (System.Math.Abs(deltaDistance) > 15)
             {
                 // teleport to new location
                 previousLocation.copy(targetLocation);
                 return new InteroBody1D(e.distance, realSpeed);
-            }
+            }*/
             // PID controller
             float deltaForce = kD * speed + kP * (targetLocation.distance - realDistance);
             previousLocation.copy(targetLocation);
@@ -53,11 +54,13 @@ public class PhysicsManager
         }
     }
 }
-*/
+
 
 
 public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
+    int contador = 0;
+    Rigidbody rigidBody;
     private PhysicsManager physicsManager = new PhysicsManager();
     public GameObject player;
     public HUDController hud;
@@ -102,7 +105,8 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
         // currentErgData = ergDataEvent.ergData;
         if (player.activeInHierarchy)
         {
-            Rigidbody rigidBody = player.GetComponent<Rigidbody>();
+            rigidBody = player.GetComponent<Rigidbody>();
+            //Rigidbody rigidBody = player.GetComponent<Rigidbody>();
             float v = rigidBody.velocity.x;
             float x = rigidBody.position.x;
 
@@ -141,14 +145,21 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
                     body = physicsManager.UpdateLocation(x, v, ergDataEvent.ergData);
                 }
 
-
+            if(body.velocity > 0)
+            {
+                body.velocity = -0.1f;
+            }
             rigidBody.velocity = new Vector3(body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);
-            rigidBody.position = new Vector3(body.distance, rigidBody.position.y, rigidBody.position.z);
+
+            Debug.Log("No Fixed");
+            Debug.Log(contador + "Velocidad: " + rigidBody.velocity.x);
+            Debug.Log(contador + "Posicion X:" + rigidBody.position.x);
+            // rigidBody.position = new Vector3(body.distance, rigidBody.position.y, rigidBody.position.z);
         }
     }
     void Start()
     {
-
+        
         print("SegmentListener Start");
 
         InteroEventManager.GetEventManager().AddListener((IListenerErg)this);
@@ -159,5 +170,25 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
     void Update()
     {
         unityThreadEvents.Update();
+    }
+    void FixedUpdate()
+    {
+        if (rigidBody != null)
+        {
+            contador++;
+            if((contador % 10) == 0)
+            {
+                Debug.Log("Fixed");
+                Debug.Log(contador + "Velocidad: " + rigidBody.velocity.x);
+                Debug.Log(contador + "Posicion X:" + rigidBody.position.x);
+                if(rigidBody.velocity.x <= 0.05f)
+                {
+                    rigidBody.velocity = new Vector3(rigidBody.velocity.x + 0.1f, rigidBody.velocity.y, rigidBody.velocity.z);
+                }
+                
+            }
+
+        }
+
     }
 }

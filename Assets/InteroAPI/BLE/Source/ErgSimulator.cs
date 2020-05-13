@@ -2,8 +2,9 @@
 using Intero.Common;
 using Intero.Events;
 using System.Collections;
+using Amazon.Runtime.Internal;
 
-    public class ErgSimulator : MonoBehaviour
+public class ErgSimulator : MonoBehaviour
     {
         ErgData erg = new ErgData();
         public float pace;
@@ -11,6 +12,7 @@ using System.Collections;
 
         void Update()
         {
+            pace = Random.Range(100.0f, 120.0f);
             float time = Time.timeSinceLevelLoad;
             float distance = 500 * (time / pace); // Distance in meters
 
@@ -20,9 +22,13 @@ using System.Collections;
                 erg.time = time;
                 erg.pace = pace;
                 erg.distance = distance;
-            erg.spm = 34;
+                erg.spm = 34;
                 // SendErgData();
             }
+        else
+        {
+            Debug.Log("No remando");
+        }
         }
         void Start()
         {

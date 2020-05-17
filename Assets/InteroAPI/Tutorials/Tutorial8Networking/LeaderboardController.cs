@@ -1,8 +1,6 @@
 ﻿using Intero.Common;
 using Intero.Workouts;
 using InteroAPI.Statistics;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +10,7 @@ public class LeaderboardController : MonoBehaviour
     Text[] rankNameTexts;
     Text[] rankStatsTexts;
     LeaderBoardManager leaderboard;
+    public MapController mapController;
     public GameObject rankPrefab;
     public int numberEntries;
     public RankNode rankLocal = null;
@@ -20,9 +19,10 @@ public class LeaderboardController : MonoBehaviour
         leaderboard = new LeaderBoardManager();
         rankNameTexts = new Text[numberEntries];
         rankStatsTexts = new Text[numberEntries];
+        mapController.Init(numberEntries);
         for (int i = 0; i < numberEntries; i++)
         {
-            GameObject g = Instantiate(rankPrefab, new Vector3(0, -i * 90.0F + 60F, 0), Quaternion.identity);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
+            GameObject g = Instantiate(rankPrefab, new Vector3(0, -i * 90.0F - 90F, 0), Quaternion.identity);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
             g.SetActive(true);                                                                                         //setParent
             g.transform.SetParent(transform, false);
             rankNameTexts[i] = g.transform.Find("RankName").GetComponent<Text>();
@@ -45,7 +45,8 @@ public class LeaderboardController : MonoBehaviour
         ErgData e = rank.ergData;
         Segment s = rank.segment;
         rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.spm + " " + (int)(rank.progressDistance - rankLocal.progressDistance) + " m"; //  + rank.ergData.heartrate;
-       //  rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + (s.getProgressedDistance(e)*-1);//  + "|" + s.getProgressedDistance(e);
+        mapController.UpdatePosition(i, rank);
+        //  rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + (s.getProgressedDistance(e)*-1);//  + "|" + s.getProgressedDistance(e);
     }
     public void UpdateRankList(LinkedList<RankNode> listRanks) {
         int i = 0;
@@ -68,7 +69,7 @@ public class LeaderboardController : MonoBehaviour
     public void UpdateRank(string name, float v, ErgData ergData, Segment segment)
     {
         ErgData e = new ErgData();
-        Segment s = new SegmentTime(segment);
+        Segment s = Segment.Factory(segment);
         e.Copy(ergData);
         leaderboard.UpdateRank(name,v,e, s);
         LinkedList<RankNode> ranks = leaderboard.GetRankings();

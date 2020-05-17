@@ -5,7 +5,7 @@ using InteroAPI.OAuth;
 
 public class CreateAccountManager : MonoBehaviour
 {
-    public OAuthManager interoCloud;
+    // public OAuthManager interoCloud;
     public InputField emailInput;
     public InputField userInput;
     public InputField passwordInput;
@@ -26,8 +26,7 @@ public class CreateAccountManager : MonoBehaviour
         UnityEngine.Debug.Log(email);
         UnityEngine.Debug.Log(user);
         UnityEngine.Debug.Log(pass);
-        print("passwordManager " + interoCloud.passwordManager);
-        string error = await interoCloud.Signup(user, email, pass);
+        string error = await canvasController.Signup(user, email, pass);
 
         // string error = await interoCloud.Signup(user, email, pass);
         UnityEngine.Debug.Log("ress " + error);

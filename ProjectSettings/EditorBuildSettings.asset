@@ -32,9 +32,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial10Everything/tutorialPhone.unity
     guid: 9b6ed8badd37efe438626d5cf0e29ef9
-  - enabled: 1
+  - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial10Everything/tutorialPhoneNoAWS.unity
     guid: 0df0931c2046bf448b3a6b71af45c244
+  - enabled: 1
+    path: Assets/InteroAPI/Tutorials/Tutorial10Everything/Tutorial11Map/tutorial11Map.unity
+    guid: 15969fd18bd8bfe4cba20c7548618e75
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 536e4c483108d40d68b9bc67be424163,
       type: 2}

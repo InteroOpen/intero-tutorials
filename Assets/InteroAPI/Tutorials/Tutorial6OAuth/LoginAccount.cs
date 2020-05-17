@@ -5,7 +5,7 @@ using InteroAPI.OAuth;
 
 public class LoginAccount : MonoBehaviour
 {
-    public LambdaWorkoutHistory interoCloud;
+    // public LambdaWorkoutHistory interoCloud;
     public InputField userInput;
     public InputField passwordInput;
 
@@ -15,7 +15,7 @@ public class LoginAccount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        print("passwordManager " + interoCloud.passwordManager);
+        // print("passwordManager " + interoCloud.passwordManager);
     }
     public void OnLoginAccount()
     {
@@ -28,8 +28,8 @@ public class LoginAccount : MonoBehaviour
         string pass = passwordInput.text;
         UnityEngine.Debug.Log(user);
         UnityEngine.Debug.Log(pass);
-        print("passwordManager " + interoCloud.passwordManager);
-        string error = await interoCloud.Login(user, pass);
+        // print("passwordManager " + interoCloud.passwordManager);
+        string error = await canvasController.Login(user, pass);
 
         // string error = await interoCloud.Signup(user, email, pass);
         UnityEngine.Debug.Log("ress " + error);

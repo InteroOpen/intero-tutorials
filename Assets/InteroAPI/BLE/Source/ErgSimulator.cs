@@ -7,27 +7,29 @@ using System.Collections;
     {
         ErgData erg = new ErgData();
         public float pace;
+    float d = 0;
         int i = 0;
 
         void Update()
         {
             float time = Time.timeSinceLevelLoad;
-            float distance = 500 * (time / pace); // Distance in meters
-
+        float dt = Time.deltaTime;
+        // float distance = 500 * (time / pace); // Distance in meters
+        d = d + 500 * (dt/pace);
             if ((++i % 10) == 0)
             {
                 i = 0;
                 erg.time = time;
                 erg.pace = pace;
-                erg.distance = distance;
-            erg.spm = 34;
+                erg.distance = d;
+                erg.spm = 34;
                 // SendErgData();
             }
         }
         void Start()
         {
          
-            InvokeRepeating("SendErgData", 0.0f, 0.4f);
+            InvokeRepeating("SendErgData", 0.0f, 0.5f);
         }
         public void SetPace(string pace)
     {

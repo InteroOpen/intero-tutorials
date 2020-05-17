@@ -16,7 +16,8 @@ public class HUDController : MonoBehaviour
     
     public void DisplayCurrentSegment(Segment segment, ErgData progressValue)
     {
-        textObjective.text = segment.getTextObjective();
+        if (progressValue == null) return;
+        textObjective.text = $"{progressValue.spm}/"+segment.objective.targetValue + " spm";
         //.time - 0.6f
         textDuration.text = segment.getTextRemaining(progressValue);// segment.getTextRemaining();
         segRecuperacion.SetActive(SegmentIntensity.EASY == segment.typeIntensity);

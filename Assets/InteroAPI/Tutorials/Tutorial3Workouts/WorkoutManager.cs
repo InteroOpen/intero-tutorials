@@ -15,8 +15,18 @@ public class WorkoutManager : MonoBehaviour
     {
         segmentManager = new SegmentManager();
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
-        segmentManager.Push(new SegmentTime(10, 24, SegmentIntensity.MEDIUM));
-        segmentManager.Push(new SegmentTime(15, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
         /*
         segmentManager.Push(new SegmentDistance(1000, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentDistance(500, 22, SegmentIntensity.FAST));

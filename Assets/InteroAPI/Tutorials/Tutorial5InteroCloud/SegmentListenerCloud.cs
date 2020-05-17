@@ -7,7 +7,17 @@ using InteroAPI.OAuth;
 public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkout, IListenerSegment
 {
     public GameObject player;
-    public LambdaWorkoutHistoryNoAWS auth;
+    public CanvasController cc;
+    LambdaWorkoutHistory auth;
+
+    void Start()
+    {
+        InteroEventManager.GetEventManager().AddListener((IListenerErg)this);
+        InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
+        InteroEventManager.GetEventManager().AddListener((IListenerSegment)this);
+        auth = cc.authManager;
+    }
+    // public LambdaWorkoutHistoryNoAWS auth;
     /*
     private PhysicsManager physicsManager = new PhysicsManager();
     public HUDController hud;
@@ -78,10 +88,5 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
         }
         // UnityEngine.Debug.Log("got ergData " + ergDataEvent.ergData);
     }
-    void Start()
-    {
-        InteroEventManager.GetEventManager().AddListener((IListenerErg)this);
-        InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
-        InteroEventManager.GetEventManager().AddListener((IListenerSegment)this);
-    }
+
 }

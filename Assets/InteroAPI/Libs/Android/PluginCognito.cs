@@ -53,13 +53,35 @@ public class PluginCognito
         cognitoCallback.onCompletedSignIn = onCompleted;
     }
 
-    public static void SignUp(string user, string password, Action<LoginInfo> onCompleted)
+    public static void SignUp(string user, string email, string password, Action<LoginInfo> onCompleted, Action<LoginInfo> onCompletedLogin)
     {
         Debug.Log("Unity Intero SignUp");
-        pluginInstance.Call("SignUp", new object[] { user, password });
+        pluginInstance.Call("SignUp", new object[] { user, password, email });
         cognitoCallback.onCompletedSignUp = onCompleted;
+        cognitoCallback.onCompletedSignIn = onCompletedLogin;
     }
-    
+    public static async Task<LoginInfo> SignUp(string user, string email, string password)
+    {
+        var t = new TaskCompletionSource<LoginInfo>();
+        var tLogin = new TaskCompletionSource<LoginInfo>();
+        SignUp(user, email, password, (LoginInfo s) => {
+            s.username = user;
+            s.password = password;
+            t.TrySetResult(s);
+        }, (LoginInfo s) => {
+            s.username = user;
+            s.password = password;
+            Debug.Log("intero.onSignIn666 From unity " + s.error + " idToken " + s.idToken + " accessToken " + s.accessToken);
+
+            tLogin.TrySetResult(s);
+        });
+        LoginInfo l = await t.Task;
+        if(  !(l.error!=null && l.error.Length> 0))
+        {
+            l = await tLogin.Task;
+        }
+        return l;
+    }
     public static async Task<LoginInfo> SignIn(string user, string password)
     {
         Debug.Log("Unity Intero SignIn 6969");
@@ -73,19 +95,7 @@ public class PluginCognito
        });
        return await t.Task;
     }
-    public static async Task<LoginInfo> SignUp(string user, string password)
-    {
-        // return Task.Run(() =>
-        // {
-            var t = new TaskCompletionSource<LoginInfo>();
-            SignUp(user, password, (LoginInfo s) => {
-                s.username = user;
-                s.password = password;
-                t.TrySetResult(s);
-            });
-        return await t.Task;
-        //`});
-    }
+
     public class CognitoCallback : AndroidJavaProxy
     {
         public Action<LoginInfo> onCompletedSignIn = null;

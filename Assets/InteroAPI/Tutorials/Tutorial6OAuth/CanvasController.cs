@@ -21,14 +21,16 @@ public class CanvasController : MonoBehaviour
     public GameObject syncErgView;
 
     public ModalInfoController modalInfo;
-    public LambdaWorkoutHistoryNoAWS authManager;
+    public LambdaWorkoutHistory authManager;
+    // public LambdaWorkoutHistoryNoAWS authManager;
     public ScheduleController schedule;
 
     bool showInfo = false;
     string infoMsg;
     // public PasswordManager passwordManager;
-    public void Start()
+    public void Awake()
     {
+        authManager = new LambdaWorkoutHistory();
         HideAll();
         CheckLogin();
     }
@@ -109,6 +111,15 @@ public class CanvasController : MonoBehaviour
         }
         print("passwordManager " + authManager.passwordManager);
     }
+    public async Task<string> Login(string u, string p)
+    {
+        return await authManager.Login(u,p);
+    }
+    public async Task<string> Signup(string user, string email,string pass) { 
+        return await authManager.Signup(user, email, pass);
+        
+    }
+
 
     public void HideAll()
     {

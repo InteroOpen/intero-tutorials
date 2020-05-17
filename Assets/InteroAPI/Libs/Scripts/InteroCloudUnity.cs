@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Intero.Common;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using UnityEngine;
+
+
+
 
 namespace InteroAPI.OAuth
 {
@@ -17,48 +22,69 @@ namespace InteroAPI.OAuth
             public string author;
             public string status;
         }
+        public override async Task<string> PostStartWorkoutJSON(int classId)
+        {
+            UnityEngine.Debug.Log("PostStartWorkoutJSON 1");
+            StartWorkoutJSONT startW = new StartWorkoutJSONT(classId);
+            string payload = UnityEngine.JsonUtility.ToJson(startW);
+            UnityEngine.Debug.Log("PostStartWorkoutJSON 2" + payload);
+            var content = new StringContent(payload, System.Text.Encoding.UTF8, "application/json");
+
+            UnityEngine.Debug.Log("PostStartWorkoutJSON 3");
+            HttpResponseMessage response = await client.PostAsync(backendAPIAddress + "/user/", content);
+
+            UnityEngine.Debug.Log("PostStartWorkoutJSON 4");
+            return await response.Content.ReadAsStringAsync();
+        }
+        public override async Task<string> PostMessage(int id, int segmentIndex, ErgData e)
+        {
+            PostMessageT postM = new PostMessageT(id, segmentIndex, e);
+            string payload = UnityEngine.JsonUtility.ToJson(postM);
+            var content = new StringContent(payload, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(backendAPIAddress + "/user/", content);
+            var responseString = await response.Content.ReadAsStringAsync();
+            return (responseString);
+        }
+        public override async Task<string> PostMessage(int id, int segmentIndex, StrokeData e)
+        {
+            PostMessageTS postM = new PostMessageTS(id, segmentIndex, e);
+            string payload = UnityEngine.JsonUtility.ToJson(postM);
+            var content = new StringContent(payload, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(backendAPIAddress + "/user/", content);
+            var responseString = await response.Content.ReadAsStringAsync();
+            return (responseString);
+        }
         // override
+        public override async Task<string> GetMessage(string user, string action)
+        {
+            Debug.Log("GetMessage " + user + " " + action +" ");
+            // client.he
+            var response = await client.GetAsync(backendAPIAddress + "/user?user=" + user + "&action=" + action);
+            var responseString = await response.Content.ReadAsStringAsync();
+            return (responseString);
+        }
         public override async Task<WorkoutClassJSON[]> GetWorkoutClasses(string user)
         {
             string sJSON = null;
             try
             {
-                Debug.Log("meow " + user);
-                Debug.Log("meow2 " + backendAPIAddress);
                 sJSON = await GetWorkoutClassesJSON(user);
-                Debug.Log("Eroror!!!691 1 "+ sJSON);
-
                 WorkoutClassMessageJSON jojoT = JsonUtility.FromJson<WorkoutClassMessageJSON>(sJSON);
-                Debug.Log("Eroror!!!691 2");
                 WorkoutClassJSONW[] classes = jojoT.classes;
-                Debug.Log("Eroror!!!691 3"); 
                 WorkoutClassJSON[] workoutClasses = new WorkoutClassJSON[classes.Length];
-                Debug.Log("Eroror!!!691 4");
                 for (int i = 0; i < classes.Length; i++)
                 {
-                    Debug.Log("Eroror!!!691 tt"+i);
                     workoutClasses[i] = new WorkoutClassJSON(classes[i]);
                 }
                 return workoutClasses;
             }
             catch (System.Exception e)
             {
-                Debug.Log("Eroror!!!691 " + e.Message);
+                Debug.Log("Eroror!!! " + e.Message);
                 Debug.Log("but wanted " + sJSON);
             }
 
             return (null);
-        }
-        public new async Task<string> GetMessage(string user, string action)
-        {
-
-            Debug.Log("Sending!!!691 tt" + user + "  " +action );
-            var response = await client.GetAsync(backendAPIAddress + "/user?user=" + user + "&action=" + action);
-            Debug.Log("Sent!!!!691 tt"  + "  " + response.Content);
-            string responseString = await response.Content.ReadAsStringAsync();
-            Debug.Log("got!!!!691 tt" + "  " + responseString);
-
-            return (responseString);
         }
         public override async Task<WorkoutJSON[]> GetWorkouts(string user)
         {
@@ -77,7 +103,7 @@ namespace InteroAPI.OAuth
             }
             catch (System.Exception e)
             {
-                Debug.Log("Eroror!!!692 " + e.Message);
+                Debug.Log("Eroror!!! " + e.Message);
                 Debug.Log("but wanted " + sJSON);
             }
 

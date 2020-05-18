@@ -17,7 +17,7 @@ namespace InteroAPI.OAuth
             passwordManager = new PasswordManager();
             //  us-east-2_wLCz3abPT
             // AWSOAuth.GetAWSOAuth("18d734o5tvojknm4o6vmf8coq4", "us-east-2_HsVe2qOzQ");
-#if UNITY_STANDALONE || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_EDITOR || UNITY_IOS
             AWSOAuth.GetAWSOAuth("64jsgepmoinesh86kdpbumjr94", "us-east-2_wLCz3abPT");
 #elif UNITY_ANDROID
         PluginCognito.InitCognito();//"4qbeb3enoaa626k42jjjpl6c31", "us-east-2_FaXVRBzfG");

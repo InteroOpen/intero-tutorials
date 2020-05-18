@@ -9,6 +9,8 @@ using Intero.Common;
 public class WorkoutManager : MonoBehaviour
 {
     SegmentManager segmentManager;
+    public PauseController pauseController;
+
     // Segment[] segments;
     public bool inWorkout;
     void Start()
@@ -111,6 +113,12 @@ public class WorkoutManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape) && inWorkout)
         {
             EndWorkout();
+        }
+        if (Input.GetMouseButtonDown(0) && inWorkout)
+        {
+            Debug.Log("Click!! mewnue");
+            pauseController.ShowPauseMenu(true);
+
         }
     }
 }

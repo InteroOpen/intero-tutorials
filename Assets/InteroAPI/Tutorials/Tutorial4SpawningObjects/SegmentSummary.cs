@@ -19,8 +19,8 @@ public class SegmentSummary : MonoBehaviour
     {
         ErgData e = statisticManager.GetSegmentErgDataStats();
         textPace.text = SegmentTime.timeToString((int)e.pace);
-        textSPM.text = e.spm+"";
-        textObjective.text = segmentEndEvent.currentSegment.getTextObjective();
+        textSPM.text = e.spm+"/"+ segmentEndEvent.currentSegment.getTextObjective();
+        // textObjective.text = segmentEndEvent.currentSegment.getTextObjective();
         textPower.text = e.avgPower+" watts";
 
         // ErgData[] ergs = (ErgData[]).ToArray();

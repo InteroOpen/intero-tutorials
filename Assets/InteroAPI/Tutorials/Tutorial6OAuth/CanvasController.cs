@@ -89,7 +89,7 @@ public class CanvasController : MonoBehaviour
         try
         {
             ShowloginView();
-            return;
+            // return;
         }catch (Exception e)
         {
             Debug.LogError(e);

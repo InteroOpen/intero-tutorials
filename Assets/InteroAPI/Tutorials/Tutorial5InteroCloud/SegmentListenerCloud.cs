@@ -42,7 +42,7 @@ public class SegmentListenerCloud : MonoBehaviour, IListenerErg, IListenerWorkou
 
     void IListenerSegment.OnStartSegmentEvent(SegmentStartEvent startSegmentEvent)
     {
-        print("OnStartSegmentEvent " + startSegmentEvent.progressType + " " + startSegmentEvent.currentSegment);
+        print("OnStartSegmentEvent Xxx" + startSegmentEvent.progressType + " " + startSegmentEvent.currentSegment);
         currentSegment = startSegmentEvent.currentSegment;
         print("OnStartSegmentEvent " + currentSegment.index);
         // hud.DisplayCurrentSegment(startSegmentEvent.currentSegment, 0);

@@ -14,6 +14,10 @@ public class ClientUI : MonoBehaviour
     public ErgSimulator ergSimulator;
     InteroClientTCP client = null;
     // Start is called before the first frame update
+    public void Awake()
+    {
+        Screen.sleepTimeout = (int)SleepTimeout.NeverSleep;
+    }
     public void StartClient(string username)
     {
         if (client != null)

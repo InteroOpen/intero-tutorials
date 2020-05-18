@@ -25,7 +25,7 @@ public class MapController : MonoBehaviour
 
     public void UpdatePosition(int i, float percentage)
     {
-        print("pre " + percentage);
+        // print("pre " + percentage);
         // boats[i].transform.position = ;//  new Vector3(0,0);
         // boats[i].transform.localPosition =  new Vector3(0, percentage * 400);
         boats[i].transform.position =  new Vector3(boats[i].transform.position.x,transform.position.y+220 - percentage * 400);

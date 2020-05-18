@@ -30,9 +30,12 @@ public class SegmentListener : MonoBehaviour, IListenerErg, IListenerWorkout, IL
     void IListenerSegment.OnStartSegmentEvent(SegmentStartEvent startSegmentEvent)
     {
         currentSegment = startSegmentEvent.currentSegment;
-        if(startSegmentEvent.nextSegment != null)
+        Debug.Log("OnStartSegmentEvent CCC" + startSegmentEvent.nextSegment);
+        if (startSegmentEvent.nextSegment != null){
+            Debug.Log("Updating hud next CCC" + startSegmentEvent.nextSegment);
             hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
 
+        }
         // physicsManager.ResetLocation();
     } 
 

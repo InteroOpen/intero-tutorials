@@ -16,9 +16,14 @@ public class HUDController : MonoBehaviour
     
     public void DisplayCurrentSegment(Segment segment, ErgData progressValue)
     {
-        if (progressValue == null) return;
-        textObjective.text = $"{progressValue.spm}/"+segment.objective.targetValue + " spm";
-        //.time - 0.6f
+        if (progressValue != null)
+        {
+            textObjective.text = $"{progressValue.spm}/"+segment.objective.targetValue + " spm";
+        }
+        else
+        {
+            textObjective.text = segment.objective.targetValue + " spm";    
+        }
         textDuration.text = segment.getTextRemaining(progressValue);// segment.getTextRemaining();
         segRecuperacion.SetActive(SegmentIntensity.EASY == segment.typeIntensity);
         segFuerte.SetActive(SegmentIntensity.FAST == segment.typeIntensity);

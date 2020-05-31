@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Intero.Common;
+using Intero.Events;
 using Intero.TCP;
 using Intero.Workouts;
 using UnityEngine;
@@ -68,7 +69,14 @@ public class ClientUI : MonoBehaviour
             client.OnDestroy();
         Debug.Log("OnDestroy1");
     }
+    public void SendStartWorkout()
+    {
+        client.SendMessage(OSCErgDataManager.StartWorkoutMessage());
+        // should send message to start workout locally
 
+       //  InteroEventManager.GetEventManager().SendEvent(new OSCStartWorkoutEvent(null));
+        return;
+    }
     public void SendMessage(ErgData ergData, Segment currentSegment)
     {
         if (client != null) client.SendMessage(ergData, currentSegment);

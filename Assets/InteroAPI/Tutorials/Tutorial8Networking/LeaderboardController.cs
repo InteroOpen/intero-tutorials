@@ -1,6 +1,7 @@
 ﻿using Intero.Common;
 using Intero.Workouts;
 using InteroAPI.Statistics;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class LeaderboardController : MonoBehaviour
 {
     Text[] rankNameTexts;
     Text[] rankStatsTexts;
-    LeaderBoardManager leaderboard;
+    LeaderBoardManager leaderboard = null;
     public MapController mapController;
     public GameObject rankPrefab;
     public int numberEntries;
@@ -28,6 +29,7 @@ public class LeaderboardController : MonoBehaviour
             rankNameTexts[i] = g.transform.Find("RankName").GetComponent<Text>();
             rankStatsTexts[i] = g.transform.Find("RankStats").GetComponent<Text>();
         }
+        // void UpdateRankLocal(string name, float v, ErgData ergData, Segment segment)
     }
     string GetShortName(string name)
     {
@@ -40,18 +42,26 @@ public class LeaderboardController : MonoBehaviour
     }
     void SetRank(int i, RankNode rank)
     {
+        if (rankLocal == null) return;
         // rank.progressDistance 
+        Debug.Log("SetRank 1" + rankLocal);
+        Debug.Log("SetRank 2" + rank);
+        Debug.Log("SetRank 3" + rankNameTexts);
+        Debug.Log("SetRank 3" + rankNameTexts.Length);
+
         rankNameTexts[i].text = (i + 1) + " " + GetShortName(rank.username);
         ErgData e = rank.ergData;
         Segment s = rank.segment;
+        
         rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.spm + " " + (int)(rank.progressDistance - rankLocal.progressDistance) + " m"; //  + rank.ergData.heartrate;
-        mapController.UpdatePosition(i, rank);
+        mapController.UpdatePosition(i, rank, rankLocal);
         //  rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + (s.getProgressedDistance(e)*-1);//  + "|" + s.getProgressedDistance(e);
     }
     public void UpdateRankList(LinkedList<RankNode> listRanks) {
         int i = 0;
         // only update the ones of my same index
-        int currentSegment = rankLocal.segment.index;
+        // Debug.Log("UpdateRankList" + rankLocal.username);
+        // int currentSegment = rankLocal.segment.index;
         for (LinkedListNode<RankNode> it = listRanks.First; it != null; it = it.Next)
         {
             RankNode r = it.Value;
@@ -68,6 +78,7 @@ public class LeaderboardController : MonoBehaviour
     }
     public void UpdateRank(string name, float v, ErgData ergData, Segment segment)
     {
+        if (leaderboard == null) return;
         ErgData e = new ErgData();
         Segment s = Segment.Factory(segment);
         e.Copy(ergData);

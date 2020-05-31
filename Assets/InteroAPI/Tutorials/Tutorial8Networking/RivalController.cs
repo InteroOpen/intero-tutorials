@@ -31,7 +31,9 @@ public class RivalController : MonoBehaviour
 
     public void UpdateRival(OSCErgDataEvent ergEvent)
     {
-        print("UpdateRival index " + ergEvent.senderId);
+        if (rivals == null) return;
+        print("UpdateRival index1 " + ergEvent.senderId);
+        print("UpdateRival index2 " + rivals);
         GameObject rival = rivals[ergEvent.senderId];
         PhysicsManager physicsManager = physicsManagers[ergEvent.senderId];
         Rigidbody rigidBody = rival.GetComponent<Rigidbody>();

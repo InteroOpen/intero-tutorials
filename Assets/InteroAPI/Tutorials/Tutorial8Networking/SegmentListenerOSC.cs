@@ -42,9 +42,10 @@ public class SegmentListenerOSC : MonoBehaviour, IListenerErg, IListenerWorkout,
     void IListenerErg.OnErgDataEvent(ErgDataEvent ergDataEvent)
     {
         ErgData ergData = ergDataEvent.ergData;
+        // Debug.Log("OnErgDataEvent local");
         if (player.activeInHierarchy && currentSegment !=null)
         {
-            // print("Local " + ergData);
+            print("Local " + ergData);
             leaderboard.UpdateRankLocal(netManager.GetName(), currentSegment.getProgressedDistance(ergData), ergData, currentSegment);
             netManager.SendMessage(ergData, currentSegment);
         }

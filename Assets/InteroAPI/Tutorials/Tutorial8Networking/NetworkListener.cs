@@ -5,9 +5,9 @@ using Intero.Common;
 using UnityEngine.UI;
 using Intero.Workouts;
 
-public class NetworkListener : MonoBehaviour, IListenerOSC
+public class NetworkListener : MonoBehaviour, IListenerOSC, IListenerWorkout
 {
-    public WorkoutManager workoutManager;
+    // public WorkoutManager workoutManager;
     public LeaderboardController leaderboard;
     public RivalController rivalController;
     // Start is called before the first frame update
@@ -15,6 +15,7 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
     void Start()
     {
         InteroEventManager.GetEventManager().AddListener((IListenerOSC)this);
+        InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
     }
 
     void IListenerOSC.OnOSCClientConnectedEvent(OSCClientConnectedEvent connectedEvent)
@@ -46,10 +47,14 @@ public class NetworkListener : MonoBehaviour, IListenerOSC
 
     void IListenerOSC.OnOSCStartWorkoutDataEvent(OSCStartWorkoutEvent startWorkoutEvent)
     {
-        print("Client  Start Workout!!!");
-        // Spawn rival boats
-        workoutManager.StartWorkout();
-        rivalController.StartWorkout(6);
+        InteroEventManager.GetEventManager().SendEvent(new WorkoutStartEvent());
+    }
+
+
+
+    void IListenerWorkout.OnEndWorkoutEvent(WorkoutEndEvent endWorkoutEvent) { }
+    void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent) {
+        rivalController.StartWorkout(5);
     }
 
     void IListenerOSC.OnOSCClientDisconnectedEvent(OSCClientDisconnectedEvent connectedEvent)

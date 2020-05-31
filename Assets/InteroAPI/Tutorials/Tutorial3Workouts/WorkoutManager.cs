@@ -1,22 +1,19 @@
 ﻿using UnityEngine;
 using Intero.Workouts;
 using Intero.Events;
-using System.Threading.Tasks;
 using InteroAPI.OAuth;
-using System.Collections.Generic;
-using Intero.Common;
 
-public class WorkoutManager : MonoBehaviour
+public class WorkoutManager : MonoBehaviour, IListenerWorkout
 {
     SegmentManager segmentManager;
     public PauseController pauseController;
-
+    public ClientUI client;
     // Segment[] segments;
     public bool inWorkout;
     void Start()
     {
         segmentManager = new SegmentManager();
-        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(500, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
@@ -29,6 +26,7 @@ public class WorkoutManager : MonoBehaviour
         segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
+        InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
         /*
         segmentManager.Push(new SegmentDistance(1000, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentDistance(500, 22, SegmentIntensity.FAST));
@@ -92,15 +90,25 @@ public class WorkoutManager : MonoBehaviour
         }
 
     }
-   
+
     public void StartWorkout()
+    {
+        client.SendStartWorkout();
+        InteroEventManager.GetEventManager().SendEvent(new WorkoutStartEvent());
+    }
+    void IListenerWorkout.OnEndWorkoutEvent(WorkoutEndEvent endWorkoutEvent) { }
+    void IListenerWorkout.OnStartWorkoutEvent(WorkoutStartEvent startWorkoutEvent)
     {
         segmentManager.OnStartWorkout();
         print("SegmentManager.StartWorkout");
-        InteroEventManager.GetEventManager().SendEvent(new WorkoutStartEvent());
         inWorkout = true;
     }
-
+    //public void StartWorkout()
+/*    {
+        mainScene.SetActive(true);
+        UIMenu.SetActive(false);
+    }
+    */
     public void EndWorkout()
     {
         print("SegmentManager.EndWorkout");

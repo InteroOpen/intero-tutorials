@@ -27,6 +27,7 @@ public class NetworkListenerCoach : MonoBehaviour, IListenerOSC
 
     void IListenerOSC.OnOSCErgDataEvent(OSCErgDataEvent ergEvent)
     {
+        return;
         string username = ergEvent.socketSender.username;
         ErgData e = ergEvent.ergData;
         Segment s = ergEvent.segment;

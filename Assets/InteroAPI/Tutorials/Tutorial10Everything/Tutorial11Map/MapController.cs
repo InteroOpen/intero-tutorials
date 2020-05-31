@@ -25,21 +25,33 @@ public class MapController : MonoBehaviour
 
     public void UpdatePosition(int i, float percentage)
     {
-        // print("pre " + percentage);
+        // print("Jijjjo " + percentage);
         // boats[i].transform.position = ;//  new Vector3(0,0);
         // boats[i].transform.localPosition =  new Vector3(0, percentage * 400);
+
         boats[i].transform.position =  new Vector3(boats[i].transform.position.x,transform.position.y+220 - percentage * 400);
         // positio
         // 
     }
-    public void UpdatePosition(int i, RankNode rank)
+    public void UpdatePosition(int i, RankNode rank, RankNode rankLocal)
     {
         // rank.ergData
         ErgData e = rank.ergData;
-        Segment s = rank.segment;
+        Segment s = Segment.Factory(rank.segment);
+        Segment sl = Segment.Factory(rankLocal.segment);
         // e.distance = s.getProgressedDistance(e);
-        // print(s.type+" s\t" + s.start  + "\t" + s.end + "\t" + s.Progress(e) + "\t" + s.getTextRemaining(e)); 
-        UpdatePosition(i,s.Progress(e));
+        // print(s.type+" s\t" + s.start  + "\t" + s.end + "\t" + s.Progress(e) + "\t" + s.getTextRemaining(e));
+        // rank.progressDistance - rankLocal.progressDistance
+        //Segment s = Segment.Factory(segment);
+
+        Debug.Log("Jijjjo" + e.time + " " + e.distance);
+        Debug.Log("Intero " + rank.progressDistance);
+
+
+        // Debug.Log(s.end);
+        // currentSegment.getProgressedDistance
+
+       UpdatePosition(i, sl.Progress(e));
     }
 }
 

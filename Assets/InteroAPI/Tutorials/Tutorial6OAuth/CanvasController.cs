@@ -1,5 +1,6 @@
 ﻿// using Intero.Workouts;
 // using System.Collections;
+using Facebook.Unity;
 using InteroAPI.OAuth;
 using System;
 using System.Collections.Generic;
@@ -24,13 +25,14 @@ public class CanvasController : MonoBehaviour
     public LambdaWorkoutHistory authManager;
     // public LambdaWorkoutHistoryNoAWS authManager;
     public ScheduleController schedule;
-
+    FBController fbController;
     bool showInfo = false;
     string infoMsg;
     // public PasswordManager passwordManager;
     public void Awake()
     {
         authManager = new LambdaWorkoutHistory();
+        fbController = new FBController(authManager);
         HideAll();
         CheckLogin();
     }
@@ -85,11 +87,15 @@ public class CanvasController : MonoBehaviour
 
     }
 
+    public void StartWithFacebook()
+    {
+        fbController.Login();
+    }
     async Task CheckLogin() {
         try
         {
             ShowloginView();
-            // return;
+            return;
         }catch (Exception e)
         {
             Debug.LogError(e);

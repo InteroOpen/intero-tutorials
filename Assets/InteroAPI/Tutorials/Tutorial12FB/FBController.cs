@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Facebook.Unity;
+using InteroAPI.OAuth;
+using System.Threading.Tasks;
 /*
 using Amazon;
 using Amazon.CognitoIdentity;
@@ -9,13 +11,18 @@ using UnityEngine.UI;
 */
 public class FBController 
 {
+    OAuthManager oAuthManager;
     //public Text texto;
     /*CognitoAWSCredentials credentials = new CognitoAWSCredentials(
     "us-east-2:23bc2412-4c10-42de-8919-d5e45f594824", // Identity Pool ID
     RegionEndpoint.USEast2 // Region);
     */
-    void InitFB()
+
+    public FBController(OAuthManager oAuthManager)
     {
+        this.oAuthManager = oAuthManager;
+    }
+    public void Login() { 
         if (!FB.IsInitialized)
         {
             // Initialize the Facebook SDK      
@@ -37,11 +44,12 @@ public class FBController
             // Signal an app activation App Event
             FB.ActivateApp();
             // Continue with Facebook SDK
-            var perms = new List<string>() { "public_profile", "email" };
+            var perms = new List<string>() { "public_profile", "email", "user_link"  };
             FB.LogInWithReadPermissions(perms, AuthCallback);
 
             if (FB.IsLoggedIn)
             { //User already logged in from a previous session
+                Debug.Log("User log");
                 AddFacebookTokenToCognito();
             }
             // ...
@@ -72,11 +80,10 @@ public class FBController
         {
             // AccessToken class will have session details
             var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
-            Debug.Log("AuthCallback" + result.ResultDictionary["id"].ToString());
-            Debug.Log("AuthCallback" + result.ResultDictionary["name"].ToString());
-            Debug.Log("AuthCallback" + result.ResultDictionary["email"].ToString());
+            AddFacebookTokenToCognito();
+
             // Print current access token's User ID
-            Debug.Log(aToken.UserId);
+            Debug.Log("toktok : "+aToken.UserId);
             // Print current access token's granted permissions
             foreach (string perm in aToken.Permissions)
             {
@@ -89,37 +96,34 @@ public class FBController
         }
     }
 
-    /* void FacebookLoginCallback(FBResult result)
-     {
-         if (FB.IsLoggedIn)
-         {
-             AddFacebookTokenToCognito();
-         }
-         else
-         {
-             Debug.Log("FB Login error");
-         }
-     */
     public void GetFacebookInfo(IResult result)
     {
         if (result.Error == null)
         {
-            Debug.Log("GetFacebookInfo" +result.ResultDictionary["id"].ToString());
+            string fbId = result.ResultDictionary["id"].ToString();
+            string fbName = result.ResultDictionary["name"].ToString().Replace(" ",".");
+            string fbEmail = result.ResultDictionary["email"].ToString();
+            Debug.Log("GetFacebookInfo" );
             Debug.Log("GetFacebookInfo" + result.ResultDictionary["name"].ToString());
             Debug.Log("GetFacebookInfo" + result.ResultDictionary["email"].ToString());
+            //Debug.Log("GetFacebookInfo" + result.ResultDictionary["user_link"].ToString());
+            oAuthManager.RegisterFB(fbName, fbId, fbEmail);
         }
         else
         {
             Debug.Log(result.Error);
+            // result.Error;
         }
     }
     void AddFacebookTokenToCognito()
     {
-       FB.API ("/me?fields=id,name,email", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string> () { });
-        
-       // Facebook.Unity.em
-       // AccessToken.CurrentAccessToken.UserId;
-       // AccessToken.CurrentAccessToken.em.UserId;
+       Debug.Log("AddFacebookTokenToCognito");
+       FB.API ("/me?fields=id,name,email,user_link", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string> () { });
+        // oAuthManager.LoginFB()
+        // oAuthManager.LoginFB
+        // Facebook.Unity.em
+        // AccessToken.CurrentAccessToken.UserId;
+        // AccessToken.CurrentAccessToken.em.UserId;
 
         // credentials.AddLogin("graph.facebook.com", AccessToken.CurrentAccessToken.TokenString);
         // texto.text = "Datos enviados aws";

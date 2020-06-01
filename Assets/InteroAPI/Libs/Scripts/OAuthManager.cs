@@ -33,6 +33,25 @@ namespace InteroAPI.OAuth
             UnityEngine.Debug.Log("Login leyo correcto " + username + " dd " + password);
             return await Login(username, password, false);
         }
+        public async Task<string> LoginFB(string username, string fbId)
+        {
+
+            AWSOAuth awsOAuth = AWSOAuth.GetAWSOAuth();
+            return await Login(awsOAuth.GetUserFB(username), awsOAuth.GetPwdFB(fbId));
+        }
+        public async Task<string> RegisterFB(string user, string fbId, string email)
+        {
+
+            AWSOAuth awsOAuth = AWSOAuth.GetAWSOAuth();
+            // string s = await awsOAuth.RegisterFB(userid, fbId, email);
+            string err = await Signup(awsOAuth.GetUserFB(user), email, awsOAuth.GetPwdFB(fbId));
+            if (err != null && err.Contains("ser already exists"))
+            {
+                return await Login(awsOAuth.GetUserFB(user),  awsOAuth.GetPwdFB(fbId));
+            }
+            return err;
+
+        }
         public async Task<string> Login(string username, string password, bool saveCreds = true)
         {
             string s;

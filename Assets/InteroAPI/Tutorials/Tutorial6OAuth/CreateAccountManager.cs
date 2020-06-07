@@ -10,7 +10,6 @@ public class CreateAccountManager : MonoBehaviour
     public InputField userInput;
     public InputField passwordInput;
 
-    public ModalInfoController modalInfo;
     public CanvasController canvasController;
 
     public void OnCreateAccount()
@@ -27,17 +26,5 @@ public class CreateAccountManager : MonoBehaviour
         UnityEngine.Debug.Log(user);
         UnityEngine.Debug.Log(pass);
         string error = await canvasController.Signup(user, email, pass);
-
-        // string error = await interoCloud.Signup(user, email, pass);
-        UnityEngine.Debug.Log("ress " + error);
-        if(error != null)
-        {
-            modalInfo.Show(error);
-        }
-        else
-        {
-            print("Showign ShowrowingScheduleView");
-            canvasController.ShowrowingScheduleView();
-        }
     }
 }

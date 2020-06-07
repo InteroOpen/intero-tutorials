@@ -87,10 +87,7 @@ public class CanvasController : MonoBehaviour
 
     }
 
-    public void StartWithFacebook()
-    {
-        fbController.Login();
-    }
+
     async Task CheckLogin() {
         try
         {
@@ -117,15 +114,41 @@ public class CanvasController : MonoBehaviour
         }
         print("passwordManager " + authManager.passwordManager);
     }
+    public void StartWithFacebook()
+    {
+        StartWithFacebookAsyc();
+    }
+    public async Task<string> StartWithFacebookAsyc()
+    {
+        string s = await fbController.Login(); 
+        HandleLoginResponse(s);
+        return s;
+    }
     public async Task<string> Login(string u, string p)
     {
-        return await authManager.Login(u,p);
+        string s = await authManager.Login(u,p);
+        HandleLoginResponse(s);
+        return s;
     }
     public async Task<string> Signup(string user, string email,string pass) { 
-        return await authManager.Signup(user, email, pass);
-        
+        string s = await authManager.Signup(user, email, pass);
+        HandleLoginResponse(s);
+        return s;
     }
+    void HandleLoginResponse(string error)
+    {
 
+        UnityEngine.Debug.Log("ress " + error);
+        if (error != null)
+        {
+            modalInfo.Show(error);
+        }
+        else
+        {
+            print("Showign ShowrowingScheduleView");
+            ShowrowingScheduleView();
+        }
+    }
 
     public void HideAll()
     {

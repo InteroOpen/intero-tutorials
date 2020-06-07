@@ -9,7 +9,6 @@ public class LoginAccount : MonoBehaviour
     public InputField userInput;
     public InputField passwordInput;
 
-    public ModalInfoController modalInfo;
     public CanvasController canvasController;
 
     // Start is called before the first frame update
@@ -31,16 +30,5 @@ public class LoginAccount : MonoBehaviour
         // print("passwordManager " + interoCloud.passwordManager);
         string error = await canvasController.Login(user, pass);
 
-        // string error = await interoCloud.Signup(user, email, pass);
-        UnityEngine.Debug.Log("ress " + error);
-        if (error != null)
-        {
-            modalInfo.Show(error);
-        }
-        else
-        {
-            print("Showign ShowrowingScheduleView");
-            canvasController.ShowrowingScheduleView();
-        }
     }
 }

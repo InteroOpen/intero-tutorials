@@ -4,6 +4,7 @@ using UnityEngine;
 using Facebook.Unity;
 using InteroAPI.OAuth;
 using System.Threading.Tasks;
+using System;
 /*
 using Amazon;
 using Amazon.CognitoIdentity;
@@ -12,6 +13,9 @@ using UnityEngine.UI;
 public class FBController 
 {
     OAuthManager oAuthManager;
+
+    Action<string> SucessfullLoginCompleted;
+
     //public Text texto;
     /*CognitoAWSCredentials credentials = new CognitoAWSCredentials(
     "us-east-2:23bc2412-4c10-42de-8919-d5e45f594824", // Identity Pool ID
@@ -22,7 +26,17 @@ public class FBController
     {
         this.oAuthManager = oAuthManager;
     }
-    public void Login() { 
+    public async Task<string> Login()
+    {
+        var t = new TaskCompletionSource<string>();
+        SucessfullLoginCompleted = (string error) => {
+            t.TrySetResult(error);
+        };
+        LoginCallback();
+
+        return await t.Task;
+    }
+    public  void LoginCallback() { 
         if (!FB.IsInitialized)
         {
             // Initialize the Facebook SDK      
@@ -98,6 +112,10 @@ public class FBController
 
     public void GetFacebookInfo(IResult result)
     {
+        GetFacebookInfoAsync(result);
+    }
+    public async Task GetFacebookInfoAsync(IResult result)
+    { 
         if (result.Error == null)
         {
             string fbId = result.ResultDictionary["id"].ToString();
@@ -107,13 +125,14 @@ public class FBController
             Debug.Log("GetFacebookInfo" + result.ResultDictionary["name"].ToString());
             Debug.Log("GetFacebookInfo" + result.ResultDictionary["email"].ToString());
             //Debug.Log("GetFacebookInfo" + result.ResultDictionary["user_link"].ToString());
-            oAuthManager.RegisterFB(fbName, fbId, fbEmail);
+            await oAuthManager.RegisterFB(fbName, fbId, fbEmail);
         }
         else
         {
             Debug.Log(result.Error);
             // result.Error;
         }
+        SucessfullLoginCompleted(result.Error);
     }
     void AddFacebookTokenToCognito()
     {

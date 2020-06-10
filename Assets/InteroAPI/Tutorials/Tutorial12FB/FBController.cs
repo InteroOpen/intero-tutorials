@@ -137,7 +137,7 @@ public class FBController
     void AddFacebookTokenToCognito()
     {
        Debug.Log("AddFacebookTokenToCognito");
-       FB.API ("/me?fields=id,name,email,user_link", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string> () { });
+       FB.API ("/me?fields=id,name,email", HttpMethod.GET, GetFacebookInfo, new Dictionary<string, string> () { });
         // oAuthManager.LoginFB()
         // oAuthManager.LoginFB
         // Facebook.Unity.em

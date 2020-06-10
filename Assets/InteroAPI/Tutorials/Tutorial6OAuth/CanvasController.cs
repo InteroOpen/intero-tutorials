@@ -20,6 +20,7 @@ public class CanvasController : MonoBehaviour
     public GameObject workoutResultsView;
     public GameObject profileView;
     public GameObject syncErgView;
+    public GameObject modalLoading;
 
     public ModalInfoController modalInfo;
     public LambdaWorkoutHistory authManager;
@@ -120,7 +121,12 @@ public class CanvasController : MonoBehaviour
     }
     public async Task<string> StartWithFacebookAsyc()
     {
-        string s = await fbController.Login(); 
+        // loading screen
+        modalLoading.SetActive(true);
+        string s = await fbController.Login();
+        // remove loading         
+        modalLoading.SetActive(false);
+
         HandleLoginResponse(s);
         return s;
     }

@@ -5517,7 +5517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -24.96997}
+  m_AnchoredPosition: {x: 0, y: -24.969727}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1018278106
@@ -9614,7 +9614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1732144384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9629,7 +9629,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userInput: {fileID: 1968985088}
   passwordInput: {fileID: 223062685}
-  modalInfo: {fileID: 1772901556}
   canvasController: {fileID: 8638992418853483346}
 --- !u!224 &1732144385
 RectTransform:
@@ -17592,7 +17591,6 @@ MonoBehaviour:
   emailInput: {fileID: 8638992417416591237}
   userInput: {fileID: 1264202509}
   passwordInput: {fileID: 8638992417648900224}
-  modalInfo: {fileID: 1772901556}
   canvasController: {fileID: 8638992418853483346}
 --- !u!1 &2070193189
 GameObject:

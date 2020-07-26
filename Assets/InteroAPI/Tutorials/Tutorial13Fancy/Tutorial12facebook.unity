@@ -1018,7 +1018,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 139571066}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8638992418853483346}
+        m_MethodName: ShowcreateAccountView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &139571066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1791,7 +1802,7 @@ RectTransform:
   - {fileID: 956454633}
   - {fileID: 793509848}
   m_Father: {fileID: 1732144385}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1998,6 +2009,7 @@ GameObject:
   - component: {fileID: 229593330}
   - component: {fileID: 229593332}
   - component: {fileID: 229593331}
+  - component: {fileID: 229593333}
   m_Layer: 5
   m_Name: Atras
   m_TagString: Untagged
@@ -2061,6 +2073,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229593329}
   m_CullTransparentMesh: 0
+--- !u!114 &229593333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229593329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 2
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: f2addee4f38bb354b991ab29ea2109c5, type: 3}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 229593331}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8638992418853483346}
+        m_MethodName: ShowloginView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &270944442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,7 +2228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 276709630}
   m_Layer: 5
-  m_Name: 5Sync
+  m_Name: 6Sync
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2221,7 +2287,7 @@ RectTransform:
   m_Children:
   - {fileID: 807072506}
   m_Father: {fileID: 1732144385}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5049,7 +5115,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1732144385}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -5325,7 +5391,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 639495472}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1732144384}
+        m_MethodName: OnLoginAccount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &639495472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5514,7 +5591,7 @@ RectTransform:
   - {fileID: 219272956}
   - {fileID: 829293378}
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6534,7 +6611,7 @@ RectTransform:
   m_LocalScale: {x: 0.8850001, y: 0.8850001, z: 0.8850001}
   m_Children: []
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6583,7 +6660,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 790047942}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2023931686}
+        m_MethodName: OnCreateAccount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &790047942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9268,7 +9356,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1094901765}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8638992418853483346}
+        m_MethodName: ShowloginAccountView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1094901765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11391,7 +11490,7 @@ RectTransform:
   m_LocalScale: {x: 0.8850001, y: 0.8850001, z: 0.8850001}
   m_Children: []
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -11861,7 +11960,7 @@ RectTransform:
   - {fileID: 1632779538}
   - {fileID: 194082917}
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12780,7 +12879,7 @@ RectTransform:
   - {fileID: 1733232880}
   - {fileID: 228984205}
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12997,7 +13096,7 @@ RectTransform:
   m_Children:
   - {fileID: 1531552473}
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 5
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13614,6 +13713,7 @@ GameObject:
   - component: {fileID: 1576579937}
   - component: {fileID: 1576579939}
   - component: {fileID: 1576579938}
+  - component: {fileID: 1576579940}
   m_Layer: 5
   m_Name: Atras
   m_TagString: Untagged
@@ -13633,7 +13733,7 @@ RectTransform:
   m_LocalScale: {x: 0.8850001, y: 0.8850001, z: 0.8850001}
   m_Children: []
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -13677,6 +13777,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576579936}
   m_CullTransparentMesh: 0
+--- !u!114 &1576579940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576579936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 2
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: f2addee4f38bb354b991ab29ea2109c5, type: 3}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1576579938}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8638992418853483346}
+        m_MethodName: ShowloginView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1577316608
 GameObject:
   m_ObjectHideFlags: 0
@@ -14977,8 +15131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82707b407169704cb165945f86b1d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userInput: {fileID: 1968985088}
-  passwordInput: {fileID: 223062685}
+  userInput: {fileID: 1033902747}
+  passwordInput: {fileID: 612051449}
   canvasController: {fileID: 8638992418853483346}
 --- !u!224 &1732144385
 RectTransform:
@@ -14991,10 +15145,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 292288710}
   - {fileID: 619582632}
   - {fileID: 1968985089}
   - {fileID: 223062686}
-  - {fileID: 292288710}
   - {fileID: 2017375829}
   - {fileID: 1062972919}
   - {fileID: 976645910}
@@ -16261,7 +16415,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -16934,7 +17088,7 @@ RectTransform:
   - {fileID: 1999381588}
   - {fileID: 710252075}
   m_Father: {fileID: 1732144385}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -23822,9 +23976,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1092f85617799649af71b6367c87f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emailInput: {fileID: 8638992417416591237}
-  userInput: {fileID: 1264202509}
-  passwordInput: {fileID: 8638992417648900224}
+  emailInput: {fileID: 1475449194}
+  userInput: {fileID: 1326871427}
+  passwordInput: {fileID: 661532682}
   canvasController: {fileID: 8638992418853483346}
 --- !u!1 &2051740230
 GameObject:
@@ -23862,6 +24016,41 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 110, y: 70}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2051742314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2051742315}
+  m_Layer: 5
+  m_Name: DummyScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2051742315
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051742314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8638992418853483349}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2067235459
@@ -25646,7 +25835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &6759785963050727031
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27283,7 +27472,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27698,7 +27887,7 @@ RectTransform:
   m_Children:
   - {fileID: 8638992418931756932}
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27774,7 +27963,7 @@ RectTransform:
   m_Children:
   - {fileID: 8638992417832239522}
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28478,7 +28667,7 @@ RectTransform:
   m_Children:
   - {fileID: 8638992417432270398}
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28720,7 +28909,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28742,10 +28931,9 @@ RectTransform:
   - {fileID: 8638992417416591236}
   - {fileID: 1264202512}
   - {fileID: 8638992417648900227}
-  - {fileID: 8638992417952236051}
-  - {fileID: 1478203137}
   - {fileID: 8638992418269355615}
   - {fileID: 8638992418380699324}
+  - {fileID: 8638992417952236051}
   - {fileID: 8638992417242829917}
   - {fileID: 8638992417618438486}
   - {fileID: 8638992417574789597}
@@ -28756,6 +28944,7 @@ RectTransform:
   - {fileID: 1326871426}
   - {fileID: 661532681}
   - {fileID: 790047940}
+  - {fileID: 1478203137}
   m_Father: {fileID: 8638992418853483349}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28801,7 +28990,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8638992418312676696}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29144,7 +29333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8638992418537105280
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29447,13 +29636,13 @@ MonoBehaviour:
   loginView: {fileID: 8638992417878585486}
   loginAccountView: {fileID: 1732144383}
   createAccountView: {fileID: 8638992418312676699}
-  completeProfileView: {fileID: 0}
+  completeProfileView: {fileID: 2051742314}
   rowingScheduleView: {fileID: 6759785962933636862}
   workoutSumaryView: {fileID: 1792545148}
   workoutResultsView: {fileID: 451423105}
-  profileView: {fileID: 0}
+  profileView: {fileID: 2051742314}
   syncErgView: {fileID: 8638992418823425166}
-  modalLoading: {fileID: 0}
+  modalLoading: {fileID: 2051742314}
   modalInfo: {fileID: 1772901556}
   schedule: {fileID: 6759785963229626905}
   testOut: {fileID: 391330084}
@@ -29503,6 +29692,7 @@ RectTransform:
   - {fileID: 276709630}
   - {fileID: 1610493271}
   - {fileID: 1264193929}
+  - {fileID: 2051742315}
   m_Father: {fileID: 1131762056}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

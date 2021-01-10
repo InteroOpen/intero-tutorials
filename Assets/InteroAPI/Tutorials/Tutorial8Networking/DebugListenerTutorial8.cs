@@ -16,7 +16,7 @@ public class DebugListenerTutorial8 : MonoBehaviour, IListenerOSC
 
     void IListenerOSC.OnOSCErgDataEvent(OSCErgDataEvent ergEvent)
     {
-        //print("OnOSCErgDataEvent " + ergEvent.ergData);
+        print("OnOSCErgDataEvent " + ergEvent.ergData);
 
     }
 

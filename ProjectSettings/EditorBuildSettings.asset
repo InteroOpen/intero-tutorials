@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/InteroAPI/Tutorials/Tutorial6OAuth/tutorial6.unity
     guid: 2681efbe2a53951499f95abf97a4e656
   - enabled: 0
+    path: Assets/MirrorLobby/Scenes/otraEscena.unity
+    guid: 21c69591a8cb41f46b650712c52dd0d7
+  - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial10Everything/tutorialPhone.unity
     guid: 9b6ed8badd37efe438626d5cf0e29ef9
   - enabled: 0
@@ -38,9 +41,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial10Everything/Tutorial11Map/tutorial11Map.unity
     guid: 15969fd18bd8bfe4cba20c7548618e75
-  - enabled: 1
+  - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial13Fancy/Tutorial12facebook.unity
     guid: ef626a3496ea6424d9271a3961bd48a0
+  - enabled: 1
+    path: Assets/MirrorLobby/Scenes/Main.unity
+    guid: f4e8d4de4484e44bba666f2d1f66c73e
+  - enabled: 1
+    path: Assets/InteroAPI/Tutorials/Tutorial5InteroCloud/Tutorial5SpawningObjects.unity
+    guid: 4ad92a5e27e346d4cb8415f65d772ba3
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 536e4c483108d40d68b9bc67be424163,
       type: 2}

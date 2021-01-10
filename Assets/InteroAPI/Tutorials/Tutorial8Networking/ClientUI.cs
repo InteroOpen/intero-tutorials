@@ -28,7 +28,7 @@ public class ClientUI : MonoBehaviour
         ergSimulator.SetPace("120");
         try
         {
-            client.Connect(8080);
+            client.Connect(8080, "127.0.0.1");
         } catch(Exception e)
         {
             print(" fv " + e.Message);
@@ -42,7 +42,7 @@ public class ClientUI : MonoBehaviour
         try
         {
             print(" Starting client " );
-            client.Connect(8080);
+            client.Connect(8080, "127.0.0.1");
             print(" End client ");
 
         }

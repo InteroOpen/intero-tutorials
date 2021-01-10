@@ -12,11 +12,9 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
     public GameObject player;
     public HUDController hud;
     public HUDController hudNext;
-    // public ErgData currentErgData;
     public Segment currentSegment = null;
     UnityThreadEvents unityThreadEvents = new UnityThreadEvents(InteroEventManager.GetEventManager());
-
-    private ErgData lastErgData;
+    RivalController rivalController;
     void IListenerSegment.OnEndSegmentEvent(SegmentEndEvent endSegmentEvent)
     {
         if(endSegmentEvent.nextSegment==null)
@@ -25,7 +23,6 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
             // InteroEventManager.GetEventManager().SendEvent(new WorkoutEndEvent());
             unityThreadEvents.EnqueueEvent(new WorkoutEndEvent());
         }
-       //  physicsManager.ResetLocation();
     }
 
     void IListenerSegment.OnProgressSegmentEvent(SegmentProgressEvent progressSegmentEvent) { }
@@ -38,6 +35,7 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
             hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
 
         }
+        rivalController.StartWorkout(10);
         // physicsManager.ResetLocation();
     } 
 
@@ -57,32 +55,14 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
         {
             Player playerMirror = NetworkClient.connection.identity.GetComponent<Player>();
             playerMirror.CmdSendErgData(ergDataEvent.ergData);
+
+            /*
             Rigidbody rigidBody = player.GetComponent<Rigidbody>();
             float v = rigidBody.velocity.x;
             float x = rigidBody.position.x;
 
             InteroBody1D body = null;
-            /*
 
-                // update hud
-                if (currentSegment != null)
-                {
-                    ErgData e = new ErgData();
-                    e.Copy(ergDataEvent.ergData);
-                    e.distance = currentSegment.getProgressedDistance(ergDataEvent.ergData);
-                    // $"Hello, {name}! Today is {date.DayOfWeek},
-
-                    print($"Progress d {e.distance}\t{x}\t{v}");
-                    // float d = currentSegment.getProgressedDistance(ergDataEvent.ergData);
-                    // print("loc xx erg " + ergDataEvent.ergData + "|"+d);
-                    // print(ergDataEvent.ergData);
-
-                    body = physicsManager.UpdateLocation(x, v, e);
-                    hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
-                    // physicsManager.se
-
-                }
-                else*/
             if (currentSegment != null)
             {
                 ErgData e = new ErgData();
@@ -93,23 +73,22 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
             }
             else
             {
-                    body = physicsManager.UpdateLocation(x, v, ergDataEvent.ergData);
-                }
-
+                body = physicsManager.UpdateLocation(x, v, ergDataEvent.ergData);
+            }
 
             rigidBody.velocity = new Vector3(body.velocity, rigidBody.velocity.y, rigidBody.velocity.z);
             rigidBody.position = new Vector3(body.distance, rigidBody.position.y, rigidBody.position.z);
+            */
         }
     }
     void Start()
     {
-
         print("SegmentListener Start");
-
         InteroEventManager.GetEventManager().AddListener((IListenerErg)this);
         InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
         InteroEventManager.GetEventManager().AddListener((IListenerSegment)this);
-        // InvokeRepeating("")
+        // Creamos los rivales
+        rivalController = new RivalController();
     }
     void Update()
     {

@@ -284,12 +284,11 @@ namespace Mirror.Examples.Chat
         public void RpcReceiveErgData(ErgData ergData)
         {
             // OnMessage?.Invoke(this, ergData);
-            Debug.Log(playerName + " " +ergData.distance + "Jojojojo RpcReceiveErgData");
+            Debug.Log(netIdentity + " "+netId +" "+playerName + " " +ergData.distance + "Jojojojo RpcReceiveErgData");
         }
         [Command]
         public void CmdSendErgData(ErgData ergData)
         {
-            // if (message.Trim() != "")
                 RpcReceiveErgData(ergData);
         }
     }

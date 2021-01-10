@@ -72,7 +72,7 @@ namespace Mirror.Examples.Chat
         [Command]
         public void CmdCreateSala(string salaName)
         {
-            Debug.Log("CmdCreateSala");
+            Debug.Log("CmdCreateSalaTT");
             GameObject ownSala = Instantiate(salaPrefab);
             ownSala.GetComponent<Sala>().salaName = salaName;
             // salas.Add(salaName, ownSala);
@@ -169,10 +169,6 @@ namespace Mirror.Examples.Chat
         {
             sala.transform.parent = null;
             sala.SetActive(false);
-           
-           // if (transform.parent == sala.transform)
-             //   myParent = null;
-                //transform.parent = null;
         }
         [ClientRpc]
         public void RpcCambioEscena(GameObject sala)
@@ -182,11 +178,7 @@ namespace Mirror.Examples.Chat
             salaH.SetActive(false);
             sala.transform.parent = null;
             DontDestroyOnLoad(sala);
-            SceneManager.LoadScene("Tutorial5SpawningObjects");
-            // CmdSendErgData("Jjojo");
-            // if (transform.parent == sala.transform)
-            //   myParent = null;
-            //transform.parent = null;
+            SceneManager.LoadScene("Tutorial4SpawningObjects");
         }
         // corre en los clientes
         void UpdateParent(NetworkIdentity salaVieja,NetworkIdentity salaNueva)
@@ -284,11 +276,13 @@ namespace Mirror.Examples.Chat
         public void RpcReceiveErgData(ErgData ergData)
         {
             // OnMessage?.Invoke(this, ergData);
+            Debug.Log("RpcReceiveErgData");
             Debug.Log(netIdentity + " "+netId +" "+playerName + " " +ergData.distance + "Jojojojo RpcReceiveErgData");
         }
         [Command]
         public void CmdSendErgData(ErgData ergData)
         {
+            Debug.Log("CmdSendErgData!");
                 RpcReceiveErgData(ergData);
         }
     }

@@ -16,6 +16,7 @@ public class RivalController : MonoBehaviour
     }*/
     public void StartWorkout(int numRivals)
     {
+        Debug.Log("RIvalControler.Startworkout" + numRivals);
         GameObject rivalTemplate = transform.Find("RivalTemplate").gameObject;
 
         rivals = new GameObject[numRivals];

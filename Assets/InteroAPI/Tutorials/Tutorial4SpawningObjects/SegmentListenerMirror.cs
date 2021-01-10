@@ -35,7 +35,25 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
             hudNext.DisplayCurrentSegment(startSegmentEvent.nextSegment, null);
 
         }
-        rivalController.StartWorkout(10);
+
+        GameObject[] players;
+        // Player playerMirror = NetworkClient.connection.identity.GetComponent<Player>();
+        // Sala sala  = playerMirror.transform.parent.GetComponent<Sala>();
+        players = GameObject.FindGameObjectsWithTag("Player");
+        
+        /*
+        foreach (GameObject entry in players)
+        {
+            if (entry.transform.parent == sala.transform)
+            {
+                entry.GetComponent<Player>().myParent = null;
+                entry.transform.parent = null;
+            }
+        }
+        */
+        rivalController = new RivalController();
+
+        rivalController.StartWorkout(players.Length);
         // physicsManager.ResetLocation();
     } 
 
@@ -53,6 +71,7 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
         // currentErgData = ergDataEvent.ergData;
         if (player.activeInHierarchy)
         {
+            Debug.Log("Senging CmdSendErgData");
             Player playerMirror = NetworkClient.connection.identity.GetComponent<Player>();
             playerMirror.CmdSendErgData(ergDataEvent.ergData);
 
@@ -88,7 +107,6 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
         InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
         InteroEventManager.GetEventManager().AddListener((IListenerSegment)this);
         // Creamos los rivales
-        rivalController = new RivalController();
     }
     void Update()
     {

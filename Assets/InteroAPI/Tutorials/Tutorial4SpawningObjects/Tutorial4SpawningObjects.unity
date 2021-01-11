@@ -275,6 +275,7 @@ MonoBehaviour:
   player: {fileID: 1987738532}
   hud: {fileID: 725085901}
   hudNext: {fileID: 1439541325}
+  rivalController: {fileID: 1829056317}
 --- !u!1 &129875387
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,6 +3647,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1829056317 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7573358641086313505, guid: a057b5fab2eba6f44946ef48d1fe8fb8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1222441004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32e8d252fd54d147b9524333f89a81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1976418509
 GameObject:
   m_ObjectHideFlags: 0

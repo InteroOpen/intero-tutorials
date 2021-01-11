@@ -48,9 +48,12 @@ EditorBuildSettings:
     path: Assets/MirrorLobby/Scenes/Main.unity
     guid: f4e8d4de4484e44bba666f2d1f66c73e
   - enabled: 1
+    path: Assets/InteroAPI/Tutorials/Tutorial4SpawningObjects/Tutorial4SpawningObjects.unity
+    guid: 4cbdbe7d65c625342a35b3f008c17a68
+  - enabled: 1
     path: Assets/MirrorLobby/Scenes/server.unity
     guid: aedcdc22035d6874c9406cf05ff6c3ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/InteroAPI/Tutorials/Tutorial5InteroCloud/Tutorial5SpawningObjects.unity
     guid: 4ad92a5e27e346d4cb8415f65d772ba3
   m_configObjects:

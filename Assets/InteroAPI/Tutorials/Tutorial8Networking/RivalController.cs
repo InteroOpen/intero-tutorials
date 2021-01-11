@@ -1,6 +1,7 @@
 ﻿using Intero.Common;
 using Intero.Events;
 using Intero.Physics;
+using Mirror.Examples.Chat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,18 @@ public class RivalController : MonoBehaviour
     {
         StartWorkout(3);
     }*/
+
+     Dictionary<uint, uint> mapNetId = new Dictionary<uint, uint>();
+    public void StartWorkout(GameObject[] players)
+    {
+        uint i = 0;
+        foreach (GameObject entry in players)
+        {
+            Player p = entry.GetComponent<Player>();
+            mapNetId.Add(p.netId, i++);
+        }
+        StartWorkout(players.Length);
+    }
     public void StartWorkout(int numRivals)
     {
         Debug.Log("RIvalControler.Startworkout" + numRivals);

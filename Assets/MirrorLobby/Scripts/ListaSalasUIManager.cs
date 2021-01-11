@@ -35,7 +35,7 @@ namespace Mirror.Examples.Chat
         {
             Player player = NetworkClient.connection.identity.GetComponent<Player>();
             player.CmdCreateSala(player.playerName);
-            gameObject.SetActive(false);
+            
         }
         public void OnCreateSala(Player player, string message)
         {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 75860997}
   m_Layer: 5
   m_Name: Sala
-  m_TagString: ChatWindow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2636,7 +2636,7 @@ MonoBehaviour:
   chatHistory: {fileID: 827598817}
   mensaje: {fileID: 90143748}
   toggleReady: {fileID: 1264564958}
-  salaActual: {fileID: 6355767102627728882}
+  listaSalas: {fileID: 0}
   miniMenu: {fileID: 5091370912575575116}
   myParent: {fileID: 0}
 --- !u!114 &-5556171425638810032

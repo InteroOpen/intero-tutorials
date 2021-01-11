@@ -17,6 +17,7 @@ namespace Mirror.Examples.Chat
         public Text chatHistory;
         public Text mensaje;
         public Toggle toggleReady;
+        public GameObject listaSalas;
       //  public GameObject salaActual;
         public GameObject miniMenu;
         public NetworkIdentity myParent = null;
@@ -28,14 +29,18 @@ namespace Mirror.Examples.Chat
             Player.OnPlayerJoinSala += OnJoinSala;
             Player.OnPlayerExitSala += OnExitSala;
             Player.OnMessage += OnPlayerMessage;
-
             Player.salas[salaName] = gameObject;
             if(isServer==false)
                 InvokeRepeating("UpdateTextUsersSalas", 2.0f, 0.3f);
         }
-
+        private void Start()
+        {
+            listaSalas = GameObject.Find("ListaSalas");
+            listaSalas.SetActive(false);
+        }
         public void ExitSala()
         {
+            listaSalas.SetActive(true);
             Player player = NetworkClient.connection.identity.GetComponent<Player>();
             player.CmdExitSala();
            

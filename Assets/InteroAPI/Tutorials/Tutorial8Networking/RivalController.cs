@@ -57,7 +57,7 @@ public class RivalController : MonoBehaviour
         
         ErgData e = new ErgData();
         e.Copy(ergEvent.ergData);
-        e.distance = ergEvent.segment.getProgressedDistance(ergEvent.ergData);
+        e.distance = -ergEvent.ergData.distance; // ergEvent.segment.getProgressedDistance(ergEvent.ergData);
         print("UpdateRival p Distance " + e.distance);
         if (e.distance < 0.1 && e.distance> -0.1) physicsManager.ResetLocation();
 

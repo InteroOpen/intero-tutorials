@@ -15,7 +15,7 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
     public HUDController hudNext;
     public Segment currentSegment = null;
     UnityThreadEvents unityThreadEvents = new UnityThreadEvents(InteroEventManager.GetEventManager());
-    RivalController rivalController;
+    public RivalController rivalController;
     void IListenerSegment.OnEndSegmentEvent(SegmentEndEvent endSegmentEvent)
     {
         if(endSegmentEvent.nextSegment==null)
@@ -37,31 +37,14 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
 
         }
 
-        GameObject[] players;
         // Player playerMirror = NetworkClient.connection.identity.GetComponent<Player>();
         // Sala sala  = playerMirror.transform.parent.GetComponent<Sala>();
+        GameObject[] players;
         players = GameObject.FindGameObjectsWithTag("Player");
 
         // int[] arr = new int[players.Length];
 
-        Dictionary<uint, uint> openWith = new Dictionary<uint, uint>();
-        uint i = 0;
-        foreach (GameObject entry in players)
-        {
-            Player p = entry.GetComponent<Player>();
-            openWith.Add(p.netId, i++);
-            
-            /*
-            if (entry.transform.parent == sala.transform)
-            {
-                entry.GetComponent<Player>().myParent = null;
-                entry.transform.parent = null;
-            }*/
-        }
-        
-        rivalController = new RivalController();
-
-        rivalController.StartWorkout(players.Length);
+        rivalController.StartWorkout(players);
         // physicsManager.ResetLocation();
     } 
 

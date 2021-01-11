@@ -16,7 +16,7 @@ public class RivalController : MonoBehaviour
         StartWorkout(3);
     }*/
 
-     Dictionary<uint, uint> mapNetId = new Dictionary<uint, uint>();
+     public Dictionary<uint, uint> mapNetId = new Dictionary<uint, uint>();
     public void StartWorkout(GameObject[] players)
     {
         uint i = 0;

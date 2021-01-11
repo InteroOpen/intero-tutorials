@@ -1,4 +1,5 @@
 using Intero.Common;
+using Intero.Events;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -278,6 +279,9 @@ namespace Mirror.Examples.Chat
             // OnMessage?.Invoke(this, ergData);
             Debug.Log("RpcReceiveErgData");
             Debug.Log(netIdentity + " "+netId +" "+playerName + " " +ergData.distance + "Jojojojo RpcReceiveErgData");
+            RivalController rivalController = GameObject.Find("Rival").GetComponent<RivalController>();
+            OSCErgDataEvent ergEvent = new OSCErgDataEvent(ergData, null,null, (int)rivalController.mapNetId[netId]);
+            rivalController.UpdateRival(ergEvent);
         }
         [Command]
         public void CmdSendErgData(ErgData ergData)

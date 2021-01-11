@@ -35,12 +35,12 @@ namespace Mirror.Examples.Chat
         }
         private void Start()
         {
-            listaSalas = GameObject.Find("ListaSalas");
-            listaSalas.SetActive(false);
+            //listaSalas = GameObject.Find("ListaSalas");
+          //  listaSalas.SetActive(false);
         }
         public void ExitSala()
         {
-            listaSalas.SetActive(true);
+          //  listaSalas.SetActive(true);
             Player player = NetworkClient.connection.identity.GetComponent<Player>();
             player.CmdExitSala();
            

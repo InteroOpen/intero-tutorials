@@ -13,9 +13,9 @@ public class WorkoutManager : MonoBehaviour, IListenerWorkout
     void Start()
     {
         segmentManager = new SegmentManager();
-        segmentManager.Push(new SegmentTime(500, 24, SegmentIntensity.MEDIUM));
-        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
-        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(10, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 28, SegmentIntensity.FAST));
+        segmentManager.Push(new SegmentTime(7, 22, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));

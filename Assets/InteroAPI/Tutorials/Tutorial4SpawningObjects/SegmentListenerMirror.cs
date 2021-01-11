@@ -72,15 +72,15 @@ public class SegmentListenerMirror : MonoBehaviour, IListenerErg, IListenerWorko
             float x = rigidBody.position.x;
 
             InteroBody1D body = null;
-
+            */
             if (currentSegment != null)
             {
                 ErgData e = new ErgData();
                 e.Copy(ergDataEvent.ergData);
                 e.distance = currentSegment.getProgressedDistance(ergDataEvent.ergData);
-                body = physicsManager.UpdateLocation(x, v, e);
                 hud.DisplayCurrentSegment(currentSegment, ergDataEvent.ergData);
-            }
+                //body = physicsManager.UpdateLocation(x, v, e);
+            }/*
             else
             {
                 body = physicsManager.UpdateLocation(x, v, ergDataEvent.ergData);

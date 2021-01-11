@@ -49,6 +49,7 @@ public class RivalController : MonoBehaviour
             rivals[i].SetActive(true);
             physicsManagers[i] = new PhysicsManager();
         }
+        Debug.Log("" + playerIndex + " " + playerMirror.netId);
     }
 
     public void UpdateRival(OSCErgDataEvent ergEvent)

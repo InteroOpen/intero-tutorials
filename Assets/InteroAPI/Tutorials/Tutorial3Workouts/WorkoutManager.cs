@@ -13,9 +13,9 @@ public class WorkoutManager : MonoBehaviour, IListenerWorkout
     void Start()
     {
         segmentManager = new SegmentManager();
-        segmentManager.Push(new SegmentTime(500, 24, SegmentIntensity.MEDIUM));
-        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
-        segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(10, 24, SegmentIntensity.MEDIUM));
+        segmentManager.Push(new SegmentTime(5, 28, SegmentIntensity.FAST));
+        segmentManager.Push(new SegmentTime(7, 22, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(5, 24, SegmentIntensity.MEDIUM));
@@ -27,6 +27,8 @@ public class WorkoutManager : MonoBehaviour, IListenerWorkout
         segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
         segmentManager.Push(new SegmentTime(20, 24, SegmentIntensity.MEDIUM));
         InteroEventManager.GetEventManager().AddListener((IListenerWorkout)this);
+        InteroEventManager.GetEventManager().SendEvent(new WorkoutStartEvent());
+
         /*
         segmentManager.Push(new SegmentDistance(1000, 20, SegmentIntensity.EASY));
         segmentManager.Push(new SegmentDistance(500, 22, SegmentIntensity.FAST));
@@ -71,7 +73,7 @@ public class WorkoutManager : MonoBehaviour, IListenerWorkout
             segmentManager.Push(s);
         }
     }*/
-    
+
     public void LoadWorkout(WorkoutJSON work)
     {
         segmentManager.Clear();
@@ -93,7 +95,7 @@ public class WorkoutManager : MonoBehaviour, IListenerWorkout
 
     public void StartWorkout()
     {
-        client.SendStartWorkout();
+        // client.SendStartWorkout();
         InteroEventManager.GetEventManager().SendEvent(new WorkoutStartEvent());
     }
     void IListenerWorkout.OnEndWorkoutEvent(WorkoutEndEvent endWorkoutEvent) { }

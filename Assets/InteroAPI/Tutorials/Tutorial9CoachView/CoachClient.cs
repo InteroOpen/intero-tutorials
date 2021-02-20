@@ -22,7 +22,7 @@ public class CoachClient : MonoBehaviour
     {
         client = new InteroClientTCP();
         client.username = "coach";
-        client.Connect(8080);
+        client.Connect(8080, "127.0.0.1");
         print("Connecting to Server");
     }
     public void StartWorkout()

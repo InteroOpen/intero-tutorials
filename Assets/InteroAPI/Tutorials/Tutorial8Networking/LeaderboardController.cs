@@ -20,7 +20,7 @@ public class LeaderboardController : MonoBehaviour
         leaderboard = new LeaderBoardManager();
         rankNameTexts = new Text[numberEntries];
         rankStatsTexts = new Text[numberEntries];
-        mapController.Init(numberEntries);
+        // mapController.Init(numberEntries);
         for (int i = 0; i < numberEntries; i++)
         {
             GameObject g = Instantiate(rankPrefab, new Vector3(0, -i * 90.0F - 90F, 0), Quaternion.identity);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
@@ -54,7 +54,7 @@ public class LeaderboardController : MonoBehaviour
         Segment s = rank.segment;
         
         rankStatsTexts[i].text = SegmentTime.timeToString((int)rank.ergData.pace) + " " + rank.ergData.spm + " " + (int)(rank.progressDistance - rankLocal.progressDistance) + " m"; //  + rank.ergData.heartrate;
-        mapController.UpdatePosition(i, rank, rankLocal);
+        // mapController.UpdatePosition(i, rank, rankLocal);
         //  rankStatsTexts[i].text = SegmentTime.timeToString((int)e.pace) + " " + (s.getProgressedDistance(e)*-1);//  + "|" + s.getProgressedDistance(e);
     }
     public void UpdateRankList(LinkedList<RankNode> listRanks) {

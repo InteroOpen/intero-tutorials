@@ -13,9 +13,9 @@ using System.Collections;
         void Update()
         {
             float time = Time.timeSinceLevelLoad;
-        float dt = Time.deltaTime;
-        // float distance = 500 * (time / pace); // Distance in meters
-        d = d + 500 * (dt/pace);
+            float dt = Time.deltaTime;
+            // float distance = 500 * (time / pace); // Distance in meters
+            d = d + 500 * (dt/pace);
             if ((++i % 10) == 0)
             {
                 i = 0;
@@ -37,6 +37,7 @@ using System.Collections;
     }
         void SendErgData()
         {
+            // Debug.Log("SendErgData");
             ErgDataEvent e = new ErgDataEvent(erg);
             InteroEventManager.GetEventManager().SendEvent(e);
         }

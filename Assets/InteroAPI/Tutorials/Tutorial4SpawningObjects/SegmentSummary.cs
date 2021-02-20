@@ -18,6 +18,7 @@ public class SegmentSummary : MonoBehaviour
     public void ShowSegmentSummary(SegmentEndEvent segmentEndEvent,StatisticManager statisticManager)
     {
         ErgData e = statisticManager.GetSegmentErgDataStats();
+        print(e.ToString());
         textPace.text = SegmentTime.timeToString((int)e.pace);
         textSPM.text = e.spm+"/"+ segmentEndEvent.currentSegment.getTextObjective();
         // textObjective.text = segmentEndEvent.currentSegment.getTextObjective();

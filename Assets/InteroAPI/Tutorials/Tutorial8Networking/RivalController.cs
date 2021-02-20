@@ -1,6 +1,8 @@
 ﻿using Intero.Common;
 using Intero.Events;
 using Intero.Physics;
+using Mirror;
+using Mirror.Examples.Chat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,24 +11,45 @@ public class RivalController : MonoBehaviour
 {
     PhysicsManager[] physicsManagers;// = new PhysicsManager();
     GameObject[] rivals;
+    public GameObject playerGameObject;
     /*
     void Start()
     {
         StartWorkout(3);
     }*/
+
+    public Dictionary<uint, uint> mapNetId = new Dictionary<uint, uint>();
+    public void StartWorkout(GameObject[] players)
+    {
+        uint i = 0;
+
+        foreach (GameObject entry in players)
+        {
+            Player p = entry.GetComponent<Player>();
+            mapNetId.Add(p.netId, i++);
+        }
+        StartWorkout(players.Length);
+    }
     public void StartWorkout(int numRivals)
     {
+        Debug.Log("RIvalControler.Startworkout" + numRivals);
         GameObject rivalTemplate = transform.Find("RivalTemplate").gameObject;
 
         rivals = new GameObject[numRivals];
         physicsManagers = new PhysicsManager[numRivals];
+        Player playerMirror = NetworkClient.connection.identity.GetComponent<Player>();
+        int playerIndex = (int)mapNetId[playerMirror.netId];
         for (int i = 0; i < numRivals; i++)
         {
-            rivals[i] = Instantiate(rivalTemplate, new Vector3(0,0, (i + 1) * .6F), rivalTemplate.transform.rotation);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
+            if (i == playerIndex)
+                rivals[i] = playerGameObject;
+            else
+                rivals[i] = Instantiate(rivalTemplate, new Vector3(0, 0, (i + 1) * .6F), rivalTemplate.transform.rotation);// rankPrefab.transform.position, rankPrefab.transform.rotation);// new Vector3(0, -i * 30.0F, 0), Quaternion.identity);
             rivals[i].transform.parent = transform.parent;
             rivals[i].SetActive(true);
             physicsManagers[i] = new PhysicsManager();
         }
+        Debug.Log("" + playerIndex + " " + playerMirror.netId);
     }
 
     public void UpdateRival(OSCErgDataEvent ergEvent)
@@ -43,7 +66,7 @@ public class RivalController : MonoBehaviour
         
         ErgData e = new ErgData();
         e.Copy(ergEvent.ergData);
-        e.distance = ergEvent.segment.getProgressedDistance(ergEvent.ergData);
+        e.distance = -ergEvent.ergData.distance; // ergEvent.segment.getProgressedDistance(ergEvent.ergData);
         print("UpdateRival p Distance " + e.distance);
         if (e.distance < 0.1 && e.distance> -0.1) physicsManager.ResetLocation();
 
